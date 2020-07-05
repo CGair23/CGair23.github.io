@@ -79,17 +79,22 @@
 
 
 
-<meta name="description" content="@TOC">
+<meta name="description" content="[toc] 一、matplotlib绘图核心原理主要就是理解figure(画布)、axes(坐标系)、axis(坐标轴)三者之间的关系。   想要画画，需要初始化一张figure(画布)，我们画的任何图形，都是在这张figure(画布)上操作的。 接着，需要给figure(画布)分配不同的区域，指定哪一块儿究竟该画什么。对比到matplotlib中，就是需要指定axes(坐标系)，每一个axes(">
 <meta property="og:type" content="article">
 <meta property="og:title" content="记用matplotlib画图">
 <meta property="og:url" content="http://yoursite.com/2020/07/03/%E8%AE%B0%E7%94%A8matplotlib%E7%94%BB%E5%9B%BE/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="@TOC">
+<meta property="og:description" content="[toc] 一、matplotlib绘图核心原理主要就是理解figure(画布)、axes(坐标系)、axis(坐标轴)三者之间的关系。   想要画画，需要初始化一张figure(画布)，我们画的任何图形，都是在这张figure(画布)上操作的。 接着，需要给figure(画布)分配不同的区域，指定哪一块儿究竟该画什么。对比到matplotlib中，就是需要指定axes(坐标系)，每一个axes(">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/.com//cgair/Documents/cg/my_blog/blog/source/_posts/%E8%AE%B0%E7%94%A8matplotlib%E7%94%BB%E5%9B%BE/%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86.jpg">
+<meta property="og:image" content="https://pics7.baidu.com/feed/b7003af33a87e9507b1c1ce8e97e6e45faf2b4fc.jpeg?token=2ca6afaa94012a75a295fde02a4f6b7d&amp;s=5D843C724B0F4C4B0C5D90CA0000E0B1">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1600350/201907/1600350-20190701215846064-987617972.png">
+<meta property="og:image" content="http://yoursite.com/.com//cgair/Documents/cg/my_blog/blog/source/_posts/%E8%AE%B0%E7%94%A8matplotlib%E7%94%BB%E5%9B%BE/matplotlib%E4%B8%AD%E9%85%8D%E8%89%B2.png">
 <meta property="article:published_time" content="2020-07-03T13:58:20.000Z">
-<meta property="article:modified_time" content="2020-07-03T14:08:00.512Z">
+<meta property="article:modified_time" content="2020-07-05T06:57:12.328Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/.com//cgair/Documents/cg/my_blog/blog/source/_posts/%E8%AE%B0%E7%94%A8matplotlib%E7%94%BB%E5%9B%BE/%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86.jpg">
 
 
 
@@ -299,8 +304,48 @@
       
 
       
-        <p>@<a href="%E7%9B%AE%E5%BD%95">TOC</a></p>
-<h1></h1>
+        <p>[toc]</p>
+<h2 id="一、matplotlib绘图核心原理"><a href="#一、matplotlib绘图核心原理" class="headerlink" title="一、matplotlib绘图核心原理"></a>一、matplotlib绘图核心原理</h2><p>主要就是理解figure(画布)、axes(坐标系)、axis(坐标轴)三者之间的关系。</p>
+<img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/记用matplotlib画图/核心原理.jpg" alt="核心原理" style="zoom:80%;">
+
+<p>想要画画，需要初始化一张figure(画布)，我们画的任何图形，都是在这张figure(画布)上操作的。</p>
+<p>接着，需要给figure(画布)分配不同的区域，指定哪一块儿究竟该画什么。对比到matplotlib中，就是需要指定axes(坐标系)，每一个axes(坐标系)相当于一张画布上的一块区域。一张画布上，可以分配不同区域，也就是说一张画布，可以指定多个axes(坐标系)，我们在每个坐标系上绘图，也就是说每个axes(坐标系)中，都有一个axis(坐标轴)。</p>
+<h2 id="二、创建figure的两种方式：隐式｜显式"><a href="#二、创建figure的两种方式：隐式｜显式" class="headerlink" title="二、创建figure的两种方式：隐式｜显式"></a>二、创建figure的两种方式：隐式｜显式</h2><p>如果我们想要在一个figure对象上，绘制多个图形，那么我们就必须拿到每个axes对象，然后调用每个位置上的axes对象，就可以在每个对应位置的坐标系上，进行绘图，如下图所示。需要我们显示创建figure对象。</p>
+<img src="https://pics7.baidu.com/feed/b7003af33a87e9507b1c1ce8e97e6e45faf2b4fc.jpeg?token=2ca6afaa94012a75a295fde02a4f6b7d&amp;s=5D843C724B0F4C4B0C5D90CA0000E0B1" alt="img" style="zoom:80%;">
+
+<h2 id="三、完整的绘图步骤"><a href="#三、完整的绘图步骤" class="headerlink" title="三、完整的绘图步骤"></a>三、完整的绘图步骤</h2><p><em>step1.导库</em> -&gt; </p>
+<p><em>step2.创建figure画布对象</em> -&gt;</p>
+<p> <em>step3.根据figure对象进行布局设置</em> -&gt; </p>
+<p><em>step4.获取对应位置的axes坐标系对象</em> -&gt; </p>
+<p><em>step5.调用axes对象，进行对应位置的图形绘制</em></p>
+<h2 id="四、这次画的柱状图"><a href="#四、这次画的柱状图" class="headerlink" title="四、这次画的柱状图"></a>四、这次画的柱状图</h2><p><strong>参考代码：</strong></p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line">df = pd.read_csv(<span class="string">'lianjia_utf.csv'</span>)</span><br><span class="line">df.head()</span><br><span class="line">sns.set(style=<span class="string">'white'</span>, font_scale=<span class="number">1.2</span>)</span><br><span class="line"><span class="comment"># 保证可以显示中文字体</span></span><br><span class="line">plt.rcParams[<span class="string">'font.sans-serif'</span>]=<span class="string">'simhei'</span></span><br><span class="line"><span class="comment"># 设置字体大小</span></span><br><span class="line">font1 = &#123;<span class="string">'family'</span> : <span class="string">'simhei'</span>,</span><br><span class="line"><span class="string">'weight'</span> : <span class="string">'normal'</span>,</span><br><span class="line"><span class="string">'size'</span>   : <span class="number">18</span>,&#125;</span><br><span class="line"><span class="comment"># 使用数据透视表</span></span><br><span class="line">region_pivot = pd.pivot_table(df, values=<span class="string">'Price'</span>, index=<span class="string">'Region'</span>, aggfunc=<span class="string">'count'</span>).reset_index().sort_values(ascending=<span class="literal">False</span>,by=<span class="string">'Price'</span>)</span><br><span class="line">f, ax = plt.subplots(figsize=(<span class="number">12</span>,<span class="number">6</span>))</span><br><span class="line"><span class="comment"># 画柱形图</span></span><br><span class="line">bar = plt.bar(region_pivot[<span class="string">'Region'</span>].values,region_pivot[<span class="string">'Price'</span>].values, color=<span class="string">'dodgerblue'</span>)</span><br><span class="line">bar[<span class="number">0</span>].set_color(<span class="string">'green'</span>)</span><br><span class="line"><span class="comment"># 给条形图添加数据标注</span></span><br><span class="line"><span class="keyword">for</span> x, y <span class="keyword">in</span> enumerate(region_pivot[<span class="string">'Price'</span>].values):</span><br><span class="line">    plt.text(x<span class="number">-0.4</span>, y+<span class="number">500</span>, <span class="string">"%s"</span> %y)</span><br><span class="line"><span class="comment">#删除所有边框</span></span><br><span class="line">ax.spines[<span class="string">'right'</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">ax.spines[<span class="string">'top'</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">ax.spines[<span class="string">'bottom'</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">ax.spines[<span class="string">'left'</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line"><span class="comment"># ax.set(title='重庆各区域二手房总价', xlabel='地区', ylabel='总价')</span></span><br><span class="line">plt.tick_params(labelsize=<span class="number">14</span>)</span><br><span class="line">plt.xlabel(<span class="string">'地区'</span>, font1)</span><br><span class="line">plt.ylabel(<span class="string">'总价'</span>, font1)</span><br><span class="line">plt.title(<span class="string">'重庆各区域二手房总价'</span>, font1)</span><br><span class="line">f.savefig(<span class="string">'1_1.png'</span>, bbox_inches=<span class="string">'tight'</span>)</span><br></pre></td></tr></table></figure>
+
+<p><em>说明：</em></p>
+<ol>
+<li><em>plt.text()</em> -&gt; 给图形添加数据标签:</li>
+</ol>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> a,b <span class="keyword">in</span> zip(x,y):</span><br><span class="line">    plt.text(a,b+<span class="number">0.1</span>,<span class="string">'%.0f'</span>%b,ha = <span class="string">'center'</span>,va = <span class="string">'bottom'</span>,fontsize=<span class="number">7</span>)</span><br></pre></td></tr></table></figure>
+
+<p>首先，前边设置的x、y值其实就代表了不同柱子在图形中的位置（坐标），通过for循环找到每一个x、y值的相应坐标—a、b，再使用plt.text在对应位置添文字说明来生成相应的数字标签，而for循环也保证了每一个柱子都有标签。</p>
+<p>其中，a, b+0.05表示在每一柱子对应x值、y值上方0.05处标注文字说明；’%.0f’ % b,代表标注的文字，即每个柱子对应的y值，其中0表示不显示小数后面的数值，1就表示显示小数后面一位，以此类推； ha=’center’, va= ‘bottom’代表horizontalalignment（水平对齐）、verticalalignment（垂直对齐）的方式，fontsize则是文字大小。</p>
+<p>条形图、折线图也是如此设置，饼图则在pie命令中有数据标签的对应参数。对于累积柱状图、双轴柱状图则需要用两个for循环，同时通过a与b的不同加减来设置数据标签位置。</p>
+<ol start="2">
+<li><em>plt.figure(figsize=(a, b))</em> -&gt; 设置窗口尺寸</li>
+</ol>
+<p>其中figsize用来设置图形的大小，a为图形的宽， b为图形的高，单位为英寸。</p>
+<ol start="3">
+<li><em>fig, ax = plt.subplots(figsize = (a, b))</em> -&gt;</li>
+</ol>
+<p>fig代表绘图窗口(Figure)；</p>
+<p>ax代表这个绘图窗口上的坐标系(axis)，一般会继续对ax进行操作。</p>
+<ol start="4">
+<li><em>plt.bar()</em> -&gt;</li>
+</ol>
+<p>[plt.bar()][<a href="https://www.cnblogs.com/zyg123/p/10504637.html]" target="_blank" rel="noopener">https://www.cnblogs.com/zyg123/p/10504637.html]</a></p>
+<p><strong>运行结果:</strong></p>
+<p><img src="https://img2018.cnblogs.com/blog/1600350/201907/1600350-20190701215846064-987617972.png" alt="**img"></p>
+<h2 id="五、关于配色，matplotlib中的配色，可参考下图："><a href="#五、关于配色，matplotlib中的配色，可参考下图：" class="headerlink" title="五、关于配色，matplotlib中的配色，可参考下图："></a>五、关于配色，matplotlib中的配色，可参考下图：</h2><p><img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/%E8%AE%B0%E7%94%A8matplotlib%E7%94%BB%E5%9B%BE/matplotlib%E4%B8%AD%E9%85%8D%E8%89%B2.png" alt="matplotlib中配色"></p>
 
       
     </div>
@@ -447,7 +492,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text"></span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、matplotlib绘图核心原理"><span class="nav-number">1.</span> <span class="nav-text">一、matplotlib绘图核心原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、创建figure的两种方式：隐式｜显式"><span class="nav-number">2.</span> <span class="nav-text">二、创建figure的两种方式：隐式｜显式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、完整的绘图步骤"><span class="nav-number">3.</span> <span class="nav-text">三、完整的绘图步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、这次画的柱状图"><span class="nav-number">4.</span> <span class="nav-text">四、这次画的柱状图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、关于配色，matplotlib中的配色，可参考下图："><span class="nav-number">5.</span> <span class="nav-text">五、关于配色，matplotlib中的配色，可参考下图：</span></a></li></ol></div>
             
 
           </div>
