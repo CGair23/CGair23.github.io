@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="[toc]  RNN (Recurrent Neural Network) 基础为了能够更好的处理序列的信息 - &gt; RNN 1.1 RNN 结构一个简单的循环神经网络 -&gt; 由输入层、一个隐藏层和一个输出层组成：   如果把上面有W的那个带箭头的圈去掉，它就变成了最普通的全连接神经网络： x是一个向量，它表示输入层的值（这里面没有画出来表示神经元节点的圆圈）； s是一个向量，它表示隐">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深度学习：LSTM">
+<meta property="og:url" content="http://yoursite.com/2020/08/27/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%EF%BC%9ALSTM/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="[toc]  RNN (Recurrent Neural Network) 基础为了能够更好的处理序列的信息 - &gt; RNN 1.1 RNN 结构一个简单的循环神经网络 -&gt; 由输入层、一个隐藏层和一个输出层组成：   如果把上面有W的那个带箭头的圈去掉，它就变成了最普通的全连接神经网络： x是一个向量，它表示输入层的值（这里面没有画出来表示神经元节点的圆圈）； s是一个向量，它表示隐">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/.com//cgair/Documents/cg/my_blog/blog/source/_posts/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%EF%BC%9ALSTM/%E8%AE%B0%E7%94%A8matplotlib%E7%94%BB%E5%9B%BE.png">
+<meta property="og:image" content="http://yoursite.com/.com//cgair/Documents/cg/my_blog/blog/source/_posts/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%EF%BC%9ALSTM/v2-206db7ba9d32a80ff56b6cc988a62440_1440w.png">
+<meta property="og:image" content="http://yoursite.com/.com//cgair/Documents/cg/my_blog/blog/source/_posts/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%EF%BC%9ALSTM/RNN%E6%97%B6%E9%97%B4%E7%BA%BF%E5%B1%95%E5%BC%80%E5%9B%BE.png">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=x_%7Bt%7D">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=s_%7Bt%7D">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=o_%7Bt%7D">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=s_%7Bt%7D">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=x_%7Bt%7D">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=s_%7Bt-1%7D">
+<meta property="og:image" content="http://yoursite.com/.com//cgair/Documents/cg/my_blog/blog/source/_posts/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%EF%BC%9ALSTM/%E5%8F%8C%E5%90%91%E5%BE%AA%E7%8E%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C.png">
+<meta property="og:image" content="http://yoursite.com/.com//cgair/Documents/cg/my_blog/blog/source/_posts/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%EF%BC%9ALSTM/%E6%B7%B1%E5%BA%A6%E5%BE%AA%E7%8E%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C.png">
+<meta property="og:image" content="http://yoursite.com/.com//cgair/Documents/cg/my_blog/blog/source/_posts/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%EF%BC%9ALSTM/%E6%B7%B1%E5%BA%A6%E5%BE%AA%E7%8E%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%9A%84%E8%AE%A1%E7%AE%97%E6%96%B9%E5%BC%8F.png">
+<meta property="article:published_time" content="2020-08-27T02:27:21.000Z">
+<meta property="article:modified_time" content="2020-08-27T08:39:18.432Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/.com//cgair/Documents/cg/my_blog/blog/source/_posts/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%EF%BC%9ALSTM/%E8%AE%B0%E7%94%A8matplotlib%E7%94%BB%E5%9B%BE.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/08/27/深度学习：LSTM/"/>
+
+
+
+
+
+  <title>深度学习：LSTM | Hexo</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/27/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%EF%BC%9ALSTM/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">深度学习：LSTM</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-08-27T10:27:21+08:00">
+                2020-08-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>[toc] </p>
+<h2 id="RNN-Recurrent-Neural-Network-基础"><a href="#RNN-Recurrent-Neural-Network-基础" class="headerlink" title="RNN (Recurrent Neural Network) 基础"></a>RNN (Recurrent Neural Network) 基础</h2><p><strong>为了能够更好的处理序列的信息 - &gt; RNN</strong></p>
+<h4 id="1-1-RNN-结构"><a href="#1-1-RNN-结构" class="headerlink" title="1.1 RNN 结构"></a>1.1 RNN 结构</h4><p>一个简单的循环神经网络 -&gt; 由输入层、一个隐藏层和一个输出层组成：</p>
+<img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/深度学习：LSTM/记用matplotlib画图.png" style="zoom:50%;">
+
+<p><strong>如果把上面有W的那个带箭头的圈去掉，它就变成了最普通的<em>全连接神经网络</em></strong>：</p>
+<p>x是一个向量，它表示<strong>输入层</strong>的值（这里面没有画出来表示神经元节点的圆圈）；</p>
+<p>s是一个向量，它表示<strong>隐藏层</strong>的值（这里隐藏层面画了一个节点，你也可以想象这一层其实是多个节点，节点数与向量s的维度相同）；</p>
+<p>o也是一个向量，它表示<strong>输出层</strong>的值；</p>
+<p>U是输入层到隐藏层的<strong>权重矩阵</strong>，V是隐藏层到输出层的<strong>权重矩阵</strong>。</p>
+<p><strong>w 是什么?</strong></p>
+<p><strong>循环神经网络</strong>的<strong>隐藏层</strong>的值s不仅仅取决于当前这次的输入x，还取决于上一次<strong>隐藏层</strong>的值s。</p>
+<p><strong>权重矩阵</strong> w 就是<strong>隐藏层</strong>上一次的值作为这一次的输入的权重。</p>
+<img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/深度学习：LSTM/v2-206db7ba9d32a80ff56b6cc988a62440_1440w.png" alt="v2-206db7ba9d32a80ff56b6cc988a62440_1440w" style="zoom:67%;">
+
+<p>把上面的图按照时间线展开：</p>
+<img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/深度学习：LSTM/RNN时间线展开图.png" alt="RNN时间线展开图" style="zoom:67%;">
+
+<p>这个网络在t时刻接收到输入  <img src="https://www.zhihu.com/equation?tex=x_%7Bt%7D" alt="[公式]"> 之后，隐藏层的值是 <img src="https://www.zhihu.com/equation?tex=s_%7Bt%7D" alt="[公式]"> ，输出值是 <img src="https://www.zhihu.com/equation?tex=o_%7Bt%7D" alt="[公式]"> 。</p>
+<p>关键一点是， <img src="https://www.zhihu.com/equation?tex=s_%7Bt%7D" alt="[公式]"> 的值不仅仅取决于 <img src="https://www.zhihu.com/equation?tex=x_%7Bt%7D" alt="[公式]"> ，还取决于 <img src="https://www.zhihu.com/equation?tex=s_%7Bt-1%7D" alt="[公式]"> 。</p>
+<h4 id="1-2-双向循环神经网络"><a href="#1-2-双向循环神经网络" class="headerlink" title="1.2 双向循环神经网络"></a>1.2 双向循环神经网络</h4><p>对于<strong>语言模型</strong>来说，很多时候光看前面的词是不够的。如：</p>
+<blockquote>
+<p>我的手机坏了，我打算____一部新手机。</p>
+</blockquote>
+<p>如果我们只看横线前面的词，手机坏了，那么我是打算修一修？换一部新的？还是大哭一场？这些都是无法确定的。但如果我们也看到了横线后面的词是『一部新手机』，那么，横线上的词填『买』的概率就大得多了。</p>
+<p>在上一小节中的<strong>基本循环神经网络</strong>是无法对此进行建模的，因此，我们需要<strong>双向循环神经网络</strong>，如图：</p>
+<img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/深度学习：LSTM/双向循环神经网络.png" alt="双向循环神经网络" style="zoom:67%;">
+
+<p>从上图可以看出，<strong>双向卷积神经网络</strong>的隐藏层要保存两个值，一个$A$参与正向计算，另一个值$A^{‘}$参与反向计算。最终的输出值取决于和。其计算方法</p>
+<p>可以看出一般的规律：正向计算时，隐藏层的值与有关；反向计算时，隐藏层的值与有关；最终的输出值$y_{2}$取决于正向$A_{2}$和反向${A}’_{2}$计算的<strong>加和</strong>。</p>
+<p>正向计算和反向计算<strong>不共享权重</strong>，也就是说U和U’、W和W’、V和V’都是不同的<strong>权重矩阵</strong>。</p>
+<h4 id="1-3-深度循环神经网络"><a href="#1-3-深度循环神经网络" class="headerlink" title="1.3 深度循环神经网络"></a>1.3 深度循环神经网络</h4><p>前面介绍的<strong>循环神经网络</strong>只有一个隐藏层，可以堆叠两个以上的隐藏层，这样就得到了<strong>深度循环神经网络</strong>。</p>
+<img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/深度学习：LSTM/深度循环神经网络.png" alt="深度循环神经网络" style="zoom:50%;">
+
+<img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/深度学习：LSTM/深度循环神经网络的计算方式.png" alt="深度循环神经网络的计算方式" style="zoom:50%;">
+
+<h4 id="1-4-循环神经网络的训练"><a href="#1-4-循环神经网络的训练" class="headerlink" title="1.4 循环神经网络的训练"></a>1.4 循环神经网络的训练</h4><h4 id="1-5-RNN的梯度爆炸和消失问题"><a href="#1-5-RNN的梯度爆炸和消失问题" class="headerlink" title="1.5 RNN的梯度爆炸和消失问题"></a>1.5 RNN的梯度爆炸和消失问题</h4><h2 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h2><ol>
+<li><p>[一文搞懂RNN（循环神经网络）基础篇][<a href="https://zhuanlan.zhihu.com/p/30844905]" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/30844905]</a></p>
+</li>
+<li><p>[<a href="https://www.zybuluo.com/hanbingtao/note/433855" target="_blank" rel="noopener">零基础入门深度学习(1) - 感知器</a>]</p>
+</li>
+<li><p><a href="https://www.zybuluo.com/hanbingtao/note/448086" target="_blank" rel="noopener">零基础入门深度学习(2) - 线性单元和梯度下降</a></p>
+</li>
+<li><p><a href="https://www.zybuluo.com/hanbingtao/note/476663" target="_blank" rel="noopener">零基础入门深度学习(3) - 神经网络和反向传播算法</a></p>
+</li>
+<li><p><a href="https://www.zybuluo.com/hanbingtao/note/485480" target="_blank" rel="noopener">零基础入门深度学习(4) - 卷积神经网络</a></p>
+</li>
+<li><p>[零基础入门深度学习(5) - 循环神经网络][<a href="https://zybuluo.com/hanbingtao/note/541458]" target="_blank" rel="noopener">https://zybuluo.com/hanbingtao/note/541458]</a></p>
+</li>
+<li><p><a href="https://zybuluo.com/hanbingtao/note/581764" target="_blank" rel="noopener">零基础入门深度学习(6) - 长短时记忆网络(LSTM)</a></p>
+</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/07/07/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AF%87%EF%BC%9A%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E7%AE%97%E6%B3%95/" rel="next" title="深度学习篇：神经网络核心原理与算法">
+                <i class="fa fa-chevron-left"></i> 深度学习篇：神经网络核心原理与算法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%20%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#RNN-Recurrent-Neural-Network-基础"><span class="nav-number">1.</span> <span class="nav-text">RNN (Recurrent Neural Network) 基础</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-RNN-结构"><span class="nav-number">1.0.1.</span> <span class="nav-text">1.1 RNN 结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-双向循环神经网络"><span class="nav-number">1.0.2.</span> <span class="nav-text">1.2 双向循环神经网络</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-深度循环神经网络"><span class="nav-number">1.0.3.</span> <span class="nav-text">1.3 深度循环神经网络</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-循环神经网络的训练"><span class="nav-number">1.0.4.</span> <span class="nav-text">1.4 循环神经网络的训练</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-5-RNN的梯度爆炸和消失问题"><span class="nav-number">1.0.5.</span> <span class="nav-text">1.5 RNN的梯度爆炸和消失问题</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考："><span class="nav-number">2.</span> <span class="nav-text">参考：</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
