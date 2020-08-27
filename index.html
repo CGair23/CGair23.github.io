@@ -318,8 +318,8 @@
 <p>把上面的图按照时间线展开：</p>
 <img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/深度学习：LSTM/RNN时间线展开图.png" alt="RNN时间线展开图" style="zoom:67%;">
 
-<p>这个网络在t时刻接收到输入  <img src="https://www.zhihu.com/equation?tex=x_%7Bt%7D" alt="[公式]"> 之后，隐藏层的值是 <img src="https://www.zhihu.com/equation?tex=s_%7Bt%7D" alt="[公式]"> ，输出值是 <img src="https://www.zhihu.com/equation?tex=o_%7Bt%7D" alt="[公式]"> 。</p>
-<p>关键一点是， <img src="https://www.zhihu.com/equation?tex=s_%7Bt%7D" alt="[公式]"> 的值不仅仅取决于 <img src="https://www.zhihu.com/equation?tex=x_%7Bt%7D" alt="[公式]"> ，还取决于 <img src="https://www.zhihu.com/equation?tex=s_%7Bt-1%7D" alt="[公式]"> 。</p>
+<p>这个网络在t时刻接收到输入 $x_{t}$ 之后，隐藏层的值是$s_{t}$ ，输出值是$o_{t}$。</p>
+<p>关键一点是，$s_{t}$的值不仅仅取决于 $x_{t}$  ，还取决于$s_{t-1}$。</p>
 <h4 id="1-2-双向循环神经网络"><a href="#1-2-双向循环神经网络" class="headerlink" title="1.2 双向循环神经网络"></a>1.2 双向循环神经网络</h4><p>对于<strong>语言模型</strong>来说，很多时候光看前面的词是不够的。如：</p>
 <blockquote>
 <p>我的手机坏了，我打算____一部新手机。</p>
