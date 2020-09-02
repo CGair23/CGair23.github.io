@@ -79,12 +79,12 @@
 
 
 
-<meta name="description" content="[toc]  RNN (Recurrent Neural Network) 基础为了能够更好的处理序列的信息 - &gt; RNN 1.1 RNN 结构一个简单的循环神经网络 -&gt; 由输入层、一个隐藏层和一个输出层组成：   如果把上面有W的那个带箭头的圈去掉，它就变成了最普通的全连接神经网络： x是一个向量，它表示输入层的值（这里面没有画出来表示神经元节点的圆圈）； s是一个向量，它表示隐">
+<meta name="description" content="[toc]  RNN (Recurrent Neural Network) 基础为了能够更好的处理序列的信息 - &gt; RNN RNN 结构一个简单的循环神经网络 -&gt; 由输入层、一个隐藏层和一个输出层组成：   如果把上面有W的那个带箭头的圈去掉，它就变成了最普通的全连接神经网络： x是一个向量，它表示输入层的值（这里面没有画出来表示神经元节点的圆圈）； s是一个向量，它表示隐藏层的值">
 <meta property="og:type" content="article">
 <meta property="og:title" content="深度学习：LSTM">
 <meta property="og:url" content="http://yoursite.com/2020/08/27/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%EF%BC%9ALSTM/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="[toc]  RNN (Recurrent Neural Network) 基础为了能够更好的处理序列的信息 - &gt; RNN 1.1 RNN 结构一个简单的循环神经网络 -&gt; 由输入层、一个隐藏层和一个输出层组成：   如果把上面有W的那个带箭头的圈去掉，它就变成了最普通的全连接神经网络： x是一个向量，它表示输入层的值（这里面没有画出来表示神经元节点的圆圈）； s是一个向量，它表示隐">
+<meta property="og:description" content="[toc]  RNN (Recurrent Neural Network) 基础为了能够更好的处理序列的信息 - &gt; RNN RNN 结构一个简单的循环神经网络 -&gt; 由输入层、一个隐藏层和一个输出层组成：   如果把上面有W的那个带箭头的圈去掉，它就变成了最普通的全连接神经网络： x是一个向量，它表示输入层的值（这里面没有画出来表示神经元节点的圆圈）； s是一个向量，它表示隐藏层的值">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://yoursite.com/.com//cgair/Documents/cg/my_blog/blog/source/_posts/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%EF%BC%9ALSTM/%E8%AE%B0%E7%94%A8matplotlib%E7%94%BB%E5%9B%BE.png">
 <meta property="og:image" content="http://yoursite.com/.com//cgair/Documents/cg/my_blog/blog/source/_posts/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%EF%BC%9ALSTM/v2-206db7ba9d32a80ff56b6cc988a62440_1440w.png">
@@ -93,7 +93,7 @@
 <meta property="og:image" content="http://yoursite.com/.com//cgair/Documents/cg/my_blog/blog/source/_posts/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%EF%BC%9ALSTM/%E6%B7%B1%E5%BA%A6%E5%BE%AA%E7%8E%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C.png">
 <meta property="og:image" content="http://yoursite.com/.com//cgair/Documents/cg/my_blog/blog/source/_posts/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%EF%BC%9ALSTM/%E6%B7%B1%E5%BA%A6%E5%BE%AA%E7%8E%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%9A%84%E8%AE%A1%E7%AE%97%E6%96%B9%E5%BC%8F.png">
 <meta property="article:published_time" content="2020-08-27T02:27:21.000Z">
-<meta property="article:modified_time" content="2020-08-27T08:55:31.615Z">
+<meta property="article:modified_time" content="2020-09-02T05:18:02.850Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://yoursite.com/.com//cgair/Documents/cg/my_blog/blog/source/_posts/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%EF%BC%9ALSTM/%E8%AE%B0%E7%94%A8matplotlib%E7%94%BB%E5%9B%BE.png">
@@ -307,8 +307,8 @@
 
       
         <p>[toc] </p>
-<h2 id="RNN-Recurrent-Neural-Network-基础"><a href="#RNN-Recurrent-Neural-Network-基础" class="headerlink" title="RNN (Recurrent Neural Network) 基础"></a>RNN (Recurrent Neural Network) 基础</h2><p><strong>为了能够更好的处理序列的信息 - &gt; RNN</strong></p>
-<h4 id="1-1-RNN-结构"><a href="#1-1-RNN-结构" class="headerlink" title="1.1 RNN 结构"></a>1.1 RNN 结构</h4><p>一个简单的循环神经网络 -&gt; 由输入层、一个隐藏层和一个输出层组成：</p>
+<h1 id="RNN-Recurrent-Neural-Network-基础"><a href="#RNN-Recurrent-Neural-Network-基础" class="headerlink" title="RNN (Recurrent Neural Network) 基础"></a>RNN (Recurrent Neural Network) 基础</h1><p><strong>为了能够更好的处理序列的信息 - &gt; RNN</strong></p>
+<h2 id="RNN-结构"><a href="#RNN-结构" class="headerlink" title="RNN 结构"></a>RNN 结构</h2><p>一个简单的循环神经网络 -&gt; 由输入层、一个隐藏层和一个输出层组成：</p>
 <img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/深度学习：LSTM/记用matplotlib画图.png" style="zoom:50%;">
 
 <p><strong>如果把上面有W的那个带箭头的圈去掉，它就变成了最普通的<em>全连接神经网络</em></strong>：</p>
@@ -326,7 +326,7 @@
 
 <p>这个网络在t时刻接收到输入 $x_{t}$ 之后，隐藏层的值是$s_{t}$ ，输出值是$o_{t}$。</p>
 <p>关键一点是，$s_{t}$的值不仅仅取决于 $x_{t}$  ，还取决于$s_{t-1}$。</p>
-<h4 id="1-2-双向循环神经网络"><a href="#1-2-双向循环神经网络" class="headerlink" title="1.2 双向循环神经网络"></a>1.2 双向循环神经网络</h4><p>对于<strong>语言模型</strong>来说，很多时候光看前面的词是不够的。如：</p>
+<h2 id="双向循环神经网络"><a href="#双向循环神经网络" class="headerlink" title="双向循环神经网络"></a>双向循环神经网络</h2><p>对于<strong>语言模型</strong>来说，很多时候光看前面的词是不够的。如：</p>
 <blockquote>
 <p>我的手机坏了，我打算____一部新手机。</p>
 </blockquote>
@@ -337,12 +337,12 @@
 <p>从上图可以看出，<strong>双向卷积神经网络</strong>的隐藏层要保存两个值，一个$A$参与正向计算，另一个值${A}’$参与反向计算。最终的输出值取决于和。其计算方法</p>
 <p>可以看出一般的规律：正向计算时，隐藏层的值与有关；反向计算时，隐藏层的值与有关；最终的输出值$y_{2}$取决于正向$A_{2}$和反向${A}’_{2}$计算的<strong>加和</strong>。</p>
 <p>正向计算和反向计算<strong>不共享权重</strong>，也就是说U和U’、W和W’、V和V’都是不同的<strong>权重矩阵</strong>。</p>
-<h4 id="1-3-深度循环神经网络"><a href="#1-3-深度循环神经网络" class="headerlink" title="1.3 深度循环神经网络"></a>1.3 深度循环神经网络</h4><p>前面介绍的<strong>循环神经网络</strong>只有一个隐藏层，可以堆叠两个以上的隐藏层，这样就得到了<strong>深度循环神经网络</strong>。</p>
+<h2 id="深度循环神经网络"><a href="#深度循环神经网络" class="headerlink" title="深度循环神经网络"></a>深度循环神经网络</h2><p>前面介绍的<strong>循环神经网络</strong>只有一个隐藏层，可以堆叠两个以上的隐藏层，这样就得到了<strong>深度循环神经网络</strong>。</p>
 <img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/深度学习：LSTM/深度循环神经网络.png" alt="深度循环神经网络" style="zoom:50%;">
 
 <img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/深度学习：LSTM/深度循环神经网络的计算方式.png" alt="深度循环神经网络的计算方式" style="zoom:50%;">
 
-<h4 id="1-4-循环神经网络的训练"><a href="#1-4-循环神经网络的训练" class="headerlink" title="1.4 循环神经网络的训练"></a>1.4 循环神经网络的训练</h4><h4 id="1-5-RNN的梯度爆炸和消失问题"><a href="#1-5-RNN的梯度爆炸和消失问题" class="headerlink" title="1.5 RNN的梯度爆炸和消失问题"></a>1.5 RNN的梯度爆炸和消失问题</h4><h2 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h2><ol>
+<h2 id="循环神经网络的训练"><a href="#循环神经网络的训练" class="headerlink" title="循环神经网络的训练"></a>循环神经网络的训练</h2><h2 id="RNN的梯度爆炸和消失问题"><a href="#RNN的梯度爆炸和消失问题" class="headerlink" title="RNN的梯度爆炸和消失问题"></a>RNN的梯度爆炸和消失问题</h2><h2 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h2><ol>
 <li><p>[一文搞懂RNN（循环神经网络）基础篇][<a href="https://zhuanlan.zhihu.com/p/30844905]" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/30844905]</a></p>
 </li>
 <li><p>[<a href="https://www.zybuluo.com/hanbingtao/note/433855" target="_blank" rel="noopener">零基础入门深度学习(1) - 感知器</a>]</p>
@@ -517,7 +517,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#RNN-Recurrent-Neural-Network-基础"><span class="nav-number">1.</span> <span class="nav-text">RNN (Recurrent Neural Network) 基础</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-RNN-结构"><span class="nav-number">1.0.1.</span> <span class="nav-text">1.1 RNN 结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-双向循环神经网络"><span class="nav-number">1.0.2.</span> <span class="nav-text">1.2 双向循环神经网络</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-深度循环神经网络"><span class="nav-number">1.0.3.</span> <span class="nav-text">1.3 深度循环神经网络</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-循环神经网络的训练"><span class="nav-number">1.0.4.</span> <span class="nav-text">1.4 循环神经网络的训练</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-5-RNN的梯度爆炸和消失问题"><span class="nav-number">1.0.5.</span> <span class="nav-text">1.5 RNN的梯度爆炸和消失问题</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考："><span class="nav-number">2.</span> <span class="nav-text">参考：</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#RNN-Recurrent-Neural-Network-基础"><span class="nav-number">1.</span> <span class="nav-text">RNN (Recurrent Neural Network) 基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#RNN-结构"><span class="nav-number">1.1.</span> <span class="nav-text">RNN 结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#双向循环神经网络"><span class="nav-number">1.2.</span> <span class="nav-text">双向循环神经网络</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#深度循环神经网络"><span class="nav-number">1.3.</span> <span class="nav-text">深度循环神经网络</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#循环神经网络的训练"><span class="nav-number">1.4.</span> <span class="nav-text">循环神经网络的训练</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RNN的梯度爆炸和消失问题"><span class="nav-number">1.5.</span> <span class="nav-text">RNN的梯度爆炸和消失问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考："><span class="nav-number">1.6.</span> <span class="nav-text">参考：</span></a></li></ol></li></ol></div>
             
 
           </div>
