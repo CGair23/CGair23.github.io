@@ -229,6 +229,409 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/02/%E9%A1%B9%E7%9B%AE%EF%BC%9A%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/09/02/%E9%A1%B9%E7%9B%AE%EF%BC%9A%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" itemprop="url">项目：正则表达式</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-09-02T10:03:32+08:00">
+                2020-09-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>[toc]</p>
+<h2 id="Questions-amp-Answers"><a href="#Questions-amp-Answers" class="headerlink" title="Questions &amp; Answers"></a>Questions &amp; Answers</h2><p><strong>1. 为什么需要正则表达式？</strong></p>
+<p>正则表达式本来的初衷是用来从无结构的字符串中提取信息，殊不知这正好是Unix的缺陷所在。正则表达式有它自己的价值（针对自然语言），但是我们其实不需要把它应用到程序语言和操作系统里面。</p>
+<p><strong>2. 正则表达式的优势？</strong></p>
+<p>提供了一种紧凑的、动态的方式，能够以一种<strong>完全通用的方式</strong>来解决各种字符串处理（例如：验证、查找、替换等）问题</p>
+<p><strong>3. 正则表达式定义？</strong></p>
+<p>描述了一个规则，通过这个规则可以匹配一类字符串。</p>
+<p><strong>4. 正则表达式的用处？</strong></p>
+<p><strong>验证</strong>给定字符串是否符合指定特征，比如验证是否是合法的邮件地址。</p>
+<p>用来<strong>查找</strong>字符串，从一个长的文本中查找符合指定特征的字符串。</p>
+<p>用来<strong>替换</strong>，比普通的替换更强大</p>
+<h2 id="元字符"><a href="#元字符" class="headerlink" title="元字符"></a>元字符</h2><img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/项目：正则表达式/常用的元字符.png" alt="常用的元字符" style="zoom:80%;">
+
+<p>例子：</p>
+<p>“\ba\w* \b”匹配以字母a开头的单词——先是某个单词开始处(\b)，然后是字母a,然后是任意数量的字母或数字(\w*)，最后是单词结束处(\b)。</p>
+<p>“\d+”匹配1个或更多连续的数字。这里的+是和<em>类似的元字符，不同的是</em>匹配重复任意次(可能是0次)，而+则匹配重复1次或更多次。</p>
+<p>“\b\w{6}\b”匹配刚好6个字符的单词。</p>
+<h2 id="字符转义"><a href="#字符转义" class="headerlink" title="字符转义"></a>字符转义</h2><p>想查找元字符本身的话，比如你查找 . ,或者 * ,就出现了问题：你没办法指定它们，因为它们会被解释成别的意思。这时你就得使用 \ 来取消这些字符的特殊意义。因此，你应该使用.和*。当然，要查找 \ 本身，你也得用 \ \ 。</p>
+<h2 id="重复"><a href="#重复" class="headerlink" title="重复"></a>重复</h2><img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/项目：正则表达式/常用的限定符.png" alt="常用的限定符" style="zoom:80%;">
+
+<h2 id="贪婪与懒惰"><a href="#贪婪与懒惰" class="headerlink" title="贪婪与懒惰"></a>贪婪与懒惰</h2><p>当正则表达式中包含能接受重复的限定符时，通常的行为是（在使整个表达式能得到匹配的前提下）匹配<strong>尽可能多</strong>的字符。以这个表达式为例：a.*b，它将会匹配最长的以 a 开始，以 b 结束的字符串。如果用它来搜索aabab的话，它会匹配整个字符串 aabab 。这被称为<strong>贪婪</strong>匹配。 </p>
+<p>有时，我们更需要<strong>懒惰</strong>匹配，也就是匹配<strong>尽可能少</strong>的字符。前面给出的限定符都可以被转化为懒惰匹配模式，只要在它后面加上一个问号?。这样.*?就意味着匹配任意数量的重复，但是在能使整个匹配成功的前提下使用最少的重复。</p>
+<p>例子：</p>
+<p>a.*?b 匹配最短的，以 a 开始，以 b 结束的字符串。如果把它应用于 aabab 的话，它会匹配 aab（第一到第三个字符）和 ab（第四到第五个字符）。</p>
+<h2 id="后向引用"><a href="#后向引用" class="headerlink" title="后向引用"></a>后向引用</h2><p>使用小括号指定一个子表达式后，<strong>匹配这个子表达式的文本</strong>(也就是此分组捕获的内容)可以在表达式或其它程序中作进一步的处理。默认情况下，每个分组会自动拥有一个<strong>组号</strong>，规则是：从左向右，以分组的左括号为标志，第一个出现的分组的组号为1，第二个为2，以此类推。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(exp) 	# 匹配exp,并捕获文本到自动命名的组里</span><br><span class="line">(?&lt;name&gt;exp) 	# 匹配exp,并捕获文本到名称为name的组里，也可以写成(?&#39;name&#39;exp)</span><br></pre></td></tr></table></figure>
+
+<h2 id="零宽断言"><a href="#零宽断言" class="headerlink" title="零宽断言"></a>零宽断言</h2><p>用于查找在某些内容(但并不包括这些内容)之前或之后的东西，也就是说它们像\b,^,$那样用于指定一个位置，这个位置应该满足一定的条件(即断言)，因此它们也被称为<strong>零宽断言</strong>。</p>
+<p>例子：</p>
+<p>(?=exp)也叫<strong>零宽度正预测先行断言</strong>，它断言自身出现的位置的后面能匹配表达式exp。比如\b\w+(?=ing\b)，匹配以ing结尾的单词的前面部分(除了ing以外的部分)，如查找<em>I’m singing while you’re dancing.</em>时，它会匹配sing和danc。</p>
+<p>(?&lt;=exp)也叫<strong>零宽度正回顾后发断言</strong>，它断言自身出现的位置的前面能匹配表达式exp。比如(?&lt;=\bre)\w+\b会匹配以re开头的单词的后半部分(除了re以外的部分)，例如在查找<em>reading a book</em>时，它匹配ading。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://deerchao.cn/tutorials/regex/regex.htm#testing" target="_blank" rel="noopener">正则表达式30分钟入门教程</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/31/%E9%A1%B9%E7%9B%AE%EF%BC%9A%E6%9A%97%E7%BD%91%E7%88%AC%E8%99%AB%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%90%AD%E5%BB%BA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/08/31/%E9%A1%B9%E7%9B%AE%EF%BC%9A%E6%9A%97%E7%BD%91%E7%88%AC%E8%99%AB%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%90%AD%E5%BB%BA/" itemprop="url">项目：暗网爬虫系统的搭建</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-08-31T09:46:26+08:00">
+                2020-08-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>[toc]</p>
+<h2 id="Step1-Virtual-Box-安装-Ubuntu-Linux-操作系统"><a href="#Step1-Virtual-Box-安装-Ubuntu-Linux-操作系统" class="headerlink" title="Step1. Virtual Box 安装 Ubuntu Linux 操作系统"></a>Step1. Virtual Box 安装 Ubuntu Linux 操作系统</h2><ol>
+<li>下载 Ubuntu 虚拟光盘文件</li>
+<li>设置：</li>
+</ol>
+<img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/项目：暗网爬虫系统的搭建/截屏2020-08-31 上午10.21.05.png" alt="截屏2020-08-31 上午10.21.05" style="zoom:80%;">
+
+<ol start="3">
+<li>开始安装</li>
+</ol>
+<img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/项目：暗网爬虫系统的搭建/截屏2020-08-31 上午10.23.45.png" alt="截屏2020-08-31 上午10.23.45" style="zoom:80%;">
+
+<img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/项目：暗网爬虫系统的搭建/截屏2020-08-31 上午10.24.23.png" alt="截屏2020-08-31 上午10.24.23" style="zoom:80%;">
+
+<img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/项目：暗网爬虫系统的搭建/截屏2020-08-31 上午10.24.52.png" alt="截屏2020-08-31 上午10.24.52" style="zoom:80%;">
+
+<p>单击“继续”按钮</p>
+<p>选择机器所在地 -&gt; 单击“继续”按钮</p>
+<p>请特别注意键盘布局方式是“英语（美国）”，而不是“汉语（SunPinyin）”。</p>
+<img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/项目：暗网爬虫系统的搭建/截屏2020-08-31 上午10.28.13.png" alt="截屏2020-08-31 上午10.28.13" style="zoom:80%;">
+
+<p>设置姓名、计算机名，选择一个用户名并设置账号密码</p>
+<p>单击“继续”按钮 -&gt; 开始安装 -&gt; 现在重启（如果系统没有自动退出，可强制退出。）</p>
+<ol start="4">
+<li>安装增强功能</li>
+</ol>
+<img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/项目：暗网爬虫系统的搭建/截屏2020-08-31 上午10.32.39.png" alt="截屏2020-08-31 上午10.32.39" style="zoom:80%;">
+
+<p>出现“Press Return to close this window”代表已经安装完成 -&gt; 重启</p>
+<ol start="5">
+<li><p>设置默认输入法</p>
+<p>右上角设置 -&gt; 系统设置 -&gt; 文本输入</p>
+<img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/项目：暗网爬虫系统的搭建/截屏2020-08-31 上午10.35.15.png" alt="截屏2020-08-31 上午10.35.15" style="zoom:80%;">
+
+<p>切换到下一个 -&gt; Ctrl + 空格</p>
+</li>
+</ol>
+<h2 id="Step2-Tor的下载与安装"><a href="#Step2-Tor的下载与安装" class="headerlink" title="Step2. Tor的下载与安装"></a>Step2. Tor的下载与安装</h2><h2 id="Step3-Linux-Ubuntu-下-Shadowsocks-客户端的使用"><a href="#Step3-Linux-Ubuntu-下-Shadowsocks-客户端的使用" class="headerlink" title="Step3. Linux Ubuntu 下 Shadowsocks 客户端的使用"></a>Step3. Linux Ubuntu 下 Shadowsocks 客户端的使用</h2><ol>
+<li><p>Shadowsocks 的安装</p>
+<p>sudo apt-get update </p>
+<p>sudo apt-get install shadowsocks</p>
+</li>
+<li><p>Shadowsocks 客户端的使用</p>
+<p>sslocal -s 服务器IP -p 服务器端口 -l 本地端口 -k 本地密码 -m 加密方式</p>
+<p>比如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sslocal -s 192.168.1.1 -p 8080 -l 1080 -k mima -m aes-256-cfb</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置 Shadowsocks 开机启动</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vi &#x2F;root&#x2F;sslocal.sh</span><br></pre></td></tr></table></figure>
+
+<p>写入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#!&#x2F;bin&#x2F;bash</span><br><span class="line">nohup sslocal -s 192.168.1.1 -p 8080 -l 1080 -k mima -m aes-256-cfb </span><br><span class="line">sleep 1000h</span><br></pre></td></tr></table></figure>
+
+<p>保存退出</p>
+<p>添加执行权限</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod +x &#x2F;root&#x2F;sslocal.sh</span><br></pre></td></tr></table></figure>
+
+<p>编写服务配置文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vi &#x2F;etc&#x2F;systemd&#x2F;system&#x2F;sslocal.service</span><br></pre></td></tr></table></figure>
+
+<p>写入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description&#x3D;sslocal</span><br><span class="line">[Service]</span><br><span class="line">ExecStart&#x3D;&#x2F;root&#x2F;sslocal.sh</span><br><span class="line">[Install]</span><br><span class="line">WantedBy&#x3D;multi-user.target</span><br></pre></td></tr></table></figure>
+
+<p>然后输入命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable sslocal</span><br></pre></td></tr></table></figure>
+
+<p>可以查看状态</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl status sslocal</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h2 id="Step4-基于Tor的暗网资源探测系统"><a href="#Step4-基于Tor的暗网资源探测系统" class="headerlink" title="Step4. 基于Tor的暗网资源探测系统"></a>Step4. 基于Tor的暗网资源探测系统</h2><h4 id="4-1-Polipo-代理"><a href="#4-1-Polipo-代理" class="headerlink" title="4.1 Polipo 代理"></a>4.1 Polipo 代理</h4><p>Tor 服务提供  SOCKS5 代理，但是由于 Scrapy 不支持  SOCKS5 代理，需要在 Scrapy 和 Tor 之间增加一个代理转换工具。我们使用 Polipo 工具实现 Tor 的 SOCKS5 协议和 ＨTTP 协议之间的转换，令 Scrapy 可以使用 Tor 代理访问暗网。</p>
+<p><strong>Polipo 安装：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install polipo      # 安装Polipo</span><br><span class="line">sudo gedit &#x2F;etc&#x2F;polipo&#x2F;config    # 修改配置文件</span><br></pre></td></tr></table></figure>
+
+<p>将下面的内容整个替换到文件中并保存：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"># This file only needs to list configuration variables that deviate</span><br><span class="line"># from the default values. See &#x2F;usr&#x2F;share&#x2F;doc&#x2F;polipo&#x2F;examples&#x2F;config.sample</span><br><span class="line"># and &quot;polipo -v&quot; for variables you can tweak and further information.</span><br><span class="line">logSyslog &#x3D; false</span><br><span class="line">logFile &#x3D; &quot;&#x2F;var&#x2F;log&#x2F;polipo&#x2F;polipo.log&quot;</span><br><span class="line"></span><br><span class="line">socksParentProxy &#x3D; &quot;127.0.0.1:1080&quot;</span><br><span class="line">socksProxyType &#x3D; socks5</span><br><span class="line"></span><br><span class="line">chunkHighMark &#x3D; 50331648</span><br><span class="line">objectHighMark &#x3D; 16384</span><br><span class="line"></span><br><span class="line">serverMaxSlots &#x3D; 64</span><br><span class="line">serverSlots &#x3D; 16</span><br><span class="line">serverSlots1 &#x3D; 32</span><br><span class="line"></span><br><span class="line">proxyAddress &#x3D; &quot;127.0.0.1&quot;</span><br><span class="line">proxyPort &#x3D; 8123</span><br></pre></td></tr></table></figure>
+
+<p>重启Polipo:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;etc&#x2F;init.d&#x2F;polipo restart</span><br></pre></td></tr></table></figure>
+
+<p>验证代理是否正常工作：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export http_proxy&#x3D;&quot;http:&#x2F;&#x2F;127.0.0.1:8123&#x2F;&quot;</span><br><span class="line">curl www.google.com</span><br></pre></td></tr></table></figure>
+
+<p>如果正常，就会返回抓取到的Google网页内容。此时，终端里面可以访问外网了。<br>另外，在浏览器中输入<a href="https://link.jianshu.com/?t=http%3A%2F%2F127.0.0.1%3A8123%2F" target="_blank" rel="noopener">http://127.0.0.1:8123/</a>便可以进入到Polipo的使用说明和配置界面。</p>
+<h4 id="4-2-Scrapy框架"><a href="#4-2-Scrapy框架" class="headerlink" title="4.2 Scrapy框架"></a>4.2 Scrapy框架</h4><h5 id="4-2-1-scrapy架构图"><a href="#4-2-1-scrapy架构图" class="headerlink" title="4.2.1 scrapy架构图"></a>4.2.1 scrapy架构图</h5><img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/项目：暗网爬虫系统的搭建/scrapy架构图.png" alt="scrapy架构图" style="zoom:80%;">
+
+<img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/项目：暗网爬虫系统的搭建/截屏2020-08-31 下午8.00.16.png" alt="截屏2020-08-31 下午8.00.16" style="zoom:80%;">
+
+<img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/项目：暗网爬虫系统的搭建/12983160-394d93c87390c455.png" alt="12983160-394d93c87390c455" style="zoom:80%;">
+
+<h5 id="4-2-2-数据流"><a href="#4-2-2-数据流" class="headerlink" title="4.2.2 数据流"></a>4.2.2 数据流</h5><img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/项目：暗网爬虫系统的搭建/截屏2020-08-31 下午8.00.27.png" alt="截屏2020-08-31 下午8.00.27" style="zoom:80%;">
+
+<h5 id="4-2-3-项目实战"><a href="#4-2-3-项目实战" class="headerlink" title="4.2.3 项目实战"></a>4.2.3 项目实战</h5><p>(1) 新建scrapy项目：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scrapy startproject 项目名称</span><br></pre></td></tr></table></figure>
+
+<p>(2) Pycharm 中打开 </p>
+<h4 id="4-3-开发环境：Pycharm-Anaconda3-Mongodb"><a href="#4-3-开发环境：Pycharm-Anaconda3-Mongodb" class="headerlink" title="4.3 开发环境：Pycharm + Anaconda3 + Mongodb"></a>4.3 开发环境：Pycharm + Anaconda3 + Mongodb</h4><h5 id="4-3-1-conda常用命令"><a href="#4-3-1-conda常用命令" class="headerlink" title="4.3.1 conda常用命令"></a>4.3.1 conda常用命令</h5><ol>
+<li><p>验证conda已被安装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conda --version</span><br><span class="line">conda update -n base conda #update最新版本的conda</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建新环境</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conda create --name python2 python&#x3D;2</span><br><span class="line">conda create -n xxxx python&#x3D;3.5 #创建python3.5的xxxx虚拟环境</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>切换或激活环境</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda activate xxxx #开启xxxx环境</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>离开当前环境</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda deactivate #关闭环境</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>显示所有的虚拟环境</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda info --envs</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>复制环境</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda create --name &lt;new_env_name&gt; --clone &lt;copied_env_name&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>删除环境</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda remove -n xxxx --all</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看当前环境下的安装包</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda <span class="built_in">list</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装软件包</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">conda install -p [安装路径] &lt;安装包&gt;</span><br><span class="line">conda install --name &lt;env_name&gt; &lt;package_name&gt; #在指定环境中安装包</span><br><span class="line">conda install -p /path/to/biotools bwa</span><br><span class="line">conda install -<span class="built_in">c</span> bioconda bamtools -p /home/wangyc/conda_biotools/</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h5 id="4-3-2-Linux-mongodb-安装"><a href="#4-3-2-Linux-mongodb-安装" class="headerlink" title="4.3.2 Linux mongodb 安装"></a>4.3.2 Linux mongodb 安装</h5><h4 id="4-4-OnionScan"><a href="#4-4-OnionScan" class="headerlink" title="4.4 OnionScan"></a>4.4 OnionScan</h4><h5 id="4-4-1-ubuntu-16-04-安装-go-1-7-OnionScan-适用-go-1-6-1-7"><a href="#4-4-1-ubuntu-16-04-安装-go-1-7-OnionScan-适用-go-1-6-1-7" class="headerlink" title="4.4.1 ubuntu 16.04 安装 go 1.7 (OnionScan 适用 go 1.6/1.7)"></a>4.4.1 ubuntu 16.04 安装 go 1.7 (OnionScan 适用 go 1.6/1.7)</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># 安装Go语言</span><br><span class="line">sudo apt-get update</span><br><span class="line">wget 链接</span><br><span class="line">sudo tar -xvf go1.7.linux-amd64.tar.gz</span><br><span class="line">sudo mv go &#x2F;usr&#x2F;local</span><br><span class="line"># 设置Go环境</span><br><span class="line">export GOROOT&#x3D;&#x2F;usr&#x2F;local&#x2F;go</span><br><span class="line">export GOROOT&#x3D;$HOME&#x2F;自己创建的workplce的名字</span><br><span class="line">export PATH&#x3D;$GOPATH&#x2F;bin:$GOROOT&#x2F;bin:$PATH</span><br><span class="line"># 验证安装</span><br><span class="line">go version</span><br><span class="line">-&gt; go version go1.7 linux&#x2F;amd64</span><br></pre></td></tr></table></figure>
+
+<h5 id="4-4-2-安装OnionScan"><a href="#4-4-2-安装OnionScan" class="headerlink" title="4.4.2 安装OnionScan"></a>4.4.2 <a href="https://github.com/s-rah/onionscan" target="_blank" rel="noopener">安装OnionScan</a></h5><h2 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h2><ol>
+<li><a href="https://www.jianshu.com/p/a0f3268bfa33" target="_blank" rel="noopener">https://www.jianshu.com/p/a0f3268bfa33</a></li>
+<li><a href="https://www.jianshu.com/p/bd96111de6ae" target="_blank" rel="noopener">Conda常用命令</a></li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/27/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%EF%BC%9ALSTM/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -328,7 +731,7 @@
 <p>在上一小节中的<strong>基本循环神经网络</strong>是无法对此进行建模的，因此，我们需要<strong>双向循环神经网络</strong>，如图：</p>
 <img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/深度学习：LSTM/双向循环神经网络.png" alt="双向循环神经网络" style="zoom:67%;">
 
-<p>从上图可以看出，<strong>双向卷积神经网络</strong>的隐藏层要保存两个值，一个$A$参与正向计算，另一个值$A^{‘}$参与反向计算。最终的输出值取决于和。其计算方法</p>
+<p>从上图可以看出，<strong>双向卷积神经网络</strong>的隐藏层要保存两个值，一个$A$参与正向计算，另一个值${A}’$参与反向计算。最终的输出值取决于和。其计算方法</p>
 <p>可以看出一般的规律：正向计算时，隐藏层的值与有关；反向计算时，隐藏层的值与有关；最终的输出值$y_{2}$取决于正向$A_{2}$和反向${A}’_{2}$计算的<strong>加和</strong>。</p>
 <p>正向计算和反向计算<strong>不共享权重</strong>，也就是说U和U’、W和W’、V和V’都是不同的<strong>权重矩阵</strong>。</p>
 <h4 id="1-3-深度循环神经网络"><a href="#1-3-深度循环神经网络" class="headerlink" title="1.3 深度循环神经网络"></a>1.3 深度循环神经网络</h4><p>前面介绍的<strong>循环神经网络</strong>只有一个隐藏层，可以堆叠两个以上的隐藏层，这样就得到了<strong>深度循环神经网络</strong>。</p>
@@ -1299,7 +1702,7 @@
               
                 <a href="/archives/%20%7C%7C%20archive">
               
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
