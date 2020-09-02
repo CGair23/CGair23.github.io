@@ -79,12 +79,12 @@
 
 
 
-<meta name="description" content="[toc] Back Propagation Networks - 反向传播网络BP网络是所有的神经网络中结构最为简单的一种网络。一般我们习惯把网络画成左边输入右边输出层的结构。 BP神经网络的网络结构是不固定的:   线性回归的训练到BP神经网络的训练2.1 线性回归：样本：  观察记录(通过画图)：  可以从图中直观的看到，时间和速度有一种线性关系。我们可以尝试画一条直线，从一堆点中穿越过去。">
+<meta name="description" content="[toc] Back Propagation Networks - 反向传播网络BP网络是所有的神经网络中结构最为简单的一种网络。一般我们习惯把网络画成左边输入右边输出层的结构。 BP神经网络的网络结构是不固定的:   线性回归的训练到BP神经网络的训练线性回归：样本：  观察记录(通过画图)：  可以从图中直观的看到，时间和速度有一种线性关系。我们可以尝试画一条直线，从一堆点中穿越过去。  横纵">
 <meta property="og:type" content="article">
 <meta property="og:title" content="深度学习篇：神经网络核心原理与算法">
 <meta property="og:url" content="http://yoursite.com/2020/07/07/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AF%87%EF%BC%9A%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E7%AE%97%E6%B3%95/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="[toc] Back Propagation Networks - 反向传播网络BP网络是所有的神经网络中结构最为简单的一种网络。一般我们习惯把网络画成左边输入右边输出层的结构。 BP神经网络的网络结构是不固定的:   线性回归的训练到BP神经网络的训练2.1 线性回归：样本：  观察记录(通过画图)：  可以从图中直观的看到，时间和速度有一种线性关系。我们可以尝试画一条直线，从一堆点中穿越过去。">
+<meta property="og:description" content="[toc] Back Propagation Networks - 反向传播网络BP网络是所有的神经网络中结构最为简单的一种网络。一般我们习惯把网络画成左边输入右边输出层的结构。 BP神经网络的网络结构是不固定的:   线性回归的训练到BP神经网络的训练线性回归：样本：  观察记录(通过画图)：  可以从图中直观的看到，时间和速度有一种线性关系。我们可以尝试画一条直线，从一堆点中穿越过去。  横纵">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://yoursite.com/.com//cgair/Documents/cg/my_blog/blog/source/_posts/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AF%87%EF%BC%9A%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E7%AE%97%E6%B3%95/BP%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84%E6%98%AF%E4%B8%8D%E5%9B%BA%E5%AE%9A%E7%9A%84.jpg">
 <meta property="og:image" content="https://ss.csdn.net/p?https://mmbiz.qpic.cn/mmbiz_png/QY9Ieg3xj8Bx2ibQfHWOBib71EibSgSv0HE8ePCbXp0jOtCTQnqiadb2516jKhhclOrUb4BVZQrlCvAWPcxTJ16Kuw/640?wx_fmt=png">
@@ -125,7 +125,7 @@
 <meta property="og:image" content="https://ss.csdn.net/p?https://mmbiz.qpic.cn/mmbiz_png/QY9Ieg3xj8Bx2ibQfHWOBib71EibSgSv0HEh132MlyiaQ9fjgDjWloOWTpO9AsUxIFCVhSdnz0P2srP2ShtuUvAeZA/640?wx_fmt=png">
 <meta property="og:image" content="https://ss.csdn.net/p?https://mmbiz.qpic.cn/mmbiz_png/QY9Ieg3xj8Bx2ibQfHWOBib71EibSgSv0HEDW9BXF3dbA3rafyvuWGzAgCgZjr3JVMWqZL2DJeL508RRlULj3wHeA/640?wx_fmt=png">
 <meta property="article:published_time" content="2020-07-07T14:41:30.000Z">
-<meta property="article:modified_time" content="2020-07-07T15:45:28.456Z">
+<meta property="article:modified_time" content="2020-09-02T05:37:12.724Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://yoursite.com/.com//cgair/Documents/cg/my_blog/blog/source/_posts/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AF%87%EF%BC%9A%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E7%AE%97%E6%B3%95/BP%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84%E6%98%AF%E4%B8%8D%E5%9B%BA%E5%AE%9A%E7%9A%84.jpg">
@@ -339,11 +339,11 @@
 
       
         <p>[toc]</p>
-<h2 id="Back-Propagation-Networks-反向传播网络"><a href="#Back-Propagation-Networks-反向传播网络" class="headerlink" title="Back Propagation Networks - 反向传播网络"></a>Back Propagation Networks - 反向传播网络</h2><p>BP网络是所有的神经网络中结构最为简单的一种网络。一般我们习惯把网络画成左边输入右边输出层的结构。</p>
+<h1 id="Back-Propagation-Networks-反向传播网络"><a href="#Back-Propagation-Networks-反向传播网络" class="headerlink" title="Back Propagation Networks - 反向传播网络"></a>Back Propagation Networks - 反向传播网络</h1><p>BP网络是所有的神经网络中结构最为简单的一种网络。一般我们习惯把网络画成左边输入右边输出层的结构。</p>
 <p><em>BP神经网络的网络结构是不固定的:</em></p>
 <img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/深度学习篇：神经网络核心原理与算法/BP网络结构是不固定的.jpg" alt="BP网络结构是不固定的" style="zoom:80%;">
 
-<h2 id="线性回归的训练到BP神经网络的训练"><a href="#线性回归的训练到BP神经网络的训练" class="headerlink" title="线性回归的训练到BP神经网络的训练"></a>线性回归的训练到BP神经网络的训练</h2><h3 id="2-1-线性回归："><a href="#2-1-线性回归：" class="headerlink" title="2.1 线性回归："></a>2.1 线性回归：</h3><p><strong>样本：</strong></p>
+<h2 id="线性回归的训练到BP神经网络的训练"><a href="#线性回归的训练到BP神经网络的训练" class="headerlink" title="线性回归的训练到BP神经网络的训练"></a>线性回归的训练到BP神经网络的训练</h2><h3 id="线性回归："><a href="#线性回归：" class="headerlink" title="线性回归："></a>线性回归：</h3><p><strong>样本：</strong></p>
 <p><img src="https://ss.csdn.net/p?https://mmbiz.qpic.cn/mmbiz_png/QY9Ieg3xj8Bx2ibQfHWOBib71EibSgSv0HE8ePCbXp0jOtCTQnqiadb2516jKhhclOrUb4BVZQrlCvAWPcxTJ16Kuw/640?wx_fmt=png" alt="640?wx_fmt=png"></p>
 <p><strong>观察记录(通过画图)：</strong></p>
 <p><img src="https://ss.csdn.net/p?https://mmbiz.qpic.cn/mmbiz_png/QY9Ieg3xj8Bx2ibQfHWOBib71EibSgSv0HEZUp6Q6pZljODpH2aE29FJZhBkGPsW4BCAofhrJGfNicgPMzSVib1XibRA/640?wx_fmt=png" alt="640?wx_fmt=png"></p>
@@ -400,7 +400,7 @@
 <p>如果每次进行更新的时候，你就可以使用学习率(一塔)乘以这两个方向上的偏导。各自完成自己的更新量.</p>
 <p>假如我们函数中的变量不止两个，而是有一千种。它表示的形式就是:<img src="https://ss.csdn.net/p?https://mmbiz.qpic.cn/mmbiz_png/QY9Ieg3xj8Bx2ibQfHWOBib71EibSgSv0HEcswlK172JIuJpMPtYWG69eUASo1B9uqpDibXRPT5mHc97yx3dmQ9omA/640?wx_fmt=png" alt="640?wx_fmt=png" style="zoom:67%;">，求出了这1000个参数的偏导数。然后乘以学习率，更新1000个w变量：<img src="https://ss.csdn.net/p?https://mmbiz.qpic.cn/mmbiz_png/QY9Ieg3xj8Bx2ibQfHWOBib71EibSgSv0HEDTl4yEicicOFEdcaVumdK6eic8b84J3YXr7syBsbicqGX6UKsvycsICsvg/640?wx_fmt=png" alt="640?wx_fmt=png" style="zoom:67%;">，其中w的上标i表示这是第几个w。w的下标n和n+1表示的是第几次迭代。</p>
 <p><strong>开始训练：</strong>需要一个描述残差loss的函数。接着我们可以使用若干个w来表述这个函数。然后我们可以用梯度下降算法用最快方法去更新w的各个维度。最后满足loss极值点的位置就是我们要找的w。</p>
-<h3 id="2-2-神经网络的训练"><a href="#2-2-神经网络的训练" class="headerlink" title="2.2 神经网络的训练"></a>2.2 神经网络的训练</h3><p><img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AF%87%EF%BC%9A%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E7%AE%97%E6%B3%95/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C.png" alt="神经网络"></p>
+<h3 id="神经网络的训练"><a href="#神经网络的训练" class="headerlink" title="神经网络的训练"></a>神经网络的训练</h3><p><img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AF%87%EF%BC%9A%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E7%AE%97%E6%B3%95/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C.png" alt="神经网络"></p>
 <p>第一部分是线性单元，第二部分是非线性部分。第一行为隐藏层的输入x经过wh和bh的处理变成Zh,Zh又作为非线性单元的输入。</p>
 <p><em>训练过程：</em></p>
 <ul>
@@ -582,7 +582,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Back-Propagation-Networks-反向传播网络"><span class="nav-number">1.</span> <span class="nav-text">Back Propagation Networks - 反向传播网络</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线性回归的训练到BP神经网络的训练"><span class="nav-number">2.</span> <span class="nav-text">线性回归的训练到BP神经网络的训练</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-线性回归："><span class="nav-number">2.1.</span> <span class="nav-text">2.1 线性回归：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-神经网络的训练"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 神经网络的训练</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Back-Propagation-Networks-反向传播网络"><span class="nav-number">1.</span> <span class="nav-text">Back Propagation Networks - 反向传播网络</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#线性回归的训练到BP神经网络的训练"><span class="nav-number">1.1.</span> <span class="nav-text">线性回归的训练到BP神经网络的训练</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#线性回归："><span class="nav-number">1.1.1.</span> <span class="nav-text">线性回归：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#神经网络的训练"><span class="nav-number">1.1.2.</span> <span class="nav-text">神经网络的训练</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

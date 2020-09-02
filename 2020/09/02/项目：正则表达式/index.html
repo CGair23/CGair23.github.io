@@ -88,8 +88,9 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://yoursite.com/.com//cgair/Documents/cg/my_blog/blog/source/_posts/%E9%A1%B9%E7%9B%AE%EF%BC%9A%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/%E5%B8%B8%E7%94%A8%E7%9A%84%E5%85%83%E5%AD%97%E7%AC%A6.png">
 <meta property="og:image" content="http://yoursite.com/.com//cgair/Documents/cg/my_blog/blog/source/_posts/%E9%A1%B9%E7%9B%AE%EF%BC%9A%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/%E5%B8%B8%E7%94%A8%E7%9A%84%E9%99%90%E5%AE%9A%E7%AC%A6.png">
+<meta property="og:image" content="http://yoursite.com/.com//cgair/Documents/cg/my_blog/blog/source/_posts/%E9%A1%B9%E7%9B%AE%EF%BC%9A%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/%E6%88%AA%E5%B1%8F2020-09-02%20%E4%B8%8B%E5%8D%881.01.39.png">
 <meta property="article:published_time" content="2020-09-02T02:03:32.000Z">
-<meta property="article:modified_time" content="2020-09-02T05:11:06.845Z">
+<meta property="article:modified_time" content="2020-09-02T05:27:48.075Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://yoursite.com/.com//cgair/Documents/cg/my_blog/blog/source/_posts/%E9%A1%B9%E7%9B%AE%EF%BC%9A%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/%E5%B8%B8%E7%94%A8%E7%9A%84%E5%85%83%E5%AD%97%E7%AC%A6.png">
@@ -326,6 +327,8 @@
 <p>有时，我们更需要<strong>懒惰</strong>匹配，也就是匹配<strong>尽可能少</strong>的字符。前面给出的限定符都可以被转化为懒惰匹配模式，只要在它后面加上一个问号?。这样.*?就意味着匹配任意数量的重复，但是在能使整个匹配成功的前提下使用最少的重复。</p>
 <p>例子：</p>
 <p>a.*?b 匹配最短的，以 a 开始，以 b 结束的字符串。如果把它应用于 aabab 的话，它会匹配 aab（第一到第三个字符）和 ab（第四到第五个字符）。</p>
+<img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/项目：正则表达式/截屏2020-09-02 下午1.01.39.png" alt="截屏2020-09-02 下午1.01.39" style="zoom:67%;">
+
 <h2 id="后向引用"><a href="#后向引用" class="headerlink" title="后向引用"></a>后向引用</h2><p>使用小括号指定一个子表达式后，<strong>匹配这个子表达式的文本</strong>(也就是此分组捕获的内容)可以在表达式或其它程序中作进一步的处理。默认情况下，每个分组会自动拥有一个<strong>组号</strong>，规则是：从左向右，以分组的左括号为标志，第一个出现的分组的组号为1，第二个为2，以此类推。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(exp) 	# 匹配exp,并捕获文本到自动命名的组里</span><br><span class="line">(?&lt;name&gt;exp) 	# 匹配exp,并捕获文本到名称为name的组里，也可以写成(?&#39;name&#39;exp)</span><br></pre></td></tr></table></figure>
 

@@ -324,6 +324,8 @@
 <p>有时，我们更需要<strong>懒惰</strong>匹配，也就是匹配<strong>尽可能少</strong>的字符。前面给出的限定符都可以被转化为懒惰匹配模式，只要在它后面加上一个问号?。这样.*?就意味着匹配任意数量的重复，但是在能使整个匹配成功的前提下使用最少的重复。</p>
 <p>例子：</p>
 <p>a.*?b 匹配最短的，以 a 开始，以 b 结束的字符串。如果把它应用于 aabab 的话，它会匹配 aab（第一到第三个字符）和 ab（第四到第五个字符）。</p>
+<img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/项目：正则表达式/截屏2020-09-02 下午1.01.39.png" alt="截屏2020-09-02 下午1.01.39" style="zoom:67%;">
+
 <h2 id="后向引用"><a href="#后向引用" class="headerlink" title="后向引用"></a>后向引用</h2><p>使用小括号指定一个子表达式后，<strong>匹配这个子表达式的文本</strong>(也就是此分组捕获的内容)可以在表达式或其它程序中作进一步的处理。默认情况下，每个分组会自动拥有一个<strong>组号</strong>，规则是：从左向右，以分组的左括号为标志，第一个出现的分组的组号为1，第二个为2，以此类推。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(exp) 	# 匹配exp,并捕获文本到自动命名的组里</span><br><span class="line">(?&lt;name&gt;exp) 	# 匹配exp,并捕获文本到名称为name的组里，也可以写成(?&#39;name&#39;exp)</span><br></pre></td></tr></table></figure>
 
@@ -875,12 +877,11 @@
         
           
             <p>[toc]</p>
-<h2 id="GNN-模型论文："><a href="#GNN-模型论文：" class="headerlink" title="GNN 模型论文："></a>GNN 模型论文：</h2><p><strong>原文地址：<a href="https://persagen.com/files/misc/scarselli2009graph.pdf" target="_blank" rel="noopener">The Graph Neural Network Model</a></strong></p>
+<h1 id="GNN-模型论文："><a href="#GNN-模型论文：" class="headerlink" title="GNN 模型论文："></a>GNN 模型论文：</h1><p><strong>原文地址：<a href="https://persagen.com/files/misc/scarselli2009graph.pdf" target="_blank" rel="noopener">The Graph Neural Network Model</a></strong></p>
 <p>这篇论文是第一个提出Graph Neural Network模型的论文,细述了神经网络模型了<strong>结构组成、计算方法、优化算法、流程实现</strong>等等。</p>
-<h3 id="1-1-GNN-模型"><a href="#1-1-GNN-模型" class="headerlink" title="1.1 GNN 模型"></a>1.1 GNN 模型</h3><p>GNN模型基于信息传播机制，每一个节点通过相互交换信息来更新自己的节点状态，直到达到某一个稳定值。</p>
+<h2 id="GNN-模型"><a href="#GNN-模型" class="headerlink" title="GNN 模型"></a>GNN 模型</h2><p>GNN模型基于信息传播机制，每一个节点通过相互交换信息来更新自己的节点状态，直到达到某一个稳定值。</p>
 <p>GNN的输出就是在每个节点处，根据当前节点状态分别计算输出。</p>
-<p><strong>Reference：</strong></p>
-<p>1.<a href="https://zhuanlan.zhihu.com/p/76290138" target="_blank" rel="noopener">初探GNN：《The Graph Neural Network Model 》</a></p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p>1.<a href="https://zhuanlan.zhihu.com/p/76290138" target="_blank" rel="noopener">初探GNN：《The Graph Neural Network Model 》</a></p>
 
           
         
@@ -1001,11 +1002,11 @@
         
           
             <p>[toc]</p>
-<h2 id="Back-Propagation-Networks-反向传播网络"><a href="#Back-Propagation-Networks-反向传播网络" class="headerlink" title="Back Propagation Networks - 反向传播网络"></a>Back Propagation Networks - 反向传播网络</h2><p>BP网络是所有的神经网络中结构最为简单的一种网络。一般我们习惯把网络画成左边输入右边输出层的结构。</p>
+<h1 id="Back-Propagation-Networks-反向传播网络"><a href="#Back-Propagation-Networks-反向传播网络" class="headerlink" title="Back Propagation Networks - 反向传播网络"></a>Back Propagation Networks - 反向传播网络</h1><p>BP网络是所有的神经网络中结构最为简单的一种网络。一般我们习惯把网络画成左边输入右边输出层的结构。</p>
 <p><em>BP神经网络的网络结构是不固定的:</em></p>
 <img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/深度学习篇：神经网络核心原理与算法/BP网络结构是不固定的.jpg" alt="BP网络结构是不固定的" style="zoom:80%;">
 
-<h2 id="线性回归的训练到BP神经网络的训练"><a href="#线性回归的训练到BP神经网络的训练" class="headerlink" title="线性回归的训练到BP神经网络的训练"></a>线性回归的训练到BP神经网络的训练</h2><h3 id="2-1-线性回归："><a href="#2-1-线性回归：" class="headerlink" title="2.1 线性回归："></a>2.1 线性回归：</h3><p><strong>样本：</strong></p>
+<h2 id="线性回归的训练到BP神经网络的训练"><a href="#线性回归的训练到BP神经网络的训练" class="headerlink" title="线性回归的训练到BP神经网络的训练"></a>线性回归的训练到BP神经网络的训练</h2><h3 id="线性回归："><a href="#线性回归：" class="headerlink" title="线性回归："></a>线性回归：</h3><p><strong>样本：</strong></p>
 <p><img src="https://ss.csdn.net/p?https://mmbiz.qpic.cn/mmbiz_png/QY9Ieg3xj8Bx2ibQfHWOBib71EibSgSv0HE8ePCbXp0jOtCTQnqiadb2516jKhhclOrUb4BVZQrlCvAWPcxTJ16Kuw/640?wx_fmt=png" alt="640?wx_fmt=png"></p>
 <p><strong>观察记录(通过画图)：</strong></p>
 <p><img src="https://ss.csdn.net/p?https://mmbiz.qpic.cn/mmbiz_png/QY9Ieg3xj8Bx2ibQfHWOBib71EibSgSv0HEZUp6Q6pZljODpH2aE29FJZhBkGPsW4BCAofhrJGfNicgPMzSVib1XibRA/640?wx_fmt=png" alt="640?wx_fmt=png"></p>
@@ -1062,7 +1063,7 @@
 <p>如果每次进行更新的时候，你就可以使用学习率(一塔)乘以这两个方向上的偏导。各自完成自己的更新量.</p>
 <p>假如我们函数中的变量不止两个，而是有一千种。它表示的形式就是:<img src="https://ss.csdn.net/p?https://mmbiz.qpic.cn/mmbiz_png/QY9Ieg3xj8Bx2ibQfHWOBib71EibSgSv0HEcswlK172JIuJpMPtYWG69eUASo1B9uqpDibXRPT5mHc97yx3dmQ9omA/640?wx_fmt=png" alt="640?wx_fmt=png" style="zoom:67%;">，求出了这1000个参数的偏导数。然后乘以学习率，更新1000个w变量：<img src="https://ss.csdn.net/p?https://mmbiz.qpic.cn/mmbiz_png/QY9Ieg3xj8Bx2ibQfHWOBib71EibSgSv0HEDTl4yEicicOFEdcaVumdK6eic8b84J3YXr7syBsbicqGX6UKsvycsICsvg/640?wx_fmt=png" alt="640?wx_fmt=png" style="zoom:67%;">，其中w的上标i表示这是第几个w。w的下标n和n+1表示的是第几次迭代。</p>
 <p><strong>开始训练：</strong>需要一个描述残差loss的函数。接着我们可以使用若干个w来表述这个函数。然后我们可以用梯度下降算法用最快方法去更新w的各个维度。最后满足loss极值点的位置就是我们要找的w。</p>
-<h3 id="2-2-神经网络的训练"><a href="#2-2-神经网络的训练" class="headerlink" title="2.2 神经网络的训练"></a>2.2 神经网络的训练</h3><p><img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AF%87%EF%BC%9A%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E7%AE%97%E6%B3%95/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C.png" alt="神经网络"></p>
+<h3 id="神经网络的训练"><a href="#神经网络的训练" class="headerlink" title="神经网络的训练"></a>神经网络的训练</h3><p><img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AF%87%EF%BC%9A%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E7%AE%97%E6%B3%95/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C.png" alt="神经网络"></p>
 <p>第一部分是线性单元，第二部分是非线性部分。第一行为隐藏层的输入x经过wh和bh的处理变成Zh,Zh又作为非线性单元的输入。</p>
 <p><em>训练过程：</em></p>
 <ul>
@@ -1205,10 +1206,9 @@
         
           
             <p>[toc]</p>
-<h2 id="一、什么是注意力机制"><a href="#一、什么是注意力机制" class="headerlink" title="一、什么是注意力机制"></a>一、什么是注意力机制</h2><p><u>注意力机制模仿了生物观察行为的内部过程。</u>例如人的视觉在处理一张图片时，会通过快速扫描全局图像，获得需要重点关注的目标区域，也就是注意力焦点。然后对这一区域投入更多的注意力资源，以获得更多所需要关注的目标的细节信息，并抑制其它无用信息。</p>
+<h1 id="什么是注意力机制"><a href="#什么是注意力机制" class="headerlink" title="什么是注意力机制"></a>什么是注意力机制</h1><p><u>注意力机制模仿了生物观察行为的内部过程。</u>例如人的视觉在处理一张图片时，会通过快速扫描全局图像，获得需要重点关注的目标区域，也就是注意力焦点。然后对这一区域投入更多的注意力资源，以获得更多所需要关注的目标的细节信息，并抑制其它无用信息。</p>
 <p>目前大多数的注意力模型都是依附在 Encoder-Decoder 框架下，但并不是只能运用在该模型中，注意力机制作为一种思想可以和多种模型进行结合，其本身不依赖于任何一种框架。</p>
-<h2 id="二、恶补：RNN"><a href="#二、恶补：RNN" class="headerlink" title="二、恶补：RNN"></a>二、恶补：RNN</h2><p>[一文搞懂RNN（基础）][<a href="https://zhuanlan.zhihu.com/p/30844905]" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/30844905]</a></p>
-<pre><code>### 2.1</code></pre>
+
           
         
       
@@ -1448,20 +1448,20 @@
         
           
             <p>[toc]</p>
-<h2 id="一、matplotlib绘图核心原理"><a href="#一、matplotlib绘图核心原理" class="headerlink" title="一、matplotlib绘图核心原理"></a>一、matplotlib绘图核心原理</h2><p>主要就是理解figure(画布)、axes(坐标系)、axis(坐标轴)三者之间的关系。</p>
+<h1 id="matplotlib绘图核心原理"><a href="#matplotlib绘图核心原理" class="headerlink" title="matplotlib绘图核心原理"></a>matplotlib绘图核心原理</h1><p>主要就是理解figure(画布)、axes(坐标系)、axis(坐标轴)三者之间的关系。</p>
 <img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/记用matplotlib画图/核心原理.jpg" alt="核心原理" style="zoom:80%;">
 
 <p>想要画画，需要初始化一张figure(画布)，我们画的任何图形，都是在这张figure(画布)上操作的。</p>
 <p>接着，需要给figure(画布)分配不同的区域，指定哪一块儿究竟该画什么。对比到matplotlib中，就是需要指定axes(坐标系)，每一个axes(坐标系)相当于一张画布上的一块区域。一张画布上，可以分配不同区域，也就是说一张画布，可以指定多个axes(坐标系)，我们在每个坐标系上绘图，也就是说每个axes(坐标系)中，都有一个axis(坐标轴)。</p>
-<h2 id="二、创建figure的两种方式：隐式｜显式"><a href="#二、创建figure的两种方式：隐式｜显式" class="headerlink" title="二、创建figure的两种方式：隐式｜显式"></a>二、创建figure的两种方式：隐式｜显式</h2><p>如果我们想要在一个figure对象上，绘制多个图形，那么我们就必须拿到每个axes对象，然后调用每个位置上的axes对象，就可以在每个对应位置的坐标系上，进行绘图，如下图所示。需要我们显示创建figure对象。</p>
+<h1 id="创建figure的两种方式：隐式｜显式"><a href="#创建figure的两种方式：隐式｜显式" class="headerlink" title="创建figure的两种方式：隐式｜显式"></a>创建figure的两种方式：隐式｜显式</h1><p>如果我们想要在一个figure对象上，绘制多个图形，那么我们就必须拿到每个axes对象，然后调用每个位置上的axes对象，就可以在每个对应位置的坐标系上，进行绘图，如下图所示。需要我们显示创建figure对象。</p>
 <img src="https://pics7.baidu.com/feed/b7003af33a87e9507b1c1ce8e97e6e45faf2b4fc.jpeg?token=2ca6afaa94012a75a295fde02a4f6b7d&amp;s=5D843C724B0F4C4B0C5D90CA0000E0B1" alt="img" style="zoom:80%;">
 
-<h2 id="三、完整的绘图步骤"><a href="#三、完整的绘图步骤" class="headerlink" title="三、完整的绘图步骤"></a>三、完整的绘图步骤</h2><p><em>step1.导库</em> -&gt; </p>
+<h1 id="完整的绘图步骤"><a href="#完整的绘图步骤" class="headerlink" title="完整的绘图步骤"></a>完整的绘图步骤</h1><p><em>step1.导库</em> -&gt; </p>
 <p><em>step2.创建figure画布对象</em> -&gt;</p>
 <p> <em>step3.根据figure对象进行布局设置</em> -&gt; </p>
 <p><em>step4.获取对应位置的axes坐标系对象</em> -&gt; </p>
 <p><em>step5.调用axes对象，进行对应位置的图形绘制</em></p>
-<h2 id="四、这次画的柱状图"><a href="#四、这次画的柱状图" class="headerlink" title="四、这次画的柱状图"></a>四、这次画的柱状图</h2><p><strong>参考代码：</strong></p>
+<h1 id="这次画的柱状图"><a href="#这次画的柱状图" class="headerlink" title="这次画的柱状图"></a>这次画的柱状图</h1><p><strong>参考代码：</strong></p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line">df = pd.read_csv(<span class="string">'lianjia_utf.csv'</span>)</span><br><span class="line">df.head()</span><br><span class="line">sns.set(style=<span class="string">'white'</span>, font_scale=<span class="number">1.2</span>)</span><br><span class="line"><span class="comment"># 保证可以显示中文字体</span></span><br><span class="line">plt.rcParams[<span class="string">'font.sans-serif'</span>]=<span class="string">'simhei'</span></span><br><span class="line"><span class="comment"># 设置字体大小</span></span><br><span class="line">font1 = &#123;<span class="string">'family'</span> : <span class="string">'simhei'</span>,</span><br><span class="line"><span class="string">'weight'</span> : <span class="string">'normal'</span>,</span><br><span class="line"><span class="string">'size'</span>   : <span class="number">18</span>,&#125;</span><br><span class="line"><span class="comment"># 使用数据透视表</span></span><br><span class="line">region_pivot = pd.pivot_table(df, values=<span class="string">'Price'</span>, index=<span class="string">'Region'</span>, aggfunc=<span class="string">'count'</span>).reset_index().sort_values(ascending=<span class="literal">False</span>,by=<span class="string">'Price'</span>)</span><br><span class="line">f, ax = plt.subplots(figsize=(<span class="number">12</span>,<span class="number">6</span>))</span><br><span class="line"><span class="comment"># 画柱形图</span></span><br><span class="line">bar = plt.bar(region_pivot[<span class="string">'Region'</span>].values,region_pivot[<span class="string">'Price'</span>].values, color=<span class="string">'dodgerblue'</span>)</span><br><span class="line">bar[<span class="number">0</span>].set_color(<span class="string">'green'</span>)</span><br><span class="line"><span class="comment"># 给条形图添加数据标注</span></span><br><span class="line"><span class="keyword">for</span> x, y <span class="keyword">in</span> enumerate(region_pivot[<span class="string">'Price'</span>].values):</span><br><span class="line">    plt.text(x<span class="number">-0.4</span>, y+<span class="number">500</span>, <span class="string">"%s"</span> %y)</span><br><span class="line"><span class="comment">#删除所有边框</span></span><br><span class="line">ax.spines[<span class="string">'right'</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">ax.spines[<span class="string">'top'</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">ax.spines[<span class="string">'bottom'</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">ax.spines[<span class="string">'left'</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line"><span class="comment"># ax.set(title='重庆各区域二手房总价', xlabel='地区', ylabel='总价')</span></span><br><span class="line">plt.tick_params(labelsize=<span class="number">14</span>)</span><br><span class="line">plt.xlabel(<span class="string">'地区'</span>, font1)</span><br><span class="line">plt.ylabel(<span class="string">'总价'</span>, font1)</span><br><span class="line">plt.title(<span class="string">'重庆各区域二手房总价'</span>, font1)</span><br><span class="line">f.savefig(<span class="string">'1_1.png'</span>, bbox_inches=<span class="string">'tight'</span>)</span><br></pre></td></tr></table></figure>
 
 <p><em>说明：</em></p>
@@ -1488,7 +1488,7 @@
 <p>[plt.bar()][<a href="https://www.cnblogs.com/zyg123/p/10504637.html]" target="_blank" rel="noopener">https://www.cnblogs.com/zyg123/p/10504637.html]</a></p>
 <p><strong>运行结果:</strong></p>
 <p><img src="https://img2018.cnblogs.com/blog/1600350/201907/1600350-20190701215846064-987617972.png" alt="**img"></p>
-<h2 id="五、关于配色，matplotlib中的配色，可参考下图："><a href="#五、关于配色，matplotlib中的配色，可参考下图：" class="headerlink" title="五、关于配色，matplotlib中的配色，可参考下图："></a>五、关于配色，matplotlib中的配色，可参考下图：</h2><p><img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/%E8%AE%B0%E7%94%A8matplotlib%E7%94%BB%E5%9B%BE/matplotlib%E4%B8%AD%E9%85%8D%E8%89%B2.png" alt="matplotlib中配色"></p>
+<h1 id="关于配色，matplotlib中的配色，可参考下图："><a href="#关于配色，matplotlib中的配色，可参考下图：" class="headerlink" title="关于配色，matplotlib中的配色，可参考下图："></a>关于配色，matplotlib中的配色，可参考下图：</h1><p><img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/%E8%AE%B0%E7%94%A8matplotlib%E7%94%BB%E5%9B%BE/matplotlib%E4%B8%AD%E9%85%8D%E8%89%B2.png" alt="matplotlib中配色"></p>
 
           
         
