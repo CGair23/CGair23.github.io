@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="[toc] 关于python的新特性函数注释（定义函数时使用“:”及“ -&gt;”符号） 例： 12def isValid(self, s: str) -&gt; bool:    ... 这是python3的新特性，简单理解为 s:str 中的 s 还是你要传的形参这个没有变，str 为该形参的注释，意思是告诉你传入的 s 应该是个字符串。 这里重点理解一下注释二字，也就是说python仍然是">
+<meta property="og:type" content="article">
+<meta property="og:title" content="刷leetcode的杂七杂八的知识点：python语法">
+<meta property="og:url" content="http://yoursite.com/2020/09/14/%E5%88%B7leetcode%E7%9A%84%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB%E7%9A%84%E7%9F%A5%E8%AF%86%E7%82%B9%EF%BC%9Apython%E8%AF%AD%E6%B3%95/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="[toc] 关于python的新特性函数注释（定义函数时使用“:”及“ -&gt;”符号） 例： 12def isValid(self, s: str) -&gt; bool:    ... 这是python3的新特性，简单理解为 s:str 中的 s 还是你要传的形参这个没有变，str 为该形参的注释，意思是告诉你传入的 s 应该是个字符串。 这里重点理解一下注释二字，也就是说python仍然是">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-09-14T02:19:55.000Z">
+<meta property="article:modified_time" content="2020-09-21T03:11:29.693Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/09/14/刷leetcode的杂七杂八的知识点：python语法/"/>
+
+
+
+
+
+  <title>刷leetcode的杂七杂八的知识点：python语法 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/14/%E5%88%B7leetcode%E7%9A%84%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB%E7%9A%84%E7%9F%A5%E8%AF%86%E7%82%B9%EF%BC%9Apython%E8%AF%AD%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">刷leetcode的杂七杂八的知识点：python语法</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-09-14T10:19:55+08:00">
+                2020-09-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>[toc]</p>
+<h1>关于python的新特性函数注释（定义函数时使用“:”及“ -&gt;”符号）</h1>
+<p>例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">isValid</span><span class="params">(self, s: str)</span> -&gt; bool:</span></span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
+<p>这是python3的新特性，简单理解为 s:str 中的 s 还是你要传的形参这个没有变，str 为该形参的注释，意思是告诉你传入的 s 应该是个字符串。</p>
+<p>这里重点理解一下<strong>注释</strong>二字，也就是说python仍然是动态赋值类型语言，这里虽然告诉你s应该是字符串，但是你传一个int进去，你的代码也是可以正常跑的（前提是代码内部能正常处理该类型），只不过如果你使用的IDE是pycharm这种的，会产生一些警告，而且这样的话注释也变的没有意义了。</p>
+<p>后面的 -&gt; bool 是 return 返回值的类型注释，告诉你这个函数返回的是一个 bool 类型，当然和参数注释一样，仅仅是<u>注释</u>。</p>
+<h1>列表推导</h1>
+<p><strong>列表推导是构建列表 (list) 的快捷方式</strong></p>
+<p>列表推导式在逻辑上等价于一个循环语句，只是形式上更加简洁。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">variable = [out_exp_res <span class="keyword">for</span> out_exp <span class="keyword">in</span> input_list <span class="keyword">if</span> out_exp == <span class="number">2</span>]</span><br><span class="line">  out_exp_res:　　列表生成元素表达式，可以是有返回值的函数。</span><br><span class="line">  <span class="keyword">for</span> out_exp <span class="keyword">in</span> input_list：　　迭代input_list将out_exp传入out_exp_res表达式中。</span><br><span class="line">  <span class="keyword">if</span> out_exp == <span class="number">2</span>：　　根据条件过滤哪些值可以。</span><br></pre></td></tr></table></figure>
+<h2 id="实现嵌套列表的平铺：">实现嵌套列表的平铺：</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vec = [[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>], [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]]</span><br><span class="line">[num <span class="keyword">for</span> elem <span class="keyword">in</span> vec <span class="keyword">for</span> num <span class="keyword">in</span> elem]</span><br></pre></td></tr></table></figure>
+<h2 id="过滤不符合条件的元素-在列表推导式中可以使用if子句对列表中的元素进行筛选，只在结果列表中保留符合条件的元素：">过滤不符合条件的元素 -&gt; 在列表推导式中可以使用if子句对列表中的元素进行筛选，只在结果列表中保留符合条件的元素：</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">aList = [<span class="number">-1</span>, <span class="number">-4</span>, <span class="number">6</span>, <span class="number">7.5</span>, <span class="number">-2.3</span>, <span class="number">9</span>, <span class="number">-11</span>]</span><br><span class="line">[i <span class="keyword">for</span> i <span class="keyword">in</span> aList <span class="keyword">if</span> i&gt;<span class="number">0</span>] <span class="comment">#所有大于0的数字</span></span><br></pre></td></tr></table></figure>
+<h2 id="同时遍历多个列表或可迭代对象：">同时遍历多个列表或可迭代对象：</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[(x, y) <span class="keyword">for</span> x <span class="keyword">in</span> [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>] <span class="keyword">for</span> y <span class="keyword">in</span> [<span class="number">3</span>, <span class="number">1</span>, <span class="number">4</span>] <span class="keyword">if</span> x != y]</span><br></pre></td></tr></table></figure>
+<h1>lambda函数</h1>
+<p><strong>匿名函数的应用场景是什么呢？就是仅在定义匿名函数的地方使用这个函数，其他地方用不到。</strong></p>
+<p>lambda 函数示例：</p>
+<p>lambda x, y: x*y；函数输入是 x 和 y ，输出是它们的积 x*y</p>
+<p>lambda: None；函数没有输入参数，输出是 None</p>
+<p>lambda *args: sum(args); 输入是任意个数的参数，输出是它们的和(隐性要求是输入参数必须能够进行加法运算)</p>
+<p>lambda **kwargs: 1；输入是任意键值对参数，输出是1</p>
+<h2 id="lambda-的使用场景：">lambda 的使用场景：</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">#1.函数式编程:</span></span><br><span class="line">例如：一个整数列表，要求按照列表中元素的绝对值大小升序排列</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>list1 = [<span class="number">3</span>, <span class="number">5</span>, <span class="number">-4</span>, <span class="number">-1</span>, <span class="number">0</span>, <span class="number">-2</span>, <span class="number">-6</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sorted(list1, key=<span class="keyword">lambda</span> x: abs(x))</span><br><span class="line">[<span class="number">0</span>, <span class="number">-1</span>, <span class="number">-2</span>, <span class="number">3</span>, <span class="number">-4</span>, <span class="number">5</span>, <span class="number">-6</span>]</span><br><span class="line"></span><br><span class="line">排序函数sorted支持接收一个函数作为参数，该参数作为 sorted的排序依据，这里按照列表元素的绝对值进行排序。</span><br><span class="line"></span><br><span class="line">当然，我也可以用普通函数来实现：</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(x)</span>:</span></span><br><span class="line"><span class="meta">... </span>    <span class="keyword">return</span> abs(x)</span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sorted(list1, key=foo)</span><br><span class="line">[<span class="number">0</span>, <span class="number">-1</span>, <span class="number">-2</span>, <span class="number">3</span>, <span class="number">-4</span>, <span class="number">5</span>, <span class="number">-6</span>]</span><br><span class="line">只不过是这种方式代码看起来不够 Pythonic 而已。</span><br><span class="line"></span><br><span class="line"><span class="keyword">lambda</span>：这是Python支持一种有趣的语法，它允许你快速定义单行的最小函数，可以用在任何需要函数的地方：</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>add = <span class="keyword">lambda</span> x,y : x+y</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>add(<span class="number">5</span>,<span class="number">6</span>)</span><br><span class="line"><span class="number">11</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>(<span class="keyword">lambda</span> x,y:x+y)(<span class="number">5</span>,<span class="number">6</span>)</span><br><span class="line"><span class="number">11</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#2.Python中最常见的filter筛选、map小刷子、reduce合并，都可以用lambda表达式来生成！</span></span><br><span class="line">对于序列来讲，有三个函数式编程工具: filter()、map()和reduce()。</span><br><span class="line"></span><br><span class="line">map(function,sequence)：把sequence中的值当参数逐个传给function，返回一个包含函数执行结果的list。如果function有两个参数，即map(function,sequence1,sequence2)。</span><br><span class="line"> </span><br><span class="line"><span class="comment">#求1~20的平方</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>list(map(<span class="keyword">lambda</span> x:x*x,range(<span class="number">1</span>,<span class="number">21</span>))) <span class="comment">#Python2.x使用map(lambda x:x*x,range(1,21))</span></span><br><span class="line">[<span class="number">1</span>, <span class="number">4</span>, <span class="number">9</span>, <span class="number">16</span>, <span class="number">25</span>, <span class="number">36</span>, <span class="number">49</span>, <span class="number">64</span>, <span class="number">81</span>, <span class="number">100</span>, <span class="number">121</span>, <span class="number">144</span>, <span class="number">169</span>, <span class="number">196</span>, <span class="number">225</span>, <span class="number">256</span>, <span class="number">289</span>, <span class="number">324</span>, <span class="number">361</span>, <span class="number">400</span>]</span><br><span class="line"></span><br><span class="line">filter(function,sequence)：对sequence中的item依次执行function(item)，将执行结果为<span class="literal">True</span>的item组成一个List/String/Tuple(取决于sequence的类型)返回。</span><br><span class="line"> </span><br><span class="line"><span class="comment">#求1~20之间的偶数</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>list(filter(<span class="keyword">lambda</span> x:x%<span class="number">2</span> == <span class="number">0</span>,range(<span class="number">1</span>,<span class="number">21</span>))) <span class="comment">#Python2.x使用filter(lambda x:x%2 == 0,range(1,21))</span></span><br><span class="line">[<span class="number">2</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">8</span>, <span class="number">10</span>, <span class="number">12</span>, <span class="number">14</span>, <span class="number">16</span>, <span class="number">18</span>, <span class="number">20</span>]</span><br><span class="line"></span><br><span class="line">reduce(function,sequence)：function接收的参数个数只能为<span class="number">2</span>，先把sequence中第一个值和第二个值当参数传给function，再把function的返回值和第三个值当参数传给function，然后只返回一个结果。</span><br><span class="line"> </span><br><span class="line"><span class="comment">#求1~100之和</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> functools <span class="keyword">import</span> reduce          <span class="comment">#Python3.x之后需要导入reduce模块</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>reduce(<span class="keyword">lambda</span> x,y:x+y,range(<span class="number">1</span>,<span class="number">101</span>))</span><br><span class="line"><span class="number">5050</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#求1~100之和，再加上10000</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>reduce(<span class="keyword">lambda</span> x,y:x+y,range(<span class="number">1</span>,<span class="number">101</span>),<span class="number">10000</span>)</span><br><span class="line"><span class="number">15050</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#3.闭包</span></span><br><span class="line">闭包：一个定义在函数内部的函数，闭包使得变量即使脱离了该函数的作用域范围也依然能被访问到。</span><br><span class="line"></span><br><span class="line">来看一个用<span class="keyword">lambda</span>函数作为闭包的例子。</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="function"><span class="keyword">def</span> <span class="title">add</span><span class="params">(n)</span>:</span></span><br><span class="line"><span class="meta">... </span>    <span class="keyword">return</span> <span class="keyword">lambda</span> x:x+n</span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>add2 = add(<span class="number">5</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>add2(<span class="number">15</span>)</span><br><span class="line"><span class="number">20</span></span><br><span class="line"></span><br><span class="line">这里的<span class="keyword">lambda</span>函数就是一个闭包，在全局作用域范围中，add2(<span class="number">15</span>)可以正常执行且返回值为<span class="number">20</span>。之所以返回<span class="number">20</span>是因为在add局部作用域中，变量n的值在闭包的作用使得它在全局作用域也可以被访问到。</span><br></pre></td></tr></table></figure>
+<h1>迭代器</h1>
+<h1>python 内置函数 — &gt;</h1>
+<h2 id="enumerate">enumerate()</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">enumerate(sequence, [start=<span class="number">0</span>])</span><br><span class="line">sequence -- 一个序列、迭代器或其他支持迭代对象。</span><br><span class="line">start -- 下标起始位置。</span><br><span class="line">返回 enumerate(枚举) 对象</span><br></pre></td></tr></table></figure>
+<p><strong>使用 enumerate() 方法的实例：</strong></p>
+<ol>
+<li>
+<pre><code class="language-python">seasons = ['Spring', 'Summer', 'Fall', 'Winter']
+list(enumerate(seasons))
+# [(0, 'Spring'), (1, 'Summer'), (2, 'Fall'), (3, 'Winter')]
+list(enumerate(seasons, start=1))       # 下标从 1 开始
+# [(1, 'Spring'), (2, 'Summer'), (3, 'Fall'), (4, 'Winter')]
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">   </span><br><span class="line"></span><br><span class="line">2. for 循环使用 enumerate</span><br><span class="line"></span><br><span class="line">   &#96;&#96;&#96;python</span><br><span class="line">   seq &#x3D; [&#39;one&#39;, &#39;two&#39;, &#39;three&#39;]</span><br><span class="line">   for i, element in enumerate(seq):</span><br><span class="line">       print(i, element)</span><br><span class="line">       </span><br><span class="line">   # 普通的 for 循环</span><br><span class="line">   i &#x3D; 0</span><br><span class="line">   seq &#x3D; [&#39;one&#39;, &#39;two&#39;, &#39;three&#39;]</span><br><span class="line">   for element in seq:</span><br><span class="line">       print(i, seq[i])</span><br><span class="line">       i +&#x3D;1</span><br><span class="line">   &#39;&#39;&#39;</span><br><span class="line">   0 one</span><br><span class="line">   1 two</span><br><span class="line">   2 three</span><br><span class="line">   &#39;&#39;&#39;</span><br></pre></td></tr></table></figure>
+
+</code></pre>
+</li>
+</ol>
+<h2 id="zip">zip()</h2>
+<p><strong>zip()</strong> 函数用于将可迭代的对象作为参数，将对象中对应的元素打包成一个个<u>元组，然后返回由这些元组组成的列表。</u></p>
+<p>如果各个迭代器的元素个数不一致，则返回列表长度与最短的对象相同，利用 * 号操作符，可以将元组解压为列表。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">zip([iterable, ...])</span><br><span class="line">iterabl -- 一个或多个迭代器;</span><br></pre></td></tr></table></figure>
+<p><strong>展示 zip 使用方法的实例：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">b = [<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>]</span><br><span class="line">c = [<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>] </span><br><span class="line">zipped = zip(a,b)     </span><br><span class="line"><span class="comment"># 打包为元组的列表 [(1, 4), (2, 5), (3, 6)] </span></span><br><span class="line">zip(a,c)              </span><br><span class="line"><span class="comment"># 元素个数与最短的列表一致 [(1, 4), (2, 5), (3, 6)]</span></span><br><span class="line">zip(*zipped)          </span><br><span class="line"><span class="comment"># 与 zip 相反，*zipped 可理解为解压，返回二维矩阵式 [(1, 2, 3), (4, 5, 6)]</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/09/11/%E5%86%99%E7%A0%94%E4%BA%8C%E8%AE%BA%E6%96%87%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E7%AF%87%EF%BC%9AGreen-IoT/" rel="next" title="写研二论文的学习笔记篇：Green IoT">
+                <i class="fa fa-chevron-left"></i> 写研二论文的学习笔记篇：Green IoT
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/09/14/%E5%88%B7leetcode%E7%9A%84%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB%E7%9A%84%E7%9F%A5%E8%AF%86%E7%82%B9%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E9%87%8D%E7%82%B9/" rel="prev" title="刷leetcode的杂七杂八的知识点：算法">
+                刷leetcode的杂七杂八的知识点：算法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%20%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text">关于python的新特性函数注释（定义函数时使用“:”及“ -&gt;”符号）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">2.</span> <span class="nav-text">列表推导</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#实现嵌套列表的平铺："><span class="nav-number">2.1.</span> <span class="nav-text">实现嵌套列表的平铺：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#过滤不符合条件的元素-在列表推导式中可以使用if子句对列表中的元素进行筛选，只在结果列表中保留符合条件的元素："><span class="nav-number">2.2.</span> <span class="nav-text">过滤不符合条件的元素 -&gt; 在列表推导式中可以使用if子句对列表中的元素进行筛选，只在结果列表中保留符合条件的元素：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#同时遍历多个列表或可迭代对象："><span class="nav-number">2.3.</span> <span class="nav-text">同时遍历多个列表或可迭代对象：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">3.</span> <span class="nav-text">lambda函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#lambda-的使用场景："><span class="nav-number">3.1.</span> <span class="nav-text">lambda 的使用场景：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">4.</span> <span class="nav-text">迭代器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">5.</span> <span class="nav-text">python 内置函数 — &gt;</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#enumerate"><span class="nav-number">5.1.</span> <span class="nav-text">enumerate()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#zip"><span class="nav-number">5.2.</span> <span class="nav-text">zip()</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
