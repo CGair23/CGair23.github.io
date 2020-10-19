@@ -229,6 +229,947 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/14/%E5%88%B7leetcode%E7%9A%84%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB%E7%9A%84%E7%9F%A5%E8%AF%86%E7%82%B9%EF%BC%9Apython%E8%AF%AD%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/09/14/%E5%88%B7leetcode%E7%9A%84%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB%E7%9A%84%E7%9F%A5%E8%AF%86%E7%82%B9%EF%BC%9Apython%E8%AF%AD%E6%B3%95/" itemprop="url">刷leetcode的杂七杂八的知识点：python语法</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-09-14T10:19:55+08:00">
+                2020-09-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>[toc]</p>
+<h1>关于python的新特性函数注释（定义函数时使用“:”及“ -&gt;”符号）</h1>
+<p>例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">isValid</span><span class="params">(self, s: str)</span> -&gt; bool:</span></span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
+<p>这是python3的新特性，简单理解为 s:str 中的 s 还是你要传的形参这个没有变，str 为该形参的注释，意思是告诉你传入的 s 应该是个字符串。</p>
+<p>这里重点理解一下<strong>注释</strong>二字，也就是说python仍然是动态赋值类型语言，这里虽然告诉你s应该是字符串，但是你传一个int进去，你的代码也是可以正常跑的（前提是代码内部能正常处理该类型），只不过如果你使用的IDE是pycharm这种的，会产生一些警告，而且这样的话注释也变的没有意义了。</p>
+<p>后面的 -&gt; bool 是 return 返回值的类型注释，告诉你这个函数返回的是一个 bool 类型，当然和参数注释一样，仅仅是<u>注释</u>。</p>
+<h1>列表推导</h1>
+<p><strong>列表推导是构建列表 (list) 的快捷方式</strong></p>
+<p>列表推导式在逻辑上等价于一个循环语句，只是形式上更加简洁。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">variable = [out_exp_res <span class="keyword">for</span> out_exp <span class="keyword">in</span> input_list <span class="keyword">if</span> out_exp == <span class="number">2</span>]</span><br><span class="line">  out_exp_res:　　列表生成元素表达式，可以是有返回值的函数。</span><br><span class="line">  <span class="keyword">for</span> out_exp <span class="keyword">in</span> input_list：　　迭代input_list将out_exp传入out_exp_res表达式中。</span><br><span class="line">  <span class="keyword">if</span> out_exp == <span class="number">2</span>：　　根据条件过滤哪些值可以。</span><br></pre></td></tr></table></figure>
+<h2 id="实现嵌套列表的平铺：">实现嵌套列表的平铺：</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vec = [[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>], [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]]</span><br><span class="line">[num <span class="keyword">for</span> elem <span class="keyword">in</span> vec <span class="keyword">for</span> num <span class="keyword">in</span> elem]</span><br></pre></td></tr></table></figure>
+<h2 id="过滤不符合条件的元素-在列表推导式中可以使用if子句对列表中的元素进行筛选，只在结果列表中保留符合条件的元素：">过滤不符合条件的元素 -&gt; 在列表推导式中可以使用if子句对列表中的元素进行筛选，只在结果列表中保留符合条件的元素：</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">aList = [<span class="number">-1</span>, <span class="number">-4</span>, <span class="number">6</span>, <span class="number">7.5</span>, <span class="number">-2.3</span>, <span class="number">9</span>, <span class="number">-11</span>]</span><br><span class="line">[i <span class="keyword">for</span> i <span class="keyword">in</span> aList <span class="keyword">if</span> i&gt;<span class="number">0</span>] <span class="comment">#所有大于0的数字</span></span><br></pre></td></tr></table></figure>
+<h2 id="同时遍历多个列表或可迭代对象：">同时遍历多个列表或可迭代对象：</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[(x, y) <span class="keyword">for</span> x <span class="keyword">in</span> [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>] <span class="keyword">for</span> y <span class="keyword">in</span> [<span class="number">3</span>, <span class="number">1</span>, <span class="number">4</span>] <span class="keyword">if</span> x != y]</span><br></pre></td></tr></table></figure>
+<h1>lambda函数</h1>
+<p><strong>匿名函数的应用场景是什么呢？就是仅在定义匿名函数的地方使用这个函数，其他地方用不到。</strong></p>
+<p>lambda 函数示例：</p>
+<p>lambda x, y: x*y；函数输入是 x 和 y ，输出是它们的积 x*y</p>
+<p>lambda: None；函数没有输入参数，输出是 None</p>
+<p>lambda *args: sum(args); 输入是任意个数的参数，输出是它们的和(隐性要求是输入参数必须能够进行加法运算)</p>
+<p>lambda **kwargs: 1；输入是任意键值对参数，输出是1</p>
+<h2 id="lambda-的使用场景：">lambda 的使用场景：</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">#1.函数式编程:</span></span><br><span class="line">例如：一个整数列表，要求按照列表中元素的绝对值大小升序排列</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>list1 = [<span class="number">3</span>, <span class="number">5</span>, <span class="number">-4</span>, <span class="number">-1</span>, <span class="number">0</span>, <span class="number">-2</span>, <span class="number">-6</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sorted(list1, key=<span class="keyword">lambda</span> x: abs(x))</span><br><span class="line">[<span class="number">0</span>, <span class="number">-1</span>, <span class="number">-2</span>, <span class="number">3</span>, <span class="number">-4</span>, <span class="number">5</span>, <span class="number">-6</span>]</span><br><span class="line"></span><br><span class="line">排序函数sorted支持接收一个函数作为参数，该参数作为 sorted的排序依据，这里按照列表元素的绝对值进行排序。</span><br><span class="line"></span><br><span class="line">当然，我也可以用普通函数来实现：</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(x)</span>:</span></span><br><span class="line"><span class="meta">... </span>    <span class="keyword">return</span> abs(x)</span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sorted(list1, key=foo)</span><br><span class="line">[<span class="number">0</span>, <span class="number">-1</span>, <span class="number">-2</span>, <span class="number">3</span>, <span class="number">-4</span>, <span class="number">5</span>, <span class="number">-6</span>]</span><br><span class="line">只不过是这种方式代码看起来不够 Pythonic 而已。</span><br><span class="line"></span><br><span class="line"><span class="keyword">lambda</span>：这是Python支持一种有趣的语法，它允许你快速定义单行的最小函数，可以用在任何需要函数的地方：</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>add = <span class="keyword">lambda</span> x,y : x+y</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>add(<span class="number">5</span>,<span class="number">6</span>)</span><br><span class="line"><span class="number">11</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>(<span class="keyword">lambda</span> x,y:x+y)(<span class="number">5</span>,<span class="number">6</span>)</span><br><span class="line"><span class="number">11</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#2.Python中最常见的filter筛选、map小刷子、reduce合并，都可以用lambda表达式来生成！</span></span><br><span class="line">对于序列来讲，有三个函数式编程工具: filter()、map()和reduce()。</span><br><span class="line"></span><br><span class="line">map(function,sequence)：把sequence中的值当参数逐个传给function，返回一个包含函数执行结果的list。如果function有两个参数，即map(function,sequence1,sequence2)。</span><br><span class="line"> </span><br><span class="line"><span class="comment">#求1~20的平方</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>list(map(<span class="keyword">lambda</span> x:x*x,range(<span class="number">1</span>,<span class="number">21</span>))) <span class="comment">#Python2.x使用map(lambda x:x*x,range(1,21))</span></span><br><span class="line">[<span class="number">1</span>, <span class="number">4</span>, <span class="number">9</span>, <span class="number">16</span>, <span class="number">25</span>, <span class="number">36</span>, <span class="number">49</span>, <span class="number">64</span>, <span class="number">81</span>, <span class="number">100</span>, <span class="number">121</span>, <span class="number">144</span>, <span class="number">169</span>, <span class="number">196</span>, <span class="number">225</span>, <span class="number">256</span>, <span class="number">289</span>, <span class="number">324</span>, <span class="number">361</span>, <span class="number">400</span>]</span><br><span class="line"></span><br><span class="line">filter(function,sequence)：对sequence中的item依次执行function(item)，将执行结果为<span class="literal">True</span>的item组成一个List/String/Tuple(取决于sequence的类型)返回。</span><br><span class="line"> </span><br><span class="line"><span class="comment">#求1~20之间的偶数</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>list(filter(<span class="keyword">lambda</span> x:x%<span class="number">2</span> == <span class="number">0</span>,range(<span class="number">1</span>,<span class="number">21</span>))) <span class="comment">#Python2.x使用filter(lambda x:x%2 == 0,range(1,21))</span></span><br><span class="line">[<span class="number">2</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">8</span>, <span class="number">10</span>, <span class="number">12</span>, <span class="number">14</span>, <span class="number">16</span>, <span class="number">18</span>, <span class="number">20</span>]</span><br><span class="line"></span><br><span class="line">reduce(function,sequence)：function接收的参数个数只能为<span class="number">2</span>，先把sequence中第一个值和第二个值当参数传给function，再把function的返回值和第三个值当参数传给function，然后只返回一个结果。</span><br><span class="line"> </span><br><span class="line"><span class="comment">#求1~100之和</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> functools <span class="keyword">import</span> reduce          <span class="comment">#Python3.x之后需要导入reduce模块</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>reduce(<span class="keyword">lambda</span> x,y:x+y,range(<span class="number">1</span>,<span class="number">101</span>))</span><br><span class="line"><span class="number">5050</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#求1~100之和，再加上10000</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>reduce(<span class="keyword">lambda</span> x,y:x+y,range(<span class="number">1</span>,<span class="number">101</span>),<span class="number">10000</span>)</span><br><span class="line"><span class="number">15050</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#3.闭包</span></span><br><span class="line">闭包：一个定义在函数内部的函数，闭包使得变量即使脱离了该函数的作用域范围也依然能被访问到。</span><br><span class="line"></span><br><span class="line">来看一个用<span class="keyword">lambda</span>函数作为闭包的例子。</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="function"><span class="keyword">def</span> <span class="title">add</span><span class="params">(n)</span>:</span></span><br><span class="line"><span class="meta">... </span>    <span class="keyword">return</span> <span class="keyword">lambda</span> x:x+n</span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>add2 = add(<span class="number">5</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>add2(<span class="number">15</span>)</span><br><span class="line"><span class="number">20</span></span><br><span class="line"></span><br><span class="line">这里的<span class="keyword">lambda</span>函数就是一个闭包，在全局作用域范围中，add2(<span class="number">15</span>)可以正常执行且返回值为<span class="number">20</span>。之所以返回<span class="number">20</span>是因为在add局部作用域中，变量n的值在闭包的作用使得它在全局作用域也可以被访问到。</span><br></pre></td></tr></table></figure>
+<h1>迭代器</h1>
+<h1>python 内置函数 — &gt;</h1>
+<h2 id="enumerate">enumerate()</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">enumerate(sequence, [start=<span class="number">0</span>])</span><br><span class="line">sequence -- 一个序列、迭代器或其他支持迭代对象。</span><br><span class="line">start -- 下标起始位置。</span><br><span class="line">返回 enumerate(枚举) 对象</span><br></pre></td></tr></table></figure>
+<p><strong>使用 enumerate() 方法的实例：</strong></p>
+<ol>
+<li>
+<pre><code class="language-python">seasons = ['Spring', 'Summer', 'Fall', 'Winter']
+list(enumerate(seasons))
+# [(0, 'Spring'), (1, 'Summer'), (2, 'Fall'), (3, 'Winter')]
+list(enumerate(seasons, start=1))       # 下标从 1 开始
+# [(1, 'Spring'), (2, 'Summer'), (3, 'Fall'), (4, 'Winter')]
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">   </span><br><span class="line"></span><br><span class="line">2. for 循环使用 enumerate</span><br><span class="line"></span><br><span class="line">   &#96;&#96;&#96;python</span><br><span class="line">   seq &#x3D; [&#39;one&#39;, &#39;two&#39;, &#39;three&#39;]</span><br><span class="line">   for i, element in enumerate(seq):</span><br><span class="line">       print(i, element)</span><br><span class="line">       </span><br><span class="line">   # 普通的 for 循环</span><br><span class="line">   i &#x3D; 0</span><br><span class="line">   seq &#x3D; [&#39;one&#39;, &#39;two&#39;, &#39;three&#39;]</span><br><span class="line">   for element in seq:</span><br><span class="line">       print(i, seq[i])</span><br><span class="line">       i +&#x3D;1</span><br><span class="line">   &#39;&#39;&#39;</span><br><span class="line">   0 one</span><br><span class="line">   1 two</span><br><span class="line">   2 three</span><br><span class="line">   &#39;&#39;&#39;</span><br></pre></td></tr></table></figure>
+
+</code></pre>
+</li>
+</ol>
+<h2 id="zip">zip()</h2>
+<p><strong>zip()</strong> 函数用于将可迭代的对象作为参数，将对象中对应的元素打包成一个个<u>元组，然后返回由这些元组组成的列表。</u></p>
+<p>如果各个迭代器的元素个数不一致，则返回列表长度与最短的对象相同，利用 * 号操作符，可以将元组解压为列表。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">zip([iterable, ...])</span><br><span class="line">iterabl -- 一个或多个迭代器;</span><br></pre></td></tr></table></figure>
+<p><strong>展示 zip 使用方法的实例：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">b = [<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>]</span><br><span class="line">c = [<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>] </span><br><span class="line">zipped = zip(a,b)     </span><br><span class="line"><span class="comment"># 打包为元组的列表 [(1, 4), (2, 5), (3, 6)] </span></span><br><span class="line">zip(a,c)              </span><br><span class="line"><span class="comment"># 元素个数与最短的列表一致 [(1, 4), (2, 5), (3, 6)]</span></span><br><span class="line">zip(*zipped)          </span><br><span class="line"><span class="comment"># 与 zip 相反，*zipped 可理解为解压，返回二维矩阵式 [(1, 2, 3), (4, 5, 6)]</span></span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/11/%E5%86%99%E7%A0%94%E4%BA%8C%E8%AE%BA%E6%96%87%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E7%AF%87%EF%BC%9AGreen-IoT/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/09/11/%E5%86%99%E7%A0%94%E4%BA%8C%E8%AE%BA%E6%96%87%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E7%AF%87%EF%BC%9AGreen-IoT/" itemprop="url">写研二论文的学习笔记篇：Green IoT</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-09-11T20:56:32+08:00">
+                2020-09-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/02/pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/09/02/pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url">pytorch学习笔记</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-09-02T13:48:39+08:00">
+                2020-09-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/02/%E5%86%99%E7%A0%94%E4%B8%80%E8%AE%BA%E6%96%87%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E7%AF%87%EF%BC%9A%E5%9B%BE%E5%8D%B7%E7%A7%AF%E7%BD%91%E7%BB%9C%EF%BC%88GCN%EF%BC%89%E5%92%8C%E5%9B%BE%E6%B3%A8%E6%84%8F%E5%8A%9B%E7%BD%91%E7%BB%9C%EF%BC%88GAT%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/09/02/%E5%86%99%E7%A0%94%E4%B8%80%E8%AE%BA%E6%96%87%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E7%AF%87%EF%BC%9A%E5%9B%BE%E5%8D%B7%E7%A7%AF%E7%BD%91%E7%BB%9C%EF%BC%88GCN%EF%BC%89%E5%92%8C%E5%9B%BE%E6%B3%A8%E6%84%8F%E5%8A%9B%E7%BD%91%E7%BB%9C%EF%BC%88GAT%EF%BC%89/" itemprop="url">写研一论文的学习笔记篇：图卷积网络（GCN & GAT）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-09-02T13:46:19+08:00">
+                2020-09-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1>GCN（Graph Convolutional Network ）</h1>
+<h2 id="Q-A">Q &amp; A</h2>
+<p><strong>1. 什么是离散卷积？</strong></p>
+<p>Reference 3 -&gt; 离散卷积本质就是一种加权求和。</p>
+<h1>GAT（Graph Attention Networks）</h1>
+<h1>Reference</h1>
+<ol>
+<li><a href="https://www.zhihu.com/question/54504471/answer/332657604" target="_blank" rel="noopener">如何理解 Graph Convolutional Network（GCN）？</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/81350196" target="_blank" rel="noopener">向往的GAT（图注意力模型）</a></li>
+<li><a href="https://www.zhihu.com/question/54504471/answer/332657604" target="_blank" rel="noopener">如何通俗易懂地解释卷积？</a></li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/02/%E9%A1%B9%E7%9B%AE%EF%BC%9A%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/09/02/%E9%A1%B9%E7%9B%AE%EF%BC%9A%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" itemprop="url">项目：正则表达式</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-09-02T10:03:32+08:00">
+                2020-09-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>[toc]</p>
+<h2 id="Questions-amp-Answers"><a href="#Questions-amp-Answers" class="headerlink" title="Questions &amp; Answers"></a>Questions &amp; Answers</h2><p><strong>1. 为什么需要正则表达式？</strong></p>
+<p>正则表达式本来的初衷是用来从无结构的字符串中提取信息，殊不知这正好是Unix的缺陷所在。正则表达式有它自己的价值（针对自然语言），但是我们其实不需要把它应用到程序语言和操作系统里面。</p>
+<p><strong>2. 正则表达式的优势？</strong></p>
+<p>提供了一种紧凑的、动态的方式，能够以一种<strong>完全通用的方式</strong>来解决各种字符串处理（例如：验证、查找、替换等）问题</p>
+<p><strong>3. 正则表达式定义？</strong></p>
+<p>描述了一个规则，通过这个规则可以匹配一类字符串。</p>
+<p><strong>4. 正则表达式的用处？</strong></p>
+<p><strong>验证</strong>给定字符串是否符合指定特征，比如验证是否是合法的邮件地址。</p>
+<p>用来<strong>查找</strong>字符串，从一个长的文本中查找符合指定特征的字符串。</p>
+<p>用来<strong>替换</strong>，比普通的替换更强大</p>
+<h2 id="元字符"><a href="#元字符" class="headerlink" title="元字符"></a>元字符</h2><img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/项目：正则表达式/常用的元字符.png" alt="常用的元字符" style="zoom:80%;">
+
+<p>例子：</p>
+<p>“\ba\w* \b”匹配以字母a开头的单词——先是某个单词开始处(\b)，然后是字母a,然后是任意数量的字母或数字(\w*)，最后是单词结束处(\b)。</p>
+<p>“\d+”匹配1个或更多连续的数字。这里的+是和<em>类似的元字符，不同的是</em>匹配重复任意次(可能是0次)，而+则匹配重复1次或更多次。</p>
+<p>“\b\w{6}\b”匹配刚好6个字符的单词。</p>
+<h2 id="字符转义"><a href="#字符转义" class="headerlink" title="字符转义"></a>字符转义</h2><p>想查找元字符本身的话，比如你查找 . ,或者 * ,就出现了问题：你没办法指定它们，因为它们会被解释成别的意思。这时你就得使用 \ 来取消这些字符的特殊意义。因此，你应该使用.和*。当然，要查找 \ 本身，你也得用 \ \ 。</p>
+<h2 id="重复"><a href="#重复" class="headerlink" title="重复"></a>重复</h2><img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/项目：正则表达式/常用的限定符.png" alt="常用的限定符" style="zoom:80%;">
+
+<h2 id="贪婪与懒惰"><a href="#贪婪与懒惰" class="headerlink" title="贪婪与懒惰"></a>贪婪与懒惰</h2><p>当正则表达式中包含能接受重复的限定符时，通常的行为是（在使整个表达式能得到匹配的前提下）匹配<strong>尽可能多</strong>的字符。以这个表达式为例：a.*b，它将会匹配最长的以 a 开始，以 b 结束的字符串。如果用它来搜索aabab的话，它会匹配整个字符串 aabab 。这被称为<strong>贪婪</strong>匹配。 </p>
+<p>有时，我们更需要<strong>懒惰</strong>匹配，也就是匹配<strong>尽可能少</strong>的字符。前面给出的限定符都可以被转化为懒惰匹配模式，只要在它后面加上一个问号?。这样.*?就意味着匹配任意数量的重复，但是在能使整个匹配成功的前提下使用最少的重复。</p>
+<p>例子：</p>
+<p>a.*?b 匹配最短的，以 a 开始，以 b 结束的字符串。如果把它应用于 aabab 的话，它会匹配 aab（第一到第三个字符）和 ab（第四到第五个字符）。</p>
+<img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/项目：正则表达式/截屏2020-09-02 下午1.01.39.png" alt="截屏2020-09-02 下午1.01.39" style="zoom:67%;">
+
+<h2 id="后向引用"><a href="#后向引用" class="headerlink" title="后向引用"></a>后向引用</h2><p>使用小括号指定一个子表达式后，<strong>匹配这个子表达式的文本</strong>(也就是此分组捕获的内容)可以在表达式或其它程序中作进一步的处理。默认情况下，每个分组会自动拥有一个<strong>组号</strong>，规则是：从左向右，以分组的左括号为标志，第一个出现的分组的组号为1，第二个为2，以此类推。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(exp) 	# 匹配exp,并捕获文本到自动命名的组里</span><br><span class="line">(?&lt;name&gt;exp) 	# 匹配exp,并捕获文本到名称为name的组里，也可以写成(?&#39;name&#39;exp)</span><br></pre></td></tr></table></figure>
+
+<h2 id="零宽断言"><a href="#零宽断言" class="headerlink" title="零宽断言"></a>零宽断言</h2><p>用于查找在某些内容(但并不包括这些内容)之前或之后的东西，也就是说它们像\b,^,$那样用于指定一个位置，这个位置应该满足一定的条件(即断言)，因此它们也被称为<strong>零宽断言</strong>。</p>
+<p>例子：</p>
+<p>(?=exp)也叫<strong>零宽度正预测先行断言</strong>，它断言自身出现的位置的后面能匹配表达式exp。比如\b\w+(?=ing\b)，匹配以ing结尾的单词的前面部分(除了ing以外的部分)，如查找<em>I’m singing while you’re dancing.</em>时，它会匹配sing和danc。</p>
+<p>(?&lt;=exp)也叫<strong>零宽度正回顾后发断言</strong>，它断言自身出现的位置的前面能匹配表达式exp。比如(?&lt;=\bre)\w+\b会匹配以re开头的单词的后半部分(除了re以外的部分)，例如在查找<em>reading a book</em>时，它匹配ading。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://deerchao.cn/tutorials/regex/regex.htm#testing" target="_blank" rel="noopener">正则表达式30分钟入门教程</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/31/%E9%A1%B9%E7%9B%AE%EF%BC%9A%E6%9A%97%E7%BD%91%E7%88%AC%E8%99%AB%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%90%AD%E5%BB%BA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/08/31/%E9%A1%B9%E7%9B%AE%EF%BC%9A%E6%9A%97%E7%BD%91%E7%88%AC%E8%99%AB%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%90%AD%E5%BB%BA/" itemprop="url">项目：暗网爬虫系统的搭建</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-08-31T09:46:26+08:00">
+                2020-08-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>[toc]</p>
+<h2 id="Step1-Virtual-Box-安装-Ubuntu-Linux-操作系统"><a href="#Step1-Virtual-Box-安装-Ubuntu-Linux-操作系统" class="headerlink" title="Step1. Virtual Box 安装 Ubuntu Linux 操作系统"></a>Step1. Virtual Box 安装 Ubuntu Linux 操作系统</h2><ol>
+<li>下载 Ubuntu 虚拟光盘文件</li>
+<li>设置：</li>
+</ol>
+<img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/项目：暗网爬虫系统的搭建/截屏2020-08-31 上午10.21.05.png" alt="截屏2020-08-31 上午10.21.05" style="zoom:80%;">
+
+<ol start="3">
+<li>开始安装</li>
+</ol>
+<img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/项目：暗网爬虫系统的搭建/截屏2020-08-31 上午10.23.45.png" alt="截屏2020-08-31 上午10.23.45" style="zoom:80%;">
+
+<img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/项目：暗网爬虫系统的搭建/截屏2020-08-31 上午10.24.23.png" alt="截屏2020-08-31 上午10.24.23" style="zoom:80%;">
+
+<img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/项目：暗网爬虫系统的搭建/截屏2020-08-31 上午10.24.52.png" alt="截屏2020-08-31 上午10.24.52" style="zoom:80%;">
+
+<p>单击“继续”按钮</p>
+<p>选择机器所在地 -&gt; 单击“继续”按钮</p>
+<p>请特别注意键盘布局方式是“英语（美国）”，而不是“汉语（SunPinyin）”。</p>
+<img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/项目：暗网爬虫系统的搭建/截屏2020-08-31 上午10.28.13.png" alt="截屏2020-08-31 上午10.28.13" style="zoom:80%;">
+
+<p>设置姓名、计算机名，选择一个用户名并设置账号密码</p>
+<p>单击“继续”按钮 -&gt; 开始安装 -&gt; 现在重启（如果系统没有自动退出，可强制退出。）</p>
+<ol start="4">
+<li>安装增强功能</li>
+</ol>
+<img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/项目：暗网爬虫系统的搭建/截屏2020-08-31 上午10.32.39.png" alt="截屏2020-08-31 上午10.32.39" style="zoom:80%;">
+
+<p>出现“Press Return to close this window”代表已经安装完成 -&gt; 重启</p>
+<ol start="5">
+<li><p>设置默认输入法</p>
+<p>右上角设置 -&gt; 系统设置 -&gt; 文本输入</p>
+<img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/项目：暗网爬虫系统的搭建/截屏2020-08-31 上午10.35.15.png" alt="截屏2020-08-31 上午10.35.15" style="zoom:80%;">
+
+<p>切换到下一个 -&gt; Ctrl + 空格</p>
+</li>
+</ol>
+<h2 id="Step2-Tor的下载与安装"><a href="#Step2-Tor的下载与安装" class="headerlink" title="Step2. Tor的下载与安装"></a>Step2. Tor的下载与安装</h2><h2 id="Step3-Linux-Ubuntu-下-Shadowsocks-客户端的使用"><a href="#Step3-Linux-Ubuntu-下-Shadowsocks-客户端的使用" class="headerlink" title="Step3. Linux Ubuntu 下 Shadowsocks 客户端的使用"></a>Step3. Linux Ubuntu 下 Shadowsocks 客户端的使用</h2><ol>
+<li><p>Shadowsocks 的安装</p>
+<p>sudo apt-get update </p>
+<p>sudo apt-get install shadowsocks</p>
+</li>
+<li><p>Shadowsocks 客户端的使用</p>
+<p>sslocal -s 服务器IP -p 服务器端口 -l 本地端口 -k 本地密码 -m 加密方式</p>
+<p>比如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sslocal -s 192.168.1.1 -p 8080 -l 1080 -k mima -m aes-256-cfb</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置 Shadowsocks 开机启动</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vi &#x2F;root&#x2F;sslocal.sh</span><br></pre></td></tr></table></figure>
+
+<p>写入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#!&#x2F;bin&#x2F;bash</span><br><span class="line">nohup sslocal -s 192.168.1.1 -p 8080 -l 1080 -k mima -m aes-256-cfb </span><br><span class="line">sleep 1000h</span><br></pre></td></tr></table></figure>
+
+<p>保存退出</p>
+<p>添加执行权限</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod +x &#x2F;root&#x2F;sslocal.sh</span><br></pre></td></tr></table></figure>
+
+<p>编写服务配置文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vi &#x2F;etc&#x2F;systemd&#x2F;system&#x2F;sslocal.service</span><br></pre></td></tr></table></figure>
+
+<p>写入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description&#x3D;sslocal</span><br><span class="line">[Service]</span><br><span class="line">ExecStart&#x3D;&#x2F;root&#x2F;sslocal.sh</span><br><span class="line">[Install]</span><br><span class="line">WantedBy&#x3D;multi-user.target</span><br></pre></td></tr></table></figure>
+
+<p>然后输入命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable sslocal</span><br></pre></td></tr></table></figure>
+
+<p>可以查看状态</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl status sslocal</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h2 id="Step4-基于Tor的暗网资源探测系统"><a href="#Step4-基于Tor的暗网资源探测系统" class="headerlink" title="Step4. 基于Tor的暗网资源探测系统"></a>Step4. 基于Tor的暗网资源探测系统</h2><h4 id="4-1-Polipo-代理"><a href="#4-1-Polipo-代理" class="headerlink" title="4.1 Polipo 代理"></a>4.1 Polipo 代理</h4><p>Tor 服务提供  SOCKS5 代理，但是由于 Scrapy 不支持  SOCKS5 代理，需要在 Scrapy 和 Tor 之间增加一个代理转换工具。我们使用 Polipo 工具实现 Tor 的 SOCKS5 协议和 ＨTTP 协议之间的转换，令 Scrapy 可以使用 Tor 代理访问暗网。</p>
+<p><strong>Polipo 安装：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install polipo      # 安装Polipo</span><br><span class="line">sudo gedit &#x2F;etc&#x2F;polipo&#x2F;config    # 修改配置文件</span><br></pre></td></tr></table></figure>
+
+<p>将下面的内容整个替换到文件中并保存：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"># This file only needs to list configuration variables that deviate</span><br><span class="line"># from the default values. See &#x2F;usr&#x2F;share&#x2F;doc&#x2F;polipo&#x2F;examples&#x2F;config.sample</span><br><span class="line"># and &quot;polipo -v&quot; for variables you can tweak and further information.</span><br><span class="line">logSyslog &#x3D; false</span><br><span class="line">logFile &#x3D; &quot;&#x2F;var&#x2F;log&#x2F;polipo&#x2F;polipo.log&quot;</span><br><span class="line"></span><br><span class="line">socksParentProxy &#x3D; &quot;127.0.0.1:1080&quot;</span><br><span class="line">socksProxyType &#x3D; socks5</span><br><span class="line"></span><br><span class="line">chunkHighMark &#x3D; 50331648</span><br><span class="line">objectHighMark &#x3D; 16384</span><br><span class="line"></span><br><span class="line">serverMaxSlots &#x3D; 64</span><br><span class="line">serverSlots &#x3D; 16</span><br><span class="line">serverSlots1 &#x3D; 32</span><br><span class="line"></span><br><span class="line">proxyAddress &#x3D; &quot;127.0.0.1&quot;</span><br><span class="line">proxyPort &#x3D; 8123</span><br></pre></td></tr></table></figure>
+
+<p>重启Polipo:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;etc&#x2F;init.d&#x2F;polipo restart</span><br></pre></td></tr></table></figure>
+
+<p>验证代理是否正常工作：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export http_proxy&#x3D;&quot;http:&#x2F;&#x2F;127.0.0.1:8123&#x2F;&quot;</span><br><span class="line">curl www.google.com</span><br></pre></td></tr></table></figure>
+
+<p>如果正常，就会返回抓取到的Google网页内容。此时，终端里面可以访问外网了。<br>另外，在浏览器中输入<a href="https://link.jianshu.com/?t=http%3A%2F%2F127.0.0.1%3A8123%2F" target="_blank" rel="noopener">http://127.0.0.1:8123/</a>便可以进入到Polipo的使用说明和配置界面。</p>
+<h4 id="4-2-Scrapy框架"><a href="#4-2-Scrapy框架" class="headerlink" title="4.2 Scrapy框架"></a>4.2 Scrapy框架</h4><h5 id="4-2-1-scrapy架构图"><a href="#4-2-1-scrapy架构图" class="headerlink" title="4.2.1 scrapy架构图"></a>4.2.1 scrapy架构图</h5><img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/项目：暗网爬虫系统的搭建/scrapy架构图.png" alt="scrapy架构图" style="zoom:80%;">
+
+<img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/项目：暗网爬虫系统的搭建/截屏2020-08-31 下午8.00.16.png" alt="截屏2020-08-31 下午8.00.16" style="zoom:80%;">
+
+<img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/项目：暗网爬虫系统的搭建/12983160-394d93c87390c455.png" alt="12983160-394d93c87390c455" style="zoom:80%;">
+
+<h5 id="4-2-2-数据流"><a href="#4-2-2-数据流" class="headerlink" title="4.2.2 数据流"></a>4.2.2 数据流</h5><img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/项目：暗网爬虫系统的搭建/截屏2020-08-31 下午8.00.27.png" alt="截屏2020-08-31 下午8.00.27" style="zoom:80%;">
+
+<h5 id="4-2-3-项目实战"><a href="#4-2-3-项目实战" class="headerlink" title="4.2.3 项目实战"></a>4.2.3 项目实战</h5><p>(1) 新建scrapy项目：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scrapy startproject 项目名称</span><br></pre></td></tr></table></figure>
+
+<p>(2) Pycharm 中打开 </p>
+<h4 id="4-3-开发环境：Pycharm-Anaconda3-Mongodb"><a href="#4-3-开发环境：Pycharm-Anaconda3-Mongodb" class="headerlink" title="4.3 开发环境：Pycharm + Anaconda3 + Mongodb"></a>4.3 开发环境：Pycharm + Anaconda3 + Mongodb</h4><h5 id="4-3-1-conda常用命令"><a href="#4-3-1-conda常用命令" class="headerlink" title="4.3.1 conda常用命令"></a>4.3.1 conda常用命令</h5><ol>
+<li><p>验证conda已被安装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conda --version</span><br><span class="line">conda update -n base conda #update最新版本的conda</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建新环境</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conda create --name python2 python&#x3D;2</span><br><span class="line">conda create -n xxxx python&#x3D;3.5 #创建python3.5的xxxx虚拟环境</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>切换或激活环境</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda activate xxxx #开启xxxx环境</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>离开当前环境</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda deactivate #关闭环境</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>显示所有的虚拟环境</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda info --envs</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>复制环境</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda create --name &lt;new_env_name&gt; --clone &lt;copied_env_name&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>删除环境</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda remove -n xxxx --all</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看当前环境下的安装包</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda <span class="built_in">list</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装软件包</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">conda install -p [安装路径] &lt;安装包&gt;</span><br><span class="line">conda install --name &lt;env_name&gt; &lt;package_name&gt; #在指定环境中安装包</span><br><span class="line">conda install -p /path/to/biotools bwa</span><br><span class="line">conda install -<span class="built_in">c</span> bioconda bamtools -p /home/wangyc/conda_biotools/</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h5 id="4-3-2-Linux-mongodb-安装"><a href="#4-3-2-Linux-mongodb-安装" class="headerlink" title="4.3.2 Linux mongodb 安装"></a>4.3.2 Linux mongodb 安装</h5><h4 id="4-4-OnionScan"><a href="#4-4-OnionScan" class="headerlink" title="4.4 OnionScan"></a>4.4 OnionScan</h4><h5 id="4-4-1-ubuntu-16-04-安装-go-1-7-OnionScan-适用-go-1-6-1-7"><a href="#4-4-1-ubuntu-16-04-安装-go-1-7-OnionScan-适用-go-1-6-1-7" class="headerlink" title="4.4.1 ubuntu 16.04 安装 go 1.7 (OnionScan 适用 go 1.6/1.7)"></a>4.4.1 ubuntu 16.04 安装 go 1.7 (OnionScan 适用 go 1.6/1.7)</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># 安装Go语言</span><br><span class="line">sudo apt-get update</span><br><span class="line">wget 链接</span><br><span class="line">sudo tar -xvf go1.7.linux-amd64.tar.gz</span><br><span class="line">sudo mv go &#x2F;usr&#x2F;local</span><br><span class="line"># 设置Go环境</span><br><span class="line">export GOROOT&#x3D;&#x2F;usr&#x2F;local&#x2F;go</span><br><span class="line">export GOROOT&#x3D;$HOME&#x2F;自己创建的workplce的名字</span><br><span class="line">export PATH&#x3D;$GOPATH&#x2F;bin:$GOROOT&#x2F;bin:$PATH</span><br><span class="line"># 验证安装</span><br><span class="line">go version</span><br><span class="line">-&gt; go version go1.7 linux&#x2F;amd64</span><br></pre></td></tr></table></figure>
+
+<h5 id="4-4-2-安装OnionScan"><a href="#4-4-2-安装OnionScan" class="headerlink" title="4.4.2 安装OnionScan"></a>4.4.2 <a href="https://github.com/s-rah/onionscan" target="_blank" rel="noopener">安装OnionScan</a></h5><h2 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h2><ol>
+<li><a href="https://www.jianshu.com/p/a0f3268bfa33" target="_blank" rel="noopener">https://www.jianshu.com/p/a0f3268bfa33</a></li>
+<li><a href="https://www.jianshu.com/p/bd96111de6ae" target="_blank" rel="noopener">Conda常用命令</a></li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/27/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%EF%BC%9ALSTM/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -838,424 +1779,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/05/Typora-Markdown-%E8%AF%AD%E6%B3%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/07/05/Typora-Markdown-%E8%AF%AD%E6%B3%95/" itemprop="url">Typora Markdown 语法</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-07-05T15:06:13+08:00">
-                2020-07-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>[Typora Markdown 语法][<a href="https://www.jianshu.com/p/aad81020f0e6" target="_blank" rel="noopener">https://www.jianshu.com/p/aad81020f0e6</a>]</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/03/%E8%AE%B0%E7%94%A8matplotlib%E7%94%BB%E5%9B%BE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/07/03/%E8%AE%B0%E7%94%A8matplotlib%E7%94%BB%E5%9B%BE/" itemprop="url">记用matplotlib画图</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-07-03T21:58:20+08:00">
-                2020-07-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>[toc]</p>
-<h1 id="matplotlib绘图核心原理"><a href="#matplotlib绘图核心原理" class="headerlink" title="matplotlib绘图核心原理"></a>matplotlib绘图核心原理</h1><p>主要就是理解figure(画布)、axes(坐标系)、axis(坐标轴)三者之间的关系。</p>
-<img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/记用matplotlib画图/核心原理.jpg" alt="核心原理" style="zoom:80%;">
-
-<p>想要画画，需要初始化一张figure(画布)，我们画的任何图形，都是在这张figure(画布)上操作的。</p>
-<p>接着，需要给figure(画布)分配不同的区域，指定哪一块儿究竟该画什么。对比到matplotlib中，就是需要指定axes(坐标系)，每一个axes(坐标系)相当于一张画布上的一块区域。一张画布上，可以分配不同区域，也就是说一张画布，可以指定多个axes(坐标系)，我们在每个坐标系上绘图，也就是说每个axes(坐标系)中，都有一个axis(坐标轴)。</p>
-<h1 id="创建figure的两种方式：隐式｜显式"><a href="#创建figure的两种方式：隐式｜显式" class="headerlink" title="创建figure的两种方式：隐式｜显式"></a>创建figure的两种方式：隐式｜显式</h1><p>如果我们想要在一个figure对象上，绘制多个图形，那么我们就必须拿到每个axes对象，然后调用每个位置上的axes对象，就可以在每个对应位置的坐标系上，进行绘图，如下图所示。需要我们显示创建figure对象。</p>
-<img src="https://pics7.baidu.com/feed/b7003af33a87e9507b1c1ce8e97e6e45faf2b4fc.jpeg?token=2ca6afaa94012a75a295fde02a4f6b7d&amp;s=5D843C724B0F4C4B0C5D90CA0000E0B1" alt="img" style="zoom:80%;">
-
-<h1 id="完整的绘图步骤"><a href="#完整的绘图步骤" class="headerlink" title="完整的绘图步骤"></a>完整的绘图步骤</h1><p><em>step1.导库</em> -&gt; </p>
-<p><em>step2.创建figure画布对象</em> -&gt;</p>
-<p> <em>step3.根据figure对象进行布局设置</em> -&gt; </p>
-<p><em>step4.获取对应位置的axes坐标系对象</em> -&gt; </p>
-<p><em>step5.调用axes对象，进行对应位置的图形绘制</em></p>
-<h1 id="这次画的柱状图"><a href="#这次画的柱状图" class="headerlink" title="这次画的柱状图"></a>这次画的柱状图</h1><p><strong>参考代码：</strong></p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line">df = pd.read_csv(<span class="string">'lianjia_utf.csv'</span>)</span><br><span class="line">df.head()</span><br><span class="line">sns.set(style=<span class="string">'white'</span>, font_scale=<span class="number">1.2</span>)</span><br><span class="line"><span class="comment"># 保证可以显示中文字体</span></span><br><span class="line">plt.rcParams[<span class="string">'font.sans-serif'</span>]=<span class="string">'simhei'</span></span><br><span class="line"><span class="comment"># 设置字体大小</span></span><br><span class="line">font1 = &#123;<span class="string">'family'</span> : <span class="string">'simhei'</span>,</span><br><span class="line"><span class="string">'weight'</span> : <span class="string">'normal'</span>,</span><br><span class="line"><span class="string">'size'</span>   : <span class="number">18</span>,&#125;</span><br><span class="line"><span class="comment"># 使用数据透视表</span></span><br><span class="line">region_pivot = pd.pivot_table(df, values=<span class="string">'Price'</span>, index=<span class="string">'Region'</span>, aggfunc=<span class="string">'count'</span>).reset_index().sort_values(ascending=<span class="literal">False</span>,by=<span class="string">'Price'</span>)</span><br><span class="line">f, ax = plt.subplots(figsize=(<span class="number">12</span>,<span class="number">6</span>))</span><br><span class="line"><span class="comment"># 画柱形图</span></span><br><span class="line">bar = plt.bar(region_pivot[<span class="string">'Region'</span>].values,region_pivot[<span class="string">'Price'</span>].values, color=<span class="string">'dodgerblue'</span>)</span><br><span class="line">bar[<span class="number">0</span>].set_color(<span class="string">'green'</span>)</span><br><span class="line"><span class="comment"># 给条形图添加数据标注</span></span><br><span class="line"><span class="keyword">for</span> x, y <span class="keyword">in</span> enumerate(region_pivot[<span class="string">'Price'</span>].values):</span><br><span class="line">    plt.text(x<span class="number">-0.4</span>, y+<span class="number">500</span>, <span class="string">"%s"</span> %y)</span><br><span class="line"><span class="comment">#删除所有边框</span></span><br><span class="line">ax.spines[<span class="string">'right'</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">ax.spines[<span class="string">'top'</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">ax.spines[<span class="string">'bottom'</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">ax.spines[<span class="string">'left'</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line"><span class="comment"># ax.set(title='重庆各区域二手房总价', xlabel='地区', ylabel='总价')</span></span><br><span class="line">plt.tick_params(labelsize=<span class="number">14</span>)</span><br><span class="line">plt.xlabel(<span class="string">'地区'</span>, font1)</span><br><span class="line">plt.ylabel(<span class="string">'总价'</span>, font1)</span><br><span class="line">plt.title(<span class="string">'重庆各区域二手房总价'</span>, font1)</span><br><span class="line">f.savefig(<span class="string">'1_1.png'</span>, bbox_inches=<span class="string">'tight'</span>)</span><br></pre></td></tr></table></figure>
-
-<p><em>说明：</em></p>
-<ol>
-<li><em>plt.text()</em> -&gt; 给图形添加数据标签:</li>
-</ol>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> a,b <span class="keyword">in</span> zip(x,y):</span><br><span class="line">    plt.text(a,b+<span class="number">0.1</span>,<span class="string">'%.0f'</span>%b,ha = <span class="string">'center'</span>,va = <span class="string">'bottom'</span>,fontsize=<span class="number">7</span>)</span><br></pre></td></tr></table></figure>
-
-<p>首先，前边设置的x、y值其实就代表了不同柱子在图形中的位置（坐标），通过for循环找到每一个x、y值的相应坐标—a、b，再使用plt.text在对应位置添文字说明来生成相应的数字标签，而for循环也保证了每一个柱子都有标签。</p>
-<p>其中，a, b+0.05表示在每一柱子对应x值、y值上方0.05处标注文字说明；’%.0f’ % b,代表标注的文字，即每个柱子对应的y值，其中0表示不显示小数后面的数值，1就表示显示小数后面一位，以此类推； ha=’center’, va= ‘bottom’代表horizontalalignment（水平对齐）、verticalalignment（垂直对齐）的方式，fontsize则是文字大小。</p>
-<p>条形图、折线图也是如此设置，饼图则在pie命令中有数据标签的对应参数。对于累积柱状图、双轴柱状图则需要用两个for循环，同时通过a与b的不同加减来设置数据标签位置。</p>
-<ol start="2">
-<li><em>plt.figure(figsize=(a, b))</em> -&gt; 设置窗口尺寸</li>
-</ol>
-<p>其中figsize用来设置图形的大小，a为图形的宽， b为图形的高，单位为英寸。</p>
-<ol start="3">
-<li><em>fig, ax = plt.subplots(figsize = (a, b))</em> -&gt;</li>
-</ol>
-<p>fig代表绘图窗口(Figure)；</p>
-<p>ax代表这个绘图窗口上的坐标系(axis)，一般会继续对ax进行操作。</p>
-<ol start="4">
-<li><em>plt.bar()</em> -&gt;</li>
-</ol>
-<p>[plt.bar()][<a href="https://www.cnblogs.com/zyg123/p/10504637.html]" target="_blank" rel="noopener">https://www.cnblogs.com/zyg123/p/10504637.html]</a></p>
-<p><strong>运行结果:</strong></p>
-<p><img src="https://img2018.cnblogs.com/blog/1600350/201907/1600350-20190701215846064-987617972.png" alt="**img"></p>
-<h1 id="关于配色，matplotlib中的配色，可参考下图："><a href="#关于配色，matplotlib中的配色，可参考下图：" class="headerlink" title="关于配色，matplotlib中的配色，可参考下图："></a>关于配色，matplotlib中的配色，可参考下图：</h1><p><img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/%E8%AE%B0%E7%94%A8matplotlib%E7%94%BB%E5%9B%BE/matplotlib%E4%B8%AD%E9%85%8D%E8%89%B2.png" alt="matplotlib中配色"></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/29/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/06/29/hello-world/" itemprop="url">Hello World</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-06-29T00:22:28+08:00">
-                2020-06-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/">&lt;i class&#x3D;&quot;fa fa-angle-left&quot;&gt;&lt;&#x2F;i&gt;</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    <a class="extend prev" rel="prev" href="/">&lt;i class&#x3D;&quot;fa fa-angle-left&quot;&gt;&lt;&#x2F;i&gt;</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">&lt;i class&#x3D;&quot;fa fa-angle-right&quot;&gt;&lt;&#x2F;i&gt;</a>
   </nav>
 
 
@@ -1301,7 +1829,7 @@
               
                 <a href="/archives/%20%7C%7C%20archive">
               
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

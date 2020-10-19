@@ -79,15 +79,15 @@
 
 
 
-<meta name="description" content="[toc] 超参数调试、 正则化以及优化 Q1：如何通过组织机器学习来诊断偏差和方差（基本方法），然后选择解决问题的正确操作？ A：《Deeplearning深度学习笔记》（P129 - P135） Q2：为什么正则化有利于预防过拟合呢? （Why regularization reduces overfitting?） A：《Deeplearning深度学习笔记》（P140） Plus 数学 1">
+<meta name="description" content="Linux环境变量配置全攻略">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Deeplearning深度学习笔记Q&amp;">
-<meta property="og:url" content="http://yoursite.com/2020/09/20/Deeplearning%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0Q&A/index.html">
+<meta property="og:title" content="Linux环境变量配置全攻略">
+<meta property="og:url" content="http://yoursite.com/2020/09/22/Linux%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE%E5%85%A8%E6%94%BB%E7%95%A5/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="[toc] 超参数调试、 正则化以及优化 Q1：如何通过组织机器学习来诊断偏差和方差（基本方法），然后选择解决问题的正确操作？ A：《Deeplearning深度学习笔记》（P129 - P135） Q2：为什么正则化有利于预防过拟合呢? （Why regularization reduces overfitting?） A：《Deeplearning深度学习笔记》（P140） Plus 数学 1">
+<meta property="og:description" content="Linux环境变量配置全攻略">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-09-20T02:32:30.000Z">
-<meta property="article:modified_time" content="2020-09-20T03:30:46.541Z">
+<meta property="article:published_time" content="2020-09-22T11:23:41.000Z">
+<meta property="article:modified_time" content="2020-09-23T02:20:57.088Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2020/09/20/Deeplearning深度学习笔记Q&A/"/>
+  <link rel="canonical" href="http://yoursite.com/2020/09/22/Linux环境变量配置全攻略/"/>
 
 
 
 
 
-  <title>Deeplearning深度学习笔记Q& | Hexo</title>
+  <title>Linux环境变量配置全攻略 | Hexo</title>
   
 
 
@@ -232,7 +232,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/20/Deeplearning%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0Q&A/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/22/Linux%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE%E5%85%A8%E6%94%BB%E7%95%A5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -249,7 +249,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Deeplearning深度学习笔记Q&</h1>
+          <h1 class="post-title" itemprop="name headline">Linux环境变量配置全攻略</h1>
         
 
         <div class="post-meta">
@@ -261,8 +261,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-09-20T10:32:30+08:00">
-                2020-09-20
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-09-22T19:23:41+08:00">
+                2020-09-22
               </time>
             
 
@@ -299,21 +299,7 @@
       
 
       
-        <p>[toc]</p>
-<h1>超参数调试、 正则化以及优化</h1>
-<h2 id="Q1：如何通过组织机器学习来-u-诊断偏差和方差-u-（基本方法），然后选择解决问题的正确操作？">Q1：如何通过组织机器学习来<u>诊断偏差和方差</u>（基本方法），然后选择解决问题的正确操作？</h2>
-<p><strong>A：</strong>《Deeplearning深度学习笔记》（P129 - P135）</p>
-<h2 id="Q2：为什么正则化有利于预防过拟合呢-（Why-regularization-reduces-overfitting-）">Q2：为什么正则化有利于预防过拟合呢? （Why regularization reduces overfitting?）</h2>
-<p><strong>A：</strong>《Deeplearning深度学习笔记》（P140）</p>
-<h3 id="Plus-数学-1：什么是范数？">Plus 数学 1：什么是范数？</h3>
-<p>**A：**范数主要是对矩阵和向量的一种描述，有了统一的规范，那么“大小就可以比较了”。</p>
-<p>例如：1比2小我们一目了然，可是（3,5,3）和（6,1,2）哪个大？</p>
-<p>2范数比：根号（43）比根号（41）大，因此2范数对比中（3,5,3）大。</p>
-<p><strong>矩阵范数</strong>：描述矩阵引起变化的大小，AX=B，矩阵X变化了A个量级，然后成为了B。<br>
-<strong>向量范数</strong>：描述向量在空间中的大小。</p>
-<p>《DeepLearning-500-questions-master》第一章：向量和矩阵的范数归纳</p>
-<h3 id="Plus-数学-2：什么是“弗罗贝尼乌斯范数”？如何使用该范数实现梯度下降">Plus 数学 2：什么是“弗罗贝尼乌斯范数”？如何使用该范数实现梯度下降?</h3>
-<p><strong>A：</strong>《Deeplearning深度学习笔记》（P138）</p>
+        <p><a href="https://www.cnblogs.com/youyoui/p/10680329.html" target="_blank" rel="noopener">Linux环境变量配置全攻略</a></p>
 
       
     </div>
@@ -338,8 +324,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/09/14/%E4%BB%8E0%E5%BC%80%E5%A7%8B%E5%AD%A6%E4%B9%A0nlp/" rel="next" title="从0开始学习nlp">
-                <i class="fa fa-chevron-left"></i> 从0开始学习nlp
+              <a href="/2020/09/21/%E5%88%B7leetcode%E7%9A%84%E5%BF%83%E5%BE%97/" rel="next" title="刷leetcode的心得">
+                <i class="fa fa-chevron-left"></i> 刷leetcode的心得
               </a>
             
           </div>
@@ -348,8 +334,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/09/21/%E5%88%B7leetcode%E7%9A%84%E5%BF%83%E5%BE%97/" rel="prev" title="刷leetcode的心得">
-                刷leetcode的心得 <i class="fa fa-chevron-right"></i>
+              <a href="/2020/10/08/%E6%95%B0%E5%AD%A6%E5%90%88%E9%9B%86/" rel="prev" title="数学合集">
+                数学合集 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -402,17 +388,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -463,22 +440,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text">超参数调试、 正则化以及优化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Q1：如何通过组织机器学习来-u-诊断偏差和方差-u-（基本方法），然后选择解决问题的正确操作？"><span class="nav-number">1.1.</span> <span class="nav-text">Q1：如何通过组织机器学习来诊断偏差和方差（基本方法），然后选择解决问题的正确操作？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Q2：为什么正则化有利于预防过拟合呢-（Why-regularization-reduces-overfitting-）"><span class="nav-number">1.2.</span> <span class="nav-text">Q2：为什么正则化有利于预防过拟合呢? （Why regularization reduces overfitting?）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Plus-数学-1：什么是范数？"><span class="nav-number">1.2.1.</span> <span class="nav-text">Plus 数学 1：什么是范数？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Plus-数学-2：什么是“弗罗贝尼乌斯范数”？如何使用该范数实现梯度下降"><span class="nav-number">1.2.2.</span> <span class="nav-text">Plus 数学 2：什么是“弗罗贝尼乌斯范数”？如何使用该范数实现梯度下降?</span></a></li></ol></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
