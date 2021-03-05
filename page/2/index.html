@@ -229,6 +229,549 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/21/%E5%88%B7leetcode%E7%9A%84%E5%BF%83%E5%BE%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/09/21/%E5%88%B7leetcode%E7%9A%84%E5%BF%83%E5%BE%97/" itemprop="url">刷leetcode的心得</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-09-21T12:30:46+08:00">
+                2020-09-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>[toc]</p>
+<h1 id="Java-：关于码"><a href="#Java-：关于码" class="headerlink" title="Java ：关于码"></a>Java ：关于码</h1><h2 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h2><h3 id="集合遍历"><a href="#集合遍历" class="headerlink" title="集合遍历"></a>集合遍历</h3><img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/刷leetcode的心得/集合遍历方式注意.png" alt="集合遍历方式注意" style="zoom:80%;">
+
+<h3 id="LinkedList"><a href="#LinkedList" class="headerlink" title="LinkedList"></a>LinkedList</h3><h4 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h4><ul>
+<li><code>LinkedList</code> 是一个继承于<code>AbstractSequentialList</code>的双向链表。它也可以被当作<strong>堆栈、队列或双端队列</strong>进行操作。</li>
+<li><code>LinkedList</code> 实现 <code>List</code> 接口，能进行队列操作。</li>
+<li><code>LinkedList</code> 实现 <code>Deque</code> 接口，即能将<code>LinkedList</code>当作双端队列使用。</li>
+</ul>
+<h4 id="Java集合源码分析之LinkedList"><a href="#Java集合源码分析之LinkedList" class="headerlink" title="Java集合源码分析之LinkedList"></a><a href="https://www.jianshu.com/p/b9096e50267c" target="_blank" rel="noopener">Java集合源码分析之<code>LinkedList</code></a></h4><h4 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 默认的构造函数，什么都没有做</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">LinkedList</span><span class="params">()</span> </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 用其他集合初始化</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">LinkedList</span><span class="params">(Collection&lt;? extends E&gt; c)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>();</span><br><span class="line">    addAll(c);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="特有方法"><a href="#特有方法" class="headerlink" title="特有方法"></a>特有方法</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 增</span></span><br><span class="line">addFirst(E e); <span class="comment">// 在链表头部插入一个元素</span></span><br><span class="line">addLast(E e); <span class="comment">// 在链表尾部添加一个元素</span></span><br><span class="line"></span><br><span class="line">push(E e); <span class="comment">// 与 addFirst 方法一致</span></span><br><span class="line">offer(E e); <span class="comment">// 在链表尾部插入一个元素  </span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 删</span></span><br><span class="line">removeFirst(E e); <span class="comment">// 删除头，获取元素并删除</span></span><br><span class="line">removeLast(E e); <span class="comment">// 删除尾</span></span><br><span class="line"></span><br><span class="line">pop(); <span class="comment">// 和 removeFirst 方法一致，删除头</span></span><br><span class="line">poll(); <span class="comment">// 查询并移除第一个元素   </span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 查</span></span><br><span class="line">getFirst(); <span class="comment">// 获取第一个元素</span></span><br><span class="line">getLast(); <span class="comment">// 获取最后一个元素</span></span><br><span class="line">peek(); <span class="comment">// 获取第一个元素，但是不移除</span></span><br><span class="line">peekFirst(); <span class="comment">// 获取第一个元素，但是不移除； </span></span><br><span class="line">peekLast(); <span class="comment">// 获取最后一个元素，但是不移除；</span></span><br><span class="line">pollFirst(); <span class="comment">// 查询并删除头</span></span><br><span class="line">pollLast(); <span class="comment">// 删除尾</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="LinkedList-gt-栈"><a href="#LinkedList-gt-栈" class="headerlink" title="LinkedList -&gt; 栈"></a>LinkedList -&gt; 栈</h4><p><code>LinkedList</code>具有能够实现栈的所有功能的方法，因此可以直接将LinkedList作为栈使用。</p>
+<img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/刷leetcode的心得/Deque接口里面的方法.png" alt="Deque接口里面的方法" style="zoom:67%;">
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Deque&lt;T&gt; stack = <span class="keyword">new</span> LinkedList&lt;&gt; ();</span><br><span class="line">stack.push(...);</span><br><span class="line">stack.pop(...);</span><br></pre></td></tr></table></figure>
+
+<p><strong><code>Deque</code></strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">addFirst</span><span class="params">(E e)</span>:将指定元素插入此列表的开头。</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">addLast</span><span class="params">(E e)</span>: 将指定元素添加到此列表的结尾。</span></span><br><span class="line"><span class="function">  </span></span><br><span class="line"><span class="function">E <span class="title">getFirst</span><span class="params">(E e)</span>: 返回此列表的第一个元素。</span></span><br><span class="line"><span class="function">E <span class="title">getLast</span><span class="params">(E e)</span>: 返回此列表的最后一个元素。</span></span><br><span class="line"><span class="function">  </span></span><br><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">offerFirst</span><span class="params">(E e)</span>: 在此列表的开头插入指定的元素。</span></span><br><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">offerLast</span><span class="params">(E e)</span>: 在此列表末尾插入指定的元素。</span></span><br><span class="line"><span class="function">  </span></span><br><span class="line"><span class="function">E <span class="title">peekFirst</span><span class="params">(E e)</span>: 获取但不移除此列表的第一个元素；如果此列表为空，则返回 <span class="keyword">null</span>。</span></span><br><span class="line"><span class="function">E <span class="title">peekLast</span><span class="params">(E e)</span>: 获取但不移除此列表的最后一个元素；如果此列表为空，则返回 <span class="keyword">null</span>。</span></span><br><span class="line"><span class="function">  </span></span><br><span class="line"><span class="function">E <span class="title">pollFirst</span><span class="params">(E e)</span>: 获取并移除此列表的第一个元素；如果此列表为空，则返回 <span class="keyword">null</span>。</span></span><br><span class="line"><span class="function">E <span class="title">pollLast</span><span class="params">(E e)</span>: 获取并移除此列表的最后一个元素；如果此列表为空，则返回 <span class="keyword">null</span>。</span></span><br><span class="line"><span class="function">  </span></span><br><span class="line"><span class="function">E <span class="title">removeFirst</span><span class="params">(E e)</span>: 移除并返回此列表的第一个元素。</span></span><br><span class="line"><span class="function">E <span class="title">removeLast</span><span class="params">(E e)</span>: 移除并返回此列表的最后一个元素。</span></span><br><span class="line"><span class="function">  </span></span><br><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">removeFirstOccurrence</span><span class="params">(Objcet o)</span>: 从此列表中移除第一次出现的指定元素（从头部到尾部遍历列表时）。</span></span><br><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">removeLastOccurrence</span><span class="params">(Objcet o)</span>: 从此列表中移除最后一次出现的指定元素（从头部到尾部遍历列表时）。</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h4 id="LinkedList-gt-队列"><a href="#LinkedList-gt-队列" class="headerlink" title="LinkedList -&gt; 队列"></a>LinkedList -&gt; 队列</h4><p><code>Queue</code>接口主要是使<code>LinkedList</code>具有队列的能力。</p>
+<img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/刷leetcode的心得/Queue接口.png" alt="Queue接口" style="zoom:67%;">
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Queue&lt;T&gt; queue=<span class="keyword">new</span> LinkedList&lt;&gt; ();</span><br><span class="line">queue.offer(...); <span class="comment">// 在队列尾部添加元素，队列满时不会抛异常，只是返回false</span></span><br><span class="line">queue.poll(); <span class="comment">// 删除头部元素，如果队列为空，不会抛异常，会返回null</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="ArrayList"><a href="#ArrayList" class="headerlink" title="ArrayList"></a>ArrayList</h3><h4 id="简介-1"><a href="#简介-1" class="headerlink" title="简介"></a>简介</h4><ul>
+<li><code>ArrayList</code> 继承了<code>AbstractList</code>，实现了<code>List</code>。它是一个数组队列，提供了相关的添加、删除、修改、遍历等功能。</li>
+<li><strong><code>ArrayList</code>中的操作不是线程安全的!</strong> 所以，建议在单线程中才使用<code>ArrayList</code>，而在多线程中可以选择<code>Vector</code>或者<code>CopyOnWriteArrayList</code>。</li>
+</ul>
+<h4 id="Java集合源码分析之ArrayList"><a href="#Java集合源码分析之ArrayList" class="headerlink" title="Java集合源码分析之ArrayList"></a><a href="https://www.jianshu.com/p/15e8e72ad0c8" target="_blank" rel="noopener">Java集合源码分析之<code>ArrayList</code></a></h4><h4 id="ArrayList和数组相互转化的方法"><a href="#ArrayList和数组相互转化的方法" class="headerlink" title="ArrayList和数组相互转化的方法"></a><code>ArrayList</code>和数组相互转化的方法</h4><p><strong>参考：</strong></p>
+<ol>
+<li><a href="https://blog.csdn.net/zjx2016/article/details/78273192" target="_blank" rel="noopener">https://blog.csdn.net/zjx2016/article/details/78273192</a></li>
+<li><a href="https://blog.csdn.net/weixin_41615787/article/details/85115620" target="_blank" rel="noopener">https://blog.csdn.net/weixin_41615787/article/details/85115620</a></li>
+</ol>
+<h3 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h3><h4 id="简介-2"><a href="#简介-2" class="headerlink" title="简介"></a>简介</h4><ul>
+<li><code>HashMap</code> 作为<code>Map</code>的主要实现类。<code>HashMap</code>底层：数组 + 链表（<code>jdk7</code>及以前）；数组 + 链表 + 红黑树（<code>jdk8</code>）</li>
+<li><strong><code>HashMap</code>线程不安全!</strong> 效率高。</li>
+<li><code>HashMap</code>可存储<code>null</code>的<code>key</code>和<code>value</code>。</li>
+</ul>
+<img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/刷leetcode的心得/HashMap底层原理（jdk7）.png" alt="HashMap底层原理（jdk7）" style="zoom:50%;">
+
+<img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/刷leetcode的心得/HashMap底层原理（jdk8）.png" alt="HashMap底层原理（jdk8）" style="zoom:50%;">
+
+
+
+<h4 id="Java集合源码分析之HashMap"><a href="#Java集合源码分析之HashMap" class="headerlink" title="Java集合源码分析之HashMap"></a><a href="https://www.jianshu.com/p/f16bfeeeea88" target="_blank" rel="noopener">Java集合源码分析之<code>HashMap</code></a></h4><h4 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h4><p><strong>增加、删除、修改操作</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Object <span class="title">put</span><span class="params">(Object key, Object value)</span></span>; <span class="comment">// 将指定 key-value 添加到（或修改）当前 map 对象中</span></span><br><span class="line"><span class="function">Object <span class="title">remove</span><span class="params">(Object key)</span></span>; <span class="comment">// 移除指定 key 的 key-value 对，并返回value</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">putAll</span><span class="params">(Map m)</span></span>; <span class="comment">// 将 m 中的所有 key-value 对存放到当前 map 中</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">clear</span><span class="params">()</span></span>; <span class="comment">// 清空当前 map 中的所有数据</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>元素查询操作</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Object <span class="title">get</span><span class="params">(Object key)</span></span>; <span class="comment">// 获取指定 key 对应的 value</span></span><br><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">containsKey</span><span class="params">(Object key)</span></span>; <span class="comment">// 是否包含指定的 key</span></span><br><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">containsValue</span><span class="params">(Object value)</span></span>; <span class="comment">// 是否包含指定的 value</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">size</span><span class="params">()</span></span>; <span class="comment">// 返回 map 中 key-value 对的个数</span></span><br><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">isEmpty</span><span class="params">()</span></span>; <span class="comment">// 判断当前 map 是否为空</span></span><br><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object obj)</span></span>; <span class="comment">// 判断当前 map 和参数对象 obj 是否相等</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>遍历</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Set <span class="title">keySet</span><span class="params">()</span></span>; <span class="comment">// 返回所有 key 构成的 Set 集合</span></span><br><span class="line"><span class="function">Collection <span class="title">values</span><span class="params">()</span></span>; <span class="comment">// 返回所有 value 构成的 Collection 集合</span></span><br><span class="line"><span class="function">Set <span class="title">entrySet</span><span class="params">()</span></span>; <span class="comment">// 返回所有 key-value 构成的 Set 集合</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// test</span></span><br><span class="line">Set set = map.keySet();</span><br><span class="line">Iterator iterator = set.iterator();</span><br><span class="line"><span class="keyword">while</span>(iterator.hasNext()) &#123;</span><br><span class="line">  System.out.println(iterator.next());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Collection values = map.values();</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(Object obj : values) &#123;</span><br><span class="line">  System.out.println(obj);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Set entrySet = map.entrySet();</span><br><span class="line">Iterator iterator = entrySet.iterator();</span><br><span class="line"><span class="keyword">while</span>(iterator.hasNext()) &#123;</span><br><span class="line">  Object obj = iterator.next();</span><br><span class="line">  Map.Entry entry = (Map.Entry) obj;</span><br><span class="line">  System.out.println(entry.getKey());</span><br><span class="line">  System.out.println(entry.getValu());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>getOrDefault() 方法</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取指定 key 对应对 value，如果找不到 key ，则返回设置的默认值。</span></span><br><span class="line"><span class="comment">// key - 键</span></span><br><span class="line"><span class="comment">// defaultValue - 当指定的key并不存在映射关系中，则返回的该默认值</span></span><br><span class="line">hashmap.getOrDefault(Object key, V defaultValue);</span><br><span class="line"></span><br><span class="line"><span class="comment">// example</span></span><br><span class="line"><span class="comment">// 创建一个 HashMap</span></span><br><span class="line">HashMap&lt;Integer, String&gt; sites = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 往 HashMap 添加一些元素</span></span><br><span class="line">sites.put(<span class="number">1</span>, <span class="string">"Google"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Not Found - 如果 HashMap 中没有该 key，则返回默认值</span></span><br><span class="line">String value1 = sites.getOrDefault(<span class="number">1</span>, <span class="string">"Not Found"</span>);</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="LinkedHashMap"><a href="#LinkedHashMap" class="headerlink" title="LinkedHashMap"></a>LinkedHashMap</h4><img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/刷leetcode的心得/截屏2021-02-17 下午1.52.53.png" alt="截屏2021-02-17 下午1.52.53" style="zoom:50%;">
+
+<p><code>LinkedHashMap</code>是<code>HashMap</code>的子类，所以也具备<code>HashMap</code>的诸多特性。不同的是，<code>LinkedHashMap</code>还维护了一个双向链表，以保证通过<code>Iterator</code>遍历时顺序与插入顺序一致。除此之外，它还支持 <strong>Access Order</strong>，即按照元素被访问的顺序来排序，我们熟知的<code>LRUCache</code>底层就依赖于此。</p>
+<h3 id="Collections工具类"><a href="#Collections工具类" class="headerlink" title="Collections工具类"></a>Collections工具类</h3><h2 id="String-类"><a href="#String-类" class="headerlink" title="String 类"></a>String 类</h2><p><strong>参考：</strong><a href="https://www.cnblogs.com/zhangyinhua/p/7689974.html" target="_blank" rel="noopener">String 类详解</a></p>
+<h3 id="常用方法-1"><a href="#常用方法-1" class="headerlink" title="常用方法"></a>常用方法</h3><p><strong>charAt() 方法</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// charAt() 方法用于返回指定索引处的字符。索引范围为从 0 到 length() - 1。</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">char</span> <span class="title">charAt</span><span class="params">(<span class="keyword">int</span> index)</span></span>; <span class="comment">// index -- 字符的索引。</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>substring()方法</strong> </p>
+<p><code>string</code>小写!</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// substring() 方法返回字符串的子字符串。</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">substring</span><span class="params">(<span class="keyword">int</span> beginIndex)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">substring</span><span class="params">(<span class="keyword">int</span> beginIndex, <span class="keyword">int</span> endIndex)</span></span>; </span><br><span class="line"><span class="comment">// beginIndex -- 起始索引（包括）, 索引从 0 开始。</span></span><br><span class="line"><span class="comment">// endIndex -- 结束索引（不包括）。</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Java-String-中的-null、length-0、-””-理解"><a href="#Java-String-中的-null、length-0、-””-理解" class="headerlink" title="Java String 中的==null、length()==0、==”” 理解"></a><a href="https://blog.csdn.net/u011419353/article/details/47269129/" target="_blank" rel="noopener">Java String 中的==null、length()==0、==”” 理解</a></h3><p>值为<code>null</code>的引用变量，并没有指向存有值得地址，地址都没有，哪来的什么值，没有值，但是想用值得某个方法，所以就报空指针异常了。</p>
+<p>所以在进行判断的时候，要先判断为不为<code>null</code> </p>
+<p>如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(a == <span class="keyword">null</span> || a.length() == <span class="number">0</span>) &#123;</span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Java-数组"><a href="#Java-数组" class="headerlink" title="Java 数组"></a>Java 数组</h2><h3 id="定义以及初始化"><a href="#定义以及初始化" class="headerlink" title="定义以及初始化"></a>定义以及初始化</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 一维数组</span></span><br><span class="line">数组类型[] 数组名 = <span class="keyword">new</span> 数据类型[数组长度];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 二维数组</span></span><br><span class="line"><span class="comment">// 动态初始化</span></span><br><span class="line">数据类型 [][]  数组名 = <span class="keyword">new</span> 数据类型[m][n];</span><br><span class="line"><span class="keyword">int</span> [][]  arr=<span class="keyword">new</span>  <span class="keyword">int</span> [<span class="number">5</span>][<span class="number">3</span>];<span class="comment">// 可以理解为“5行3例”</span></span><br><span class="line"><span class="comment">// 静态初始化</span></span><br><span class="line">数据类型 [][]   数组名 = &#123;&#123;元素<span class="number">1</span>,元素<span class="number">2</span>....&#125;,&#123;元素<span class="number">1</span>,元素<span class="number">2</span>....&#125;,&#123;元素<span class="number">1</span>,元素<span class="number">2</span>....&#125;.....&#125;;</span><br><span class="line"><span class="keyword">int</span> [][]  arr=&#123;&#123;<span class="number">22</span>,<span class="number">15</span>,<span class="number">32</span>,<span class="number">20</span>,<span class="number">18</span>&#125;,&#123;<span class="number">12</span>,<span class="number">21</span>,<span class="number">25</span>,<span class="number">19</span>,<span class="number">33</span>&#125;,&#123;<span class="number">14</span>,<span class="number">58</span>,<span class="number">34</span>,<span class="number">24</span>,<span class="number">66</span>&#125;,&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><strong>参考：</strong><a href="https://www.cnblogs.com/2020javamianshiti/p/javashuzudingyi.html" target="_blank" rel="noopener">Java 数组的定义以及初始化</a></p>
+<h3 id="java-util-Arrays类"><a href="#java-util-Arrays类" class="headerlink" title="java.util.Arrays类"></a>java.util.Arrays类</h3><p>操作数组的工具类，包含用于操作数组的各种方法（例如排序和搜索）。</p>
+<p><a href="https://www.cnblogs.com/ysocean/p/8616122.html" target="_blank" rel="noopener">java.util.Arrays 类</a></p>
+<p><a href="https://blog.csdn.net/weixin_44863459/article/details/107991158" target="_blank" rel="noopener"><code>Arrays</code>类方法详解</a></p>
+<p><strong>Arrays.sort()</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">Arrays.sort(Object[] array); <span class="comment">// 对数组元素进行排序（串行排序）</span></span><br><span class="line"></span><br><span class="line">Arrays.sort(T[] array, Comparator&lt;? <span class="keyword">super</span> T&gt; comparator); <span class="comment">// 使用自定义比较器，对数组元素进行排序（串行排序）</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// e.g.</span></span><br><span class="line">String[] data = &#123;“<span class="number">1</span>”, “<span class="number">4</span>”, “<span class="number">3</span>”, “<span class="number">2</span>”&#125;;</span><br><span class="line">System.out.println(Arrays.toString(data)); <span class="comment">// [1, 4, 3, 2]</span></span><br><span class="line"><span class="comment">// 实现降序排序，返回-1放左边，1放右边，0保持不变</span></span><br><span class="line">Arrays.sort(data, (str1, str2) -&gt; &#123;</span><br><span class="line">	<span class="keyword">if</span> (str1.compareTo(str2) &gt; <span class="number">0</span>) &#123;</span><br><span class="line">	<span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">	&#125; </span><br><span class="line">  <span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">&#125;);</span><br><span class="line">System.out.println(Arrays.toString(data)); <span class="comment">// [4, 3, 2, 1]</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>Arrays.copyOf()</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Arrays.copyOf(T[] original, <span class="keyword">int</span> newLength); <span class="comment">// 拷贝数组，其内部调用了 System.arraycopy() 方法，从下标0开始，如果超过原数组长度，会用null进行填充</span></span><br><span class="line"><span class="comment">// e.g.</span></span><br><span class="line">Integer[] data1 = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>&#125;;</span><br><span class="line">Integer[] data2 = Arrays.copyOf(data1, <span class="number">2</span>);</span><br><span class="line">System.out.println(Arrays.toString(data2)); <span class="comment">// [1, 2]</span></span><br><span class="line">Integer[] data2 = Arrays.copyOf(data1, <span class="number">5</span>);</span><br><span class="line">System.out.println(Arrays.toString(data2)); <span class="comment">// [1, 2, 3, 4, null]</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Java从键盘输入"><a href="#Java从键盘输入" class="headerlink" title="Java从键盘输入"></a>Java从键盘输入</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner; </span><br><span class="line"><span class="comment">/** </span></span><br><span class="line"><span class="comment"> * Scanner类中的方法 </span></span><br><span class="line"><span class="comment"> * 优点一: 可以获取键盘输入的字符串 </span></span><br><span class="line"><span class="comment"> * 优点二: 有现成的获取int,float等类型数据，非常强大，也非常方便； </span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">Scanner sc = <span class="keyword">new</span> Scanner(System.in); </span><br><span class="line"><span class="keyword">int</span>[] arr = <span class="keyword">new</span> <span class="keyword">int</span>[数组大小];</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i= <span class="number">0</span>; i &lt; arr.length; i++)&#123;</span><br><span class="line">arr[i] = sc.nextInt();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h1 id="二叉树"><a href="#二叉树" class="headerlink" title="二叉树"></a>二叉树</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><ul>
+<li>涉及到二叉树的<strong>构造</strong>，无论普通二叉树还是二叉搜索树一定前序，都是先构造中节点。</li>
+<li>求<strong>普通二叉树的属性</strong>，一般是后序，一般要通过递归函数的返回值做计算。</li>
+<li>求<strong>二叉搜索树的属性</strong>，一定是中序了，要不白瞎了有序性了。</li>
+</ul>
+<h2 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h2><h3 id="BST"><a href="#BST" class="headerlink" title="BST"></a>BST</h3><ol>
+<li><strong>BST 一个重要的性质：</strong>BST 的中序遍历结果是有序的（升序）。</li>
+</ol>
+<h2 id="递归三部曲"><a href="#递归三部曲" class="headerlink" title="递归三部曲"></a>递归三部曲</h2><ol>
+<li>确定递归函数的参数和返回值</li>
+<li>确定终止条件</li>
+<li>确定单层递归的逻辑</li>
+</ol>
+<h2 id="递归函数什么时候需要返回值？什么时候不需要返回值？"><a href="#递归函数什么时候需要返回值？什么时候不需要返回值？" class="headerlink" title="递归函数什么时候需要返回值？什么时候不需要返回值？"></a>递归函数什么时候需要返回值？什么时候不需要返回值？</h2><p>如果需要搜索整棵二叉树，那么递归函数就不要返回值，如果<strong>要搜索其中一条符合条件的路径</strong>，递归函数就<strong>需要返回值</strong>，因为遇到符合条件的路径了就要及时返回。</p>
+<h2 id="二叉树算法的-trick"><a href="#二叉树算法的-trick" class="headerlink" title="二叉树算法的 trick"></a>二叉树算法的 trick</h2><ol>
+<li>通过使用<strong>辅助函数</strong>，<strong>增加函数参数列表，在参数中携带额外信息，将这种约束传递给子树的所有节点</strong>。</li>
+</ol>
+<h1 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h1><h2 id="数组理论知识重点"><a href="#数组理论知识重点" class="headerlink" title="数组理论知识重点"></a>数组理论知识重点</h2><p>数组是存放在连续内存空间上的相同类型数据的集合。</p>
+<p>正是<strong>因为数组的在内存空间的地址是连续的，所以我们在删除或者增添元素的时候，就难免要移动其他元素的地址</strong>（不能单独删除数组中的某个元素，只能覆盖）。</p>
+<h1 id="双指针法"><a href="#双指针法" class="headerlink" title="双指针法"></a>双指针法</h1><p>双指针技巧还可以分为两类：</p>
+<p><strong>一类是「快慢指针」</strong> -&gt; 主要解决链表中的问题，比如典型的判定链表中是否包含环。</p>
+<p><strong>一类是「左右指针」</strong> -&gt; 主要解决数组（或者字符串）中的问题，比如二分查找。</p>
+<p><strong>最高境界是「滑动窗口」算法</strong></p>
+<h2 id="滑动窗口算法框架"><a href="#滑动窗口算法框架" class="headerlink" title="滑动窗口算法框架"></a>滑动窗口算法框架</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 滑动窗口算法框架 */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">slidingWindow</span><span class="params">(<span class="built_in">string</span> s, <span class="built_in">string</span> t)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">unordered_map</span>&lt;<span class="keyword">char</span>, <span class="keyword">int</span>&gt; need, window;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">char</span> c : t) need[c]++;</span><br><span class="line">    <span class="comment">// map.put(key, map.getOrDefault(key, 0) + 1)</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> left = <span class="number">0</span>, right = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> valid = <span class="number">0</span>; </span><br><span class="line">    <span class="keyword">while</span> (right &lt; s.<span class="built_in">size</span>()) &#123;</span><br><span class="line">        <span class="comment">// c 是将移入窗口的字符</span></span><br><span class="line">        <span class="keyword">char</span> c = s[right];</span><br><span class="line">        <span class="comment">// 右移窗口</span></span><br><span class="line">        right++;</span><br><span class="line">        <span class="comment">// 进行窗口内数据的一系列更新</span></span><br><span class="line">        ...</span><br><span class="line"></span><br><span class="line">        <span class="comment">/*** debug 输出的位置 ***/</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"window: [%d, %d)\n"</span>, left, right);</span><br><span class="line">        <span class="comment">/********************/</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 判断左侧窗口是否要收缩</span></span><br><span class="line">        <span class="keyword">while</span> (window needs shrink) &#123;</span><br><span class="line">            <span class="comment">// d 是将移出窗口的字符</span></span><br><span class="line">            <span class="keyword">char</span> d = s[left];</span><br><span class="line">            <span class="comment">// 左移窗口</span></span><br><span class="line">            left++;</span><br><span class="line">            <span class="comment">// 进行窗口内数据的一系列更新</span></span><br><span class="line">            ...</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>两处<code>...</code>表示的更新窗口数据（分别是右移和左移窗口更新操作）的地方，它们操作是完全对称的。</strong></p>
+<h1 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h1><p>归并和快排都是<strong>「基于分治算法」</strong>的。</p>
+<h2 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h2><p>快排需要将序列变成两个部分，就是<strong>「序列左边全部小于一个数」</strong>，<strong>「序列右面全部大于一个数」</strong>，然后利用递归的思想再将左序列当成一个完整的序列再进行排序，同样把序列的右侧也当成一个完整的序列进行排序。</p>
+<img src="https://mmbiz.qpic.cn/mmbiz_png/Lia5wemIHThzO89HSicFib3OHh3XbfTWfpkBoom9vCVosjTa6mMOU9ESMmNOiaPP13iaubcwc5UOdNa3oEHy6WIPEsg/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="Image" style="zoom:67%;">
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">quicksort</span><span class="params">(<span class="keyword">int</span> [] a,<span class="keyword">int</span> left,<span class="keyword">int</span> right)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> low=left;</span><br><span class="line">  <span class="keyword">int</span> high=right;</span><br><span class="line">  <span class="comment">// 下面两句的顺序一定不能混，否则会产生数组越界！！！</span></span><br><span class="line">  <span class="keyword">if</span>(low&gt;high) <span class="comment">// 作为判断是否截止条件</span></span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  <span class="keyword">int</span> k=a[low]; <span class="comment">// 额外空间k，取最左侧的一个作为衡量，最后要求左侧都比它小，右侧都比它大。</span></span><br><span class="line">  <span class="keyword">while</span>(low&lt;high) <span class="comment">//这一轮要求把左侧小于a[low],右侧大于a[low]。</span></span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">while</span>(low&lt;high&amp;&amp;a[high]&gt;=k) <span class="comment">// 右侧找到第一个小于k的停止</span></span><br><span class="line">    &#123;</span><br><span class="line">      high--;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 这样就找到第一个比它小的了</span></span><br><span class="line">    a[low]=a[high]; <span class="comment">// 放到low位置</span></span><br><span class="line">    <span class="keyword">while</span>(low&lt;high&amp;&amp;a[low]&lt;=k) <span class="comment">// 在low往右找到第一个大于k的，放到右侧a[high]位置</span></span><br><span class="line">    &#123;</span><br><span class="line">      low++;</span><br><span class="line">    &#125;</span><br><span class="line">    a[high]=a[low];   </span><br><span class="line">  &#125;</span><br><span class="line">  a[low]=k; <span class="comment">// 赋值然后左右递归分治求之</span></span><br><span class="line">  quicksort(a, left, low-<span class="number">1</span>);</span><br><span class="line">  quicksort(a, low+<span class="number">1</span>, right);  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong><code>Partition</code></strong></p>
+<p><code>Partition</code>（切分）操作总能排定一个元素，还能够知道这个元素它最终所在的位置，这样每经过一次 <code>partition</code>（切分）操作就能缩小搜索的范围，这样的思想叫做 “减而治之”（是 “分而治之” 思想的特例）。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">partition</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> pivot = nums[left];</span><br><span class="line">        <span class="keyword">int</span> j = left;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = left + <span class="number">1</span>; i &lt;= right; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (nums[i] &lt; pivot) &#123;</span><br><span class="line">                <span class="comment">// 小于 pivot 的元素都被交换到前面</span></span><br><span class="line">                j++;</span><br><span class="line">                swap(nums, j, i);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 在之前遍历的过程中，满足 [left + 1, j] &lt; pivot，并且 (j, i] &gt;= pivot</span></span><br><span class="line">        swap(nums, j, left);</span><br><span class="line">        <span class="comment">// 交换以后 [left, j - 1] &lt; pivot, nums[j] = pivot, [j + 1, right] &gt;= pivot</span></span><br><span class="line">        <span class="keyword">return</span> j;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> index1, <span class="keyword">int</span> index2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> temp = nums[index1];</span><br><span class="line">        nums[index1] = nums[index2];</span><br><span class="line">        nums[index2] = temp;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h2><p>归并的思想是这样的：</p>
+<ul>
+<li>第一次：整串先进行划分成一个一个单独，第一次是将序列中(<code>1 2 3 4 5 6---</code>)两两归并成有序，归并完(<code>xx xx xx xx----</code>)这样局部有序的序列。</li>
+<li>第二次就是两两归并成若干四个(<code>1 2 3 4 5 6 7 8 ----</code>)<strong>「每个小局部是有序的」</strong>。</li>
+<li>就这样一直到最后这个串串只剩一个，然而这个耗费的总次数logn。每次操作的时间复杂的又是<code>O(n)</code>。所以总共的时间复杂度为<code>O(nlogn)</code>。</li>
+</ul>
+<img src="https://images2015.cnblogs.com/blog/1024555/201612/1024555-20161218163120151-452283750.png" alt="img" style="zoom:50%;">
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">mergesort</span><span class="params">(<span class="keyword">int</span>[] array, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> mid = (left + right) / <span class="number">2</span>;</span><br><span class="line">  <span class="keyword">if</span>(left &lt; right)</span><br><span class="line">  &#123;</span><br><span class="line">    mergesort(array, left, mid);</span><br><span class="line">    mergesort(array, mid + <span class="number">1</span>, right);</span><br><span class="line">    merge(array, left, mid, right);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span>[] array, <span class="keyword">int</span> l, <span class="keyword">int</span> mid, <span class="keyword">int</span> r)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> lindex = l;</span><br><span class="line">  <span class="keyword">int</span> rindex = mid + <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">int</span> temp[] = <span class="keyword">new</span> <span class="keyword">int</span>[r - l + <span class="number">1</span>];</span><br><span class="line">  <span class="keyword">int</span> tempindex = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">while</span> (lindex &lt;= mid &amp;&amp; rindex &lt;= r) &#123; <span class="comment">// 先左右比较合并</span></span><br><span class="line">    <span class="keyword">if</span>(array[lindex] &lt;= array[rindex])</span><br><span class="line">    &#123;</span><br><span class="line">      temp[tempindex ++] = array[lindex ++]; <span class="comment">// 赋值后自加1</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;    </span><br><span class="line">      temp[tempindex ++ ] = array[rindex ++];</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">while</span>(lindex &lt;= mid) <span class="comment">// 当一个越界后剩余按序列添加即可</span></span><br><span class="line">  &#123;</span><br><span class="line">    temp[tempindex ++] = array[lindex ++];</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">while</span>(rindex &lt;= r)</span><br><span class="line">  &#123;</span><br><span class="line">    temp[teamindex ++] = array[rindex ++];</span><br><span class="line">  &#125; </span><br><span class="line">  </span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; tempindex; i++)</span><br><span class="line">  &#123;</span><br><span class="line">    array[l + i] = temp[i];</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h1><h2 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h2><h3 id="二分查找框架"><a href="#二分查找框架" class="headerlink" title="二分查找框架"></a>二分查找框架</h3><p><strong>不要出现</strong> <code>else</code>，而是把所有情况用 <code>else if</code>写清楚，这样可以清楚地展现所有细节。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">binarySearch</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> left = <span class="number">0</span>, right = ...;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(...) &#123;</span><br><span class="line">        <span class="keyword">int</span> mid = (right + left) / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span> (nums[mid] == target) &#123;</span><br><span class="line">            ...</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (nums[mid] &lt; target) &#123;</span><br><span class="line">            left = ...</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (nums[mid] &gt; target) &#123;</span><br><span class="line">            right = ...</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ...;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>其中<code>...</code>标记的部分</strong>，就是可能出现<strong>细节问题</strong>的地方。</p>
+<h3 id="基本的二分搜索"><a href="#基本的二分搜索" class="headerlink" title="基本的二分搜索"></a>基本的二分搜索</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">binarySearch</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> left = <span class="number">0</span>; </span><br><span class="line">    <span class="keyword">int</span> right = nums.length - <span class="number">1</span>; <span class="comment">// 注意</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(left &lt;= right) &#123; <span class="comment">// 注意</span></span><br><span class="line">        <span class="keyword">int</span> mid = (right + left) / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span>(nums[mid] == target)</span><br><span class="line">            <span class="keyword">return</span> mid; </span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (nums[mid] &lt; target)</span><br><span class="line">            left = mid + <span class="number">1</span>; <span class="comment">// 注意</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (nums[mid] &gt; target)</span><br><span class="line">            right = mid - <span class="number">1</span>; <span class="comment">// 注意</span></span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>「搜索区间」：</strong> <code>[left, right]</code> ，当我们发现索引 mid 不是要找的 target 时，下一步当然是去搜索<code>[left, mid - 1]</code> 或者<code>[mid + 1, right]</code>，因为 mid 已经搜索过，应该从搜索区间中去除。</p>
+<p><strong>「缺陷」：</strong> <code>e.g.</code>有序数组<code>nums = [1,2,2,2,3]</code>，<code>target = 2</code>，此算法返回的索引是<code>2</code>，没错。但是如果我想得到<code>target</code> 的左侧边界，即索引 <code>1</code>，或者我想得到<code>target</code> 的右侧边界，即索引<code>3</code>，这样的话此算法是无法处理的。</p>
+<h3 id="寻找左侧边界的二分搜索"><a href="#寻找左侧边界的二分搜索" class="headerlink" title="寻找左侧边界的二分搜索"></a>寻找左侧边界的二分搜索</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">left_bound</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (nums.length == <span class="number">0</span>) <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> left = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> right = nums.length; <span class="comment">// 注意</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (left &lt; right) &#123; <span class="comment">// 注意</span></span><br><span class="line">        <span class="keyword">int</span> mid = (left + right) / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span> (nums[mid] == target) &#123;</span><br><span class="line">            right = mid; <span class="comment">// 注意</span></span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (nums[mid] &lt; target) &#123;</span><br><span class="line">            left = mid + <span class="number">1</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (nums[mid] &gt; target) &#123;</span><br><span class="line">            right = mid; <span class="comment">// 注意</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> left;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>为什么该算法能够搜索左侧边界？</strong></p>
+<p>找到<code>target</code>时不要立即返回，而是缩小「搜索区间」的上界<code>right</code>，在区间 <code>[left, mid)</code>中继续搜索，即不断向左收缩，达到锁定左侧边界的目的。</p>
+<h3 id="寻找右侧边界的二分查找"><a href="#寻找右侧边界的二分查找" class="headerlink" title="寻找右侧边界的二分查找"></a>寻找右侧边界的二分查找</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">right_bound</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (nums.length == <span class="number">0</span>) <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> left = <span class="number">0</span>, right = nums.length;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (left &lt; right) &#123;</span><br><span class="line">        <span class="keyword">int</span> mid = (left + right) / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span> (nums[mid] == target) &#123;</span><br><span class="line">            left = mid + <span class="number">1</span>; <span class="comment">// 注意</span></span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (nums[mid] &lt; target) &#123;</span><br><span class="line">            left = mid + <span class="number">1</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (nums[mid] &gt; target) &#123;</span><br><span class="line">            right = mid;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> left - <span class="number">1</span>; <span class="comment">// 注意</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>为什么这个算法能够找到右侧边界？</strong></p>
+<p>当 <code>nums[mid] == target</code>时，不要立即返回，而是增大「搜索区间」的下界 <code>left</code>，使得区间不断向右收缩，达到锁定右侧边界的目的。</p>
+<h2 id><a href="#" class="headerlink" title></a></h2><h1 id="递归（recursion）"><a href="#递归（recursion）" class="headerlink" title="递归（recursion）"></a>递归（recursion）</h1><p>遇到任何<strong>递归型</strong>的问题，无非就是灵魂三问：</p>
+<ol>
+<li><p>这个<strong>函数</strong>是干嘛的？</p>
+</li>
+<li><p>这个函数参数中的<strong>变量</strong>是什么的是什么？</p>
+</li>
+<li><p>得到函数的<strong>递归结果</strong>，你应该干什么？</p>
+</li>
+</ol>
+<p>OR</p>
+<ol>
+<li><strong>「确定递归函数的参数和返回值：」</strong>确定哪些参数是递归的过程中需要处理的，那么就在递归函数里加上这个参数， 并且还要明确每次递归的返回值是什么进而确定递归函数的返回类型。</li>
+<li><strong>「确定终止条件：」</strong>写完了递归算法,  运行的时候，经常会遇到栈溢出的错误，就是没写终止条件或者终止条件写的不对，操作系统也是用一个栈的结构来保存每一层递归的信息，如果递归没有终止，操作系统的内存栈必然就会溢出。</li>
+<li><strong>「确定单层递归的逻辑：」</strong>确定每一层递归需要处理的信息。在这里也就会重复调用自己来实现递归的过程。</li>
+</ol>
+<h1 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h1><p><strong>动态规划问题的一般形式就是求最值</strong>。动态规划其实是运筹学的一种最优化方法。</p>
+<p>因为要求最值，肯定要把所有可行的答案<strong>穷举出来</strong>，然后在其中找最值。<strong>求解动态规划的核心问题是穷举</strong>。需要「备忘录」或者「DP table」来优化穷举过程，避免不必要的计算。</p>
+<p>动态规划问题一定会<strong>具备「最优子结构」</strong>，才能通过子问题的最值得到原问题的最值。动态规划功能强大，它能够解决子问题并使用这些答案来解决大问题。但仅当 每个子问题都是离散的，即不依赖于其他子问题时，动态规划才管用。</p>
+<p><strong>思维框架：</strong></p>
+<p><strong>明确「状态」 -&gt; 定义 dp 数组/函数的含义 -&gt; 明确「选择」-&gt; 明确 base case。</strong></p>
+<p>先看共有几种「状态」，再找出每个「状态」对应的「选择」。</p>
+<img src="https://mmbiz.qpic.cn/mmbiz_png/map09icNxZ4nPicwNq5syrSwnBc02yxG3aeibzourMAl7wGxtQfWTMtHs5QVdLYibrKZ2RgrqujZkLJEnrn7DibNBbg/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="Image" style="zoom:80%;">
+
+
+
+
+
+<h1 id="回溯"><a href="#回溯" class="headerlink" title="回溯"></a>回溯</h1><p>回溯法是一种搜索的方式。回溯法不是什么高效的算法，「因为回溯的本质是穷举，穷举所有可能，然后选出我们想要的答案」</p>
+<p>回溯法，一般可以解决如下几种问题：</p>
+<ul>
+<li><strong>排列</strong>问题：N个数按一定规则全排列，有几种排列方式</li>
+<li><strong>组合</strong>问题：N个数里面按一定规则找出k个数的集合</li>
+<li>切割问题：一个字符串按一定规则有几种切割方式</li>
+<li>子集问题：一个N个数的集合里有多少符合条件的子集</li>
+<li>棋盘问题：N皇后，解数独等等</li>
+</ul>
+<p><strong>解决一个回溯问题，实际上就是一个决策树的遍历过程</strong>。你只需要思考 3 个问题：</p>
+<p><strong>1、路径</strong>：也就是已经做出的选择。</p>
+<p><strong>2、选择列表</strong>：也就是你当前可以做的选择。</p>
+<p><strong>3、结束条件</strong>：也就是到达决策树底层，无法再做选择的条件。</p>
+<h2 id="回溯算法框架"><a href="#回溯算法框架" class="headerlink" title="回溯算法框架"></a>回溯算法框架</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">result = []</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">backtrack</span><span class="params">(路径, 选择列表)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> 满足结束条件:</span><br><span class="line">        result.add(路径)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line"><span class="comment"># 回溯算法就是个多叉树的遍历问题，关键就是在前序遍历和后序遍历的位置做一些操作</span></span><br><span class="line">    <span class="keyword">for</span> 选择 <span class="keyword">in</span> 选择列表:</span><br><span class="line">        做选择</span><br><span class="line">        backtrack(路径, 选择列表)</span><br><span class="line">        撤销选择</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="BFS-算法框架"><a href="#BFS-算法框架" class="headerlink" title="BFS 算法框架"></a>BFS 算法框架</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 计算从起点 start 到终点 target 的最近距离 int BFS(Node start, Node target) &#123;</span></span><br><span class="line">Queue&lt;Node&gt; q; <span class="comment">// 核心数据结构 </span></span><br><span class="line">Set&lt;Node&gt; visited; <span class="comment">// 避免走回头路</span></span><br><span class="line"></span><br><span class="line">--------------------------------------------------</span><br><span class="line">q.offer(start); <span class="comment">// 将起点加入队列 visited.add(start);</span></span><br><span class="line"><span class="keyword">int</span> step = <span class="number">0</span>; <span class="comment">// 记录扩散的步数</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> (q not empty) &#123;</span><br><span class="line">	<span class="keyword">int</span> sz = q.size();</span><br><span class="line">--------------------------------------------------</span><br><span class="line">	<span class="comment">/* 将当前队列中的所有节点向四周扩散 */</span> </span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; sz; i++) &#123;</span><br><span class="line">		Node cur = q.poll();</span><br><span class="line">		<span class="comment">/* 划重点:这里判断是否到达终点 */</span></span><br><span class="line">		<span class="keyword">if</span> (cur is target)</span><br><span class="line">    	<span class="keyword">return</span> step;</span><br><span class="line">    </span><br><span class="line">		<span class="comment">/* 将 cur 的相邻节点加入队列 */</span> </span><br><span class="line">    <span class="keyword">for</span> (Node x : cur.adj())</span><br><span class="line">			<span class="keyword">if</span> (x not in visited) &#123; </span><br><span class="line">        q.offer(x);</span><br><span class="line">				visited.add(x); </span><br><span class="line">			&#125;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">	<span class="comment">/* 划重点:更新步数在这里 */</span></span><br><span class="line">	step++; </span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="网格的-DFS-遍历"><a href="#网格的-DFS-遍历" class="headerlink" title="网格的 DFS 遍历"></a>网格的 DFS 遍历</h1><p>网格问题是由 <code>m×n</code>个小方格组成一个网格，每个小方格与其上下左右四个方格认为是相邻的，要在这样的网格上进行某种搜索。</p>
+<img src="https://pic.leetcode-cn.com/63f5803e9452ccecf92fa64f54c887ed0e4e4c3434b9fb246bf2b410e4424555.jpg" alt="网格结构中四个相邻的格子" style="zoom:50%;">
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span>[][] grid, <span class="keyword">int</span> r, <span class="keyword">int</span> c)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 判断 base case</span></span><br><span class="line">    <span class="comment">// 如果坐标 (r, c) 超出了网格范围，直接返回</span></span><br><span class="line">    <span class="keyword">if</span> (!inArea(grid, r, c)) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  </span><br><span class="line">  	<span class="comment">// 避免重复遍历</span></span><br><span class="line">  -------------------------------------------------------------</span><br><span class="line">    <span class="comment">// 如果这个格子不是岛屿，直接返回</span></span><br><span class="line">    <span class="keyword">if</span> (grid[r][c] != <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    grid[r][c] = <span class="number">2</span>; <span class="comment">// 将格子标记为「已遍历过」</span></span><br><span class="line">  -------------------------------------------------------------</span><br><span class="line">  </span><br><span class="line">    <span class="comment">// 访问上、下、左、右四个相邻结点</span></span><br><span class="line">    dfs(grid, r - <span class="number">1</span>, c);</span><br><span class="line">    dfs(grid, r + <span class="number">1</span>, c);</span><br><span class="line">    dfs(grid, r, c - <span class="number">1</span>);</span><br><span class="line">    dfs(grid, r, c + <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 判断坐标 (r, c) 是否在网格中</span></span><br><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">inArea</span><span class="params">(<span class="keyword">int</span>[][] grid, <span class="keyword">int</span> r, <span class="keyword">int</span> c)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span> &lt;= r &amp;&amp; r &lt; grid.length </span><br><span class="line">        	&amp;&amp; <span class="number">0</span> &lt;= c &amp;&amp; c &lt; grid[<span class="number">0</span>].length;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="《剑指Offer名企面试官精讲典型编程题》"><a href="#《剑指Offer名企面试官精讲典型编程题》" class="headerlink" title="《剑指Offer名企面试官精讲典型编程题》"></a>《剑指Offer名企面试官精讲典型编程题》</h1><h2 id="数组-1"><a href="#数组-1" class="headerlink" title="数组"></a>数组</h2><h3 id="数组基础"><a href="#数组基础" class="headerlink" title="数组基础"></a>数组基础</h3><h3 id="面试题04-二维数组中的查找"><a href="#面试题04-二维数组中的查找" class="headerlink" title="面试题04. 二维数组中的查找"></a>面试题04. 二维数组中的查找</h3><h3 id="面试题-10-01-合并排序的数组"><a href="#面试题-10-01-合并排序的数组" class="headerlink" title="面试题 10.01. 合并排序的数组"></a>面试题 10.01. 合并排序的数组</h3><h3 id="数组-trick"><a href="#数组-trick" class="headerlink" title="数组 trick"></a>数组 trick</h3><p>1、合并两个数组 (包括字符串) 时，如果从前往后复制每个数字 (或字符) 需要重复移动数字 (或字符) 多次，那么我们可以考虑从后往前复制，这样就能减少移动的次数，从而􏰀高效率。</p>
+<p>2、快慢指针法：<strong>「通过一个快指针和慢指针在一个for循环下完成两个for循环的工作。」</strong></p>
+<p>e.g.</p>
+<img src="https://mmbiz.qpic.cn/mmbiz_gif/ciaqDnJprwv4rN7Lc7cH7s9Xs5Gfgibnf7kT8a6hE8xVSviaeZHuIqUAx3HRef0dDvg5roSXCIulV2XcjOnxKwYVA/640?wx_fmt=gif&wxfrom=5&wx_lazy=1" alt="图片" style="zoom:67%;">
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> slowIndex = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> fastIndex = <span class="number">0</span>; fastIndex &lt; nums.length; fastIndex ++) &#123;</span><br><span class="line">	<span class="keyword">if</span>(val != nums[fastIndex]) &#123;</span><br><span class="line">    nums[slowIndex] = nums[fastIndex];</span><br><span class="line">    slowIndex ++;</span><br><span class="line">    </span><br><span class="line">            &#125;           </span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> slowIndex;</span><br></pre></td></tr></table></figure>
+
+<h2 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h2><h3 id="链表基础"><a href="#链表基础" class="headerlink" title="链表基础"></a>链表基础</h3><p>1、链表<strong>遍历</strong>框架：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (ListNode p = head; p != <span class="keyword">null</span>; p = p.next) &#123;</span><br><span class="line">  <span class="comment">// 迭代访问 p.val</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">ListNode cur = head;</span><br><span class="line"><span class="keyword">while</span>(cur != <span class="keyword">null</span>) &#123;</span><br><span class="line">  <span class="comment">// 迭代访问 cur.val</span></span><br><span class="line">  cur = cur.next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2、链表<strong>操作</strong>的两种方式：</p>
+<ol>
+<li>直接使用原来的链表来进行操作。</li>
+<li>设置一个<strong>虚拟头结点</strong>在进行操作。</li>
+</ol>
+<h3 id="剑指-Offer-06-从尾到头打印链表"><a href="#剑指-Offer-06-从尾到头打印链表" class="headerlink" title="剑指 Offer 06. 从尾到头打印链表"></a>剑指 Offer 06. 从尾到头打印链表</h3><h3 id="剑指-Offer-18-删除链表的节点"><a href="#剑指-Offer-18-删除链表的节点" class="headerlink" title="剑指 Offer 18. 删除链表的节点"></a>剑指 Offer 18. 删除链表的节点</h3><h3 id="剑指-Offer-22-链表中倒数第k个节点"><a href="#剑指-Offer-22-链表中倒数第k个节点" class="headerlink" title="剑指 Offer 22. 链表中倒数第k个节点"></a>剑指 Offer 22. 链表中倒数第k个节点</h3><h3 id="剑指-Offer-24-反转链表"><a href="#剑指-Offer-24-反转链表" class="headerlink" title="剑指 Offer 24. 反转链表"></a>剑指 Offer 24. 反转链表</h3><h3 id="剑指-Offer-25-合并两个排序的链表"><a href="#剑指-Offer-25-合并两个排序的链表" class="headerlink" title="剑指 Offer 25. 合并两个排序的链表"></a>剑指 Offer 25. 合并两个排序的链表</h3><h3 id="剑指-Offer-52-两个链表的第一个公共节点"><a href="#剑指-Offer-52-两个链表的第一个公共节点" class="headerlink" title="剑指 Offer 52. 两个链表的第一个公共节点"></a>剑指 Offer 52. 两个链表的第一个公共节点</h3><h3 id="剑指-Offer-62-圆圈中最后剩下的数字"><a href="#剑指-Offer-62-圆圈中最后剩下的数字" class="headerlink" title="剑指 Offer 62. 圆圈中最后剩下的数字"></a>剑指 Offer 62. 圆圈中最后剩下的数字</h3><h3 id="剑指-Offer-36-二叉搜索树与双向链表"><a href="#剑指-Offer-36-二叉搜索树与双向链表" class="headerlink" title="剑指 Offer 36. 二叉搜索树与双向链表"></a>剑指 Offer 36. 二叉搜索树与双向链表</h3><h3 id="剑指-Offer-35-复杂链表的复制"><a href="#剑指-Offer-35-复杂链表的复制" class="headerlink" title="剑指 Offer 35. 复杂链表的复制"></a>剑指 Offer 35. 复杂链表的复制</h3><h3 id="链表-trick"><a href="#链表-trick" class="headerlink" title="链表 trick"></a>链表 trick</h3><p>1、<strong>「可以设置一个虚拟头结点」</strong>，原链表的所有节点就都可以按照统一的方式进行移除了。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ListNode dummyHead = <span class="keyword">new</span> ListNode(<span class="number">0</span>); <span class="comment">// 设置一个虚拟头结点</span></span><br><span class="line">dummyHead.next = head; <span class="comment">// 将虚拟头结点指向head，这样方面后面做删除操作</span></span><br></pre></td></tr></table></figure>
+
+<p>使用<strong>虚拟头结点</strong>的目的在于链表初始化时无可用节点值，而且<strong>链表构造过程需要指针移动</strong>，进而会导致头指针丢失，无法返回结果。</p>
+<h2 id="树"><a href="#树" class="headerlink" title="树"></a>树</h2><h3 id="剑指-Offer-55-I-二叉树的深度"><a href="#剑指-Offer-55-I-二叉树的深度" class="headerlink" title="剑指 Offer 55 - I. 二叉树的深度"></a>剑指 Offer 55 - I. 二叉树的深度</h3><h3 id="剑指-Offer-34-二叉树中和为某一值的路径"><a href="#剑指-Offer-34-二叉树中和为某一值的路径" class="headerlink" title="剑指 Offer 34. 二叉树中和为某一值的路径"></a>剑指 Offer 34. 二叉树中和为某一值的路径</h3><h3 id="剑指-Offer-07-重建二叉树"><a href="#剑指-Offer-07-重建二叉树" class="headerlink" title="剑指 Offer 07. 重建二叉树"></a>剑指 Offer 07. 重建二叉树</h3><h3 id="剑指-Offer-33-二叉搜索树的后序遍历序列"><a href="#剑指-Offer-33-二叉搜索树的后序遍历序列" class="headerlink" title="剑指 Offer 33. 二叉搜索树的后序遍历序列"></a>剑指 Offer 33. 二叉搜索树的后序遍历序列</h3><h3 id="剑指-Offer-68-I-二叉搜索树的最近公共祖先"><a href="#剑指-Offer-68-I-二叉搜索树的最近公共祖先" class="headerlink" title="剑指 Offer 68 - I. 二叉搜索树的最近公共祖先"></a>剑指 Offer 68 - I. 二叉搜索树的最近公共祖先</h3><h3 id="剑指-Offer-68-II-二叉树的最近公共祖先"><a href="#剑指-Offer-68-II-二叉树的最近公共祖先" class="headerlink" title="剑指 Offer 68 - II. 二叉树的最近公共祖先"></a>剑指 Offer 68 - II. 二叉树的最近公共祖先</h3><h3 id="剑指-Offer-36-二叉搜索树与双向链表-1"><a href="#剑指-Offer-36-二叉搜索树与双向链表-1" class="headerlink" title="剑指 Offer 36. 二叉搜索树与双向链表"></a>剑指 Offer 36. 二叉搜索树与双向链表</h3><h3 id="剑指-Offer-40-最小的k个数-堆-BST"><a href="#剑指-Offer-40-最小的k个数-堆-BST" class="headerlink" title="剑指 Offer 40. 最小的k个数 (堆/BST)"></a>剑指 Offer 40. 最小的k个数 (堆/BST)</h3><h2 id="栈和队列"><a href="#栈和队列" class="headerlink" title="栈和队列"></a>栈和队列</h2><h3 id="剑指-Offer-09-用两个栈实现队列"><a href="#剑指-Offer-09-用两个栈实现队列" class="headerlink" title="剑指 Offer 09. 用两个栈实现队列"></a>剑指 Offer 09. 用两个栈实现队列</h3><h3 id="225-用队列实现栈"><a href="#225-用队列实现栈" class="headerlink" title="225. 用队列实现栈"></a>225. 用队列实现栈</h3><h2 id="算法和数据操作：查找和排序"><a href="#算法和数据操作：查找和排序" class="headerlink" title="算法和数据操作：查找和排序"></a>算法和数据操作：查找和排序</h2><h3 id="排序的分类"><a href="#排序的分类" class="headerlink" title="排序的分类"></a>排序的分类</h3><img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/刷leetcode的心得/640.png" alt="640" style="zoom:67%;">
+
+
+
+
+
+
+
+
+
+<h1 id="字节跳动高频题"><a href="#字节跳动高频题" class="headerlink" title="字节跳动高频题"></a>字节跳动高频题</h1><h1 id="毫无思路"><a href="#毫无思路" class="headerlink" title="毫无思路"></a>毫无思路</h1><p>59.螺旋矩阵II</p>
+<p>剑指 Offer 33. 二叉搜索树的后序遍历序列</p>
+<p>剑指 Offer 68 - I. 二叉搜索树的最近公共祖先</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/20/Deeplearning%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0Q&A/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/09/20/Deeplearning%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0Q&A/" itemprop="url">Deeplearning深度学习笔记Q&</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-09-20T10:32:30+08:00">
+                2020-09-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>[toc]</p>
+<h1>超参数调试、 正则化以及优化</h1>
+<h2 id="Q1：如何通过组织机器学习来-u-诊断偏差和方差-u-（基本方法），然后选择解决问题的正确操作？">Q1：如何通过组织机器学习来<u>诊断偏差和方差</u>（基本方法），然后选择解决问题的正确操作？</h2>
+<p><strong>A：</strong>《Deeplearning深度学习笔记》（P129 - P135）</p>
+<h2 id="Q2：为什么正则化有利于预防过拟合呢-（Why-regularization-reduces-overfitting-）">Q2：为什么正则化有利于预防过拟合呢? （Why regularization reduces overfitting?）</h2>
+<p><strong>A：</strong>《Deeplearning深度学习笔记》（P140）</p>
+<h3 id="Plus-数学-1：什么是范数？">Plus 数学 1：什么是范数？</h3>
+<p>**A：**范数主要是对矩阵和向量的一种描述，有了统一的规范，那么“大小就可以比较了”。</p>
+<p>例如：1比2小我们一目了然，可是（3,5,3）和（6,1,2）哪个大？</p>
+<p>2范数比：根号（43）比根号（41）大，因此2范数对比中（3,5,3）大。</p>
+<p><strong>矩阵范数</strong>：描述矩阵引起变化的大小，AX=B，矩阵X变化了A个量级，然后成为了B。<br>
+<strong>向量范数</strong>：描述向量在空间中的大小。</p>
+<p>《DeepLearning-500-questions-master》第一章：向量和矩阵的范数归纳</p>
+<h3 id="Plus-数学-2：什么是“弗罗贝尼乌斯范数”？如何使用该范数实现梯度下降">Plus 数学 2：什么是“弗罗贝尼乌斯范数”？如何使用该范数实现梯度下降?</h3>
+<p><strong>A：</strong>《Deeplearning深度学习笔记》（P138）</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/14/%E5%88%B7leetcode%E7%9A%84%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB%E7%9A%84%E7%9F%A5%E8%AF%86%E7%82%B9%EF%BC%9Apython%E8%AF%AD%E6%B3%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1057,6 +1600,12 @@ list(enumerate(seasons, start=1))       # 下标从 1 开始
 
 <p>可以查看状态</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl status sslocal</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>无法使用aes-255-gcm加/解密方式</p>
+<p>因为通过apt直接下载的ss客户端不是3.0版本的。只有3.0及以上才有该加密方式。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">下载3.0可以通过</span><br><span class="line">pip install https:&#x2F;&#x2F;github.com&#x2F;shadowsocks&#x2F;shadowsocks&#x2F;archive&#x2F;master.zip -U</span><br></pre></td></tr></table></figure>
+
+
 
 </li>
 </ol>
@@ -1116,11 +1665,16 @@ list(enumerate(seasons, start=1))       # 下标从 1 开始
 
 </li>
 </ol>
-<h5 id="4-3-2-Linux-mongodb-安装"><a href="#4-3-2-Linux-mongodb-安装" class="headerlink" title="4.3.2 Linux mongodb 安装"></a>4.3.2 Linux mongodb 安装</h5><h4 id="4-4-OnionScan"><a href="#4-4-OnionScan" class="headerlink" title="4.4 OnionScan"></a>4.4 OnionScan</h4><h5 id="4-4-1-ubuntu-16-04-安装-go-1-7-OnionScan-适用-go-1-6-1-7"><a href="#4-4-1-ubuntu-16-04-安装-go-1-7-OnionScan-适用-go-1-6-1-7" class="headerlink" title="4.4.1 ubuntu 16.04 安装 go 1.7 (OnionScan 适用 go 1.6/1.7)"></a>4.4.1 ubuntu 16.04 安装 go 1.7 (OnionScan 适用 go 1.6/1.7)</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># 安装Go语言</span><br><span class="line">sudo apt-get update</span><br><span class="line">wget 链接</span><br><span class="line">sudo tar -xvf go1.7.linux-amd64.tar.gz</span><br><span class="line">sudo mv go &#x2F;usr&#x2F;local</span><br><span class="line"># 设置Go环境</span><br><span class="line">export GOROOT&#x3D;&#x2F;usr&#x2F;local&#x2F;go</span><br><span class="line">export GOROOT&#x3D;$HOME&#x2F;自己创建的workplce的名字</span><br><span class="line">export PATH&#x3D;$GOPATH&#x2F;bin:$GOROOT&#x2F;bin:$PATH</span><br><span class="line"># 验证安装</span><br><span class="line">go version</span><br><span class="line">-&gt; go version go1.7 linux&#x2F;amd64</span><br></pre></td></tr></table></figure>
+<h5 id="4-3-2-conda替换源"><a href="#4-3-2-conda替换源" class="headerlink" title="4.3.2 conda替换源"></a>4.3.2 conda替换源</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">conda config --add channels https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;pkgs&#x2F;free&#x2F;</span><br><span class="line"></span><br><span class="line">conda config --add channels https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;cloud&#x2F;conda-forge&#x2F;</span><br><span class="line"></span><br><span class="line">conda config --add channels https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;cloud&#x2F;msys2&#x2F;</span><br><span class="line"></span><br><span class="line">conda config --set show_channel_urls yes</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">如果需要使用pytorch,需要添加新的源</span><br><span class="line">conda config --add channels https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;cloud&#x2F;pytorch</span><br><span class="line">注意安装pytorch库的时候，记得去掉结尾的 -c pytorch 不然会影响安装的速度。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">如果你不想使用国内镜像源，想要切换回原来的镜像源，执行下面的命令。</span><br><span class="line">conda config --remove-key channels</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="4-3-3-Linux-mongodb-安装"><a href="#4-3-3-Linux-mongodb-安装" class="headerlink" title="4.3.3 Linux mongodb 安装"></a>4.3.3 Linux mongodb 安装</h5><h4 id="4-4-OnionScan"><a href="#4-4-OnionScan" class="headerlink" title="4.4 OnionScan"></a>4.4 OnionScan</h4><h5 id="4-4-1-ubuntu-16-04-安装-go-1-7-OnionScan-适用-go-1-6-1-7"><a href="#4-4-1-ubuntu-16-04-安装-go-1-7-OnionScan-适用-go-1-6-1-7" class="headerlink" title="4.4.1 ubuntu 16.04 安装 go 1.7 (OnionScan 适用 go 1.6/1.7)"></a>4.4.1 ubuntu 16.04 安装 go 1.7 (OnionScan 适用 go 1.6/1.7)</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># 安装Go语言</span><br><span class="line">sudo apt-get update</span><br><span class="line">wget 链接</span><br><span class="line">sudo tar -xvf go1.7.linux-amd64.tar.gz</span><br><span class="line">sudo mv go &#x2F;usr&#x2F;local</span><br><span class="line"># 设置Go环境</span><br><span class="line">export GOROOT&#x3D;&#x2F;usr&#x2F;local&#x2F;go</span><br><span class="line">export GOROOT&#x3D;$HOME&#x2F;自己创建的workplce的名字</span><br><span class="line">export PATH&#x3D;$GOPATH&#x2F;bin:$GOROOT&#x2F;bin:$PATH</span><br><span class="line"># 验证安装</span><br><span class="line">go version</span><br><span class="line">-&gt; go version go1.7 linux&#x2F;amd64</span><br></pre></td></tr></table></figure>
 
 <h5 id="4-4-2-安装OnionScan"><a href="#4-4-2-安装OnionScan" class="headerlink" title="4.4.2 安装OnionScan"></a>4.4.2 <a href="https://github.com/s-rah/onionscan" target="_blank" rel="noopener">安装OnionScan</a></h5><h2 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h2><ol>
 <li><a href="https://www.jianshu.com/p/a0f3268bfa33" target="_blank" rel="noopener">https://www.jianshu.com/p/a0f3268bfa33</a></li>
 <li><a href="https://www.jianshu.com/p/bd96111de6ae" target="_blank" rel="noopener">Conda常用命令</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/105207260?utm_source=wechat_session" target="_blank" rel="noopener">更换Anaconda镜像源的方法</a></li>
 </ol>
 
           
@@ -1453,332 +2007,6 @@ list(enumerate(seasons, start=1))       # 下标从 1 开始
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/07/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AF%87%EF%BC%9A%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E7%AE%97%E6%B3%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/07/07/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AF%87%EF%BC%9A%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E7%AE%97%E6%B3%95/" itemprop="url">深度学习篇：神经网络核心原理与算法</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-07-07T22:41:30+08:00">
-                2020-07-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>[toc]</p>
-<h1 id="Back-Propagation-Networks-反向传播网络"><a href="#Back-Propagation-Networks-反向传播网络" class="headerlink" title="Back Propagation Networks - 反向传播网络"></a>Back Propagation Networks - 反向传播网络</h1><p>BP网络是所有的神经网络中结构最为简单的一种网络。一般我们习惯把网络画成左边输入右边输出层的结构。</p>
-<p><em>BP神经网络的网络结构是不固定的:</em></p>
-<img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/深度学习篇：神经网络核心原理与算法/BP网络结构是不固定的.jpg" alt="BP网络结构是不固定的" style="zoom:80%;">
-
-<h2 id="线性回归的训练到BP神经网络的训练"><a href="#线性回归的训练到BP神经网络的训练" class="headerlink" title="线性回归的训练到BP神经网络的训练"></a>线性回归的训练到BP神经网络的训练</h2><h3 id="线性回归："><a href="#线性回归：" class="headerlink" title="线性回归："></a>线性回归：</h3><p><strong>样本：</strong></p>
-<p><img src="https://ss.csdn.net/p?https://mmbiz.qpic.cn/mmbiz_png/QY9Ieg3xj8Bx2ibQfHWOBib71EibSgSv0HE8ePCbXp0jOtCTQnqiadb2516jKhhclOrUb4BVZQrlCvAWPcxTJ16Kuw/640?wx_fmt=png" alt="640?wx_fmt=png"></p>
-<p><strong>观察记录(通过画图)：</strong></p>
-<p><img src="https://ss.csdn.net/p?https://mmbiz.qpic.cn/mmbiz_png/QY9Ieg3xj8Bx2ibQfHWOBib71EibSgSv0HEZUp6Q6pZljODpH2aE29FJZhBkGPsW4BCAofhrJGfNicgPMzSVib1XibRA/640?wx_fmt=png" alt="640?wx_fmt=png"></p>
-<p>可以从图中直观的看到，时间和速度有一种线性关系。我们可以尝试画一条直线，从一堆点中穿越过去。</p>
-<p><img src="https://ss.csdn.net/p?https://mmbiz.qpic.cn/mmbiz_png/QY9Ieg3xj8Bx2ibQfHWOBib71EibSgSv0HEgztbyG9LcI50Iib5l1zNlLC09xes2LrNf0MEUMvsrRzpgUMtDAj8IqA/640?wx_fmt=png" alt="*"></p>
-<p><strong>横纵坐标的关系:</strong></p>
-<p>y = w*x + b</p>
-<p><strong>误差：e</strong></p>
-<p>我们取定任何一个w和b时,只要带入x,y就会产生一个e.产生十个e.</p>
-<p><img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AF%87%EF%BC%9A%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E7%AE%97%E6%B3%95/%E4%B8%80%E5%85%83%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E8%AF%AF%E5%B7%AE%E5%85%AC%E5%BC%8F.png" alt="一元线性回归误差公式"></p>
-<p><strong>全局误差总量：</strong></p>
-<p><img src="https://ss.csdn.net/p?https://mmbiz.qpic.cn/mmbiz_png/QY9Ieg3xj8Bx2ibQfHWOBib71EibSgSv0HEwy3hyP8bwhzdd2H2wLbibZ9Ltc6q00AthPwBwL3y74YdCibaz7RWA4bg/640?wx_fmt=png" alt="640?wx_fmt=png"></p>
-<p>将所有单个样本的误差进行累加获得全局误差总量。但是无论这个e是正是负都是误差，这就是残差。这里简单的累加就存在正负抵消。</p>
-<p>对于每个e取绝对值或取平方保证非负数。</p>
-<p><img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AF%87%EF%BC%9A%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%AF%8F%E4%B8%AAe%E5%8F%96%E7%BB%9D%E5%AF%B9%E5%80%BC%E6%88%96%E5%8F%96%E5%B9%B3%E6%96%B9%E4%BF%9D%E8%AF%81%E9%9D%9E%E8%B4%9F%E6%95%B0.png" alt="每个e取绝对值或取平方保证非负数"></p>
-<p>最后一行提取公因式 + 合并可以得到：</p>
-<p><img src="https://ss.csdn.net/p?https://mmbiz.qpic.cn/mmbiz_png/QY9Ieg3xj8Bx2ibQfHWOBib71EibSgSv0HEvG41ia6kmD2n9STzNdZ6qicc7Bc52XibxoJxd2GpRhXuaoKvCNibPyHtKQ/640?wx_fmt=png" alt="640?wx_fmt=png"></p>
-<p>其中的A ～ F全部都是常数系数。未知数是w和b。</p>
-<p>我们要做的事情就是找到一个比较合适的w和b，使得loss值越小越好。</p>
-<p><strong>梯度下降法：</strong></p>
-<p>具体怎么求w和b的值：求解w和b的值的方法很多，这里我们就使用梯度下降算法。</p>
-<p><strong>梯度下降算法的更新公式 ：</strong></p>
-<p><img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AF%87%EF%BC%9A%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%AE%97%E6%B3%95%E7%9A%84%E6%9B%B4%E6%96%B0%E5%85%AC%E5%BC%8F2.png" alt="梯度下降算法的更新公式2"></p>
-<p><img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AF%87%EF%BC%9A%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%AE%97%E6%B3%95%E7%9A%84%E6%9B%B4%E6%96%B0%E5%85%AC%E5%BC%8F.png" alt="梯度下降算法的更新公式"></p>
-<p>Xn+1 和 Xn 分别代表两个临近点的x值。Xn+1是Xn更新后的下一次迭代值。</p>
-<p>学习率:挪动步长的基数，步长。学习率设置大的话就挪动的多，设置的小的话就挪动的少。</p>
-<p>f’(x)就是x点的导数，物理意义是切线的斜率。</p>
-<p>例子1：</p>
-<p>一元凸函数 ： f(x) = x^2 + 2</p>
-<p><img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AF%87%EF%BC%9A%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E7%AE%97%E6%B3%95/%E4%B8%80%E5%85%83%E5%87%B8%E5%87%BD%E6%95%B0%E4%BE%8B%E5%AD%90%E5%9B%BE%E5%83%8F.png" alt="一元凸函数例子图像"></p>
-<p>取x = 3， 点（3, 11）切线斜率：<img src="https://ss.csdn.net/p?https://mmbiz.qpic.cn/mmbiz_png/QY9Ieg3xj8Bx2ibQfHWOBib71EibSgSv0HEZdJxeGZOWl6cfVCTCBticibh5a2VXRYb73CrY9wl8gJT0nLEt7p3lsgg/640?wx_fmt=png" alt="640?wx_fmt=png" style="zoom:80%;"></p>
-<p>假设学习率为0.1，那么我们的学习率x导数值就是我们下一步要挪动的步长：<img src="https://ss.csdn.net/p?https://mmbiz.qpic.cn/mmbiz_png/QY9Ieg3xj8Bx2ibQfHWOBib71EibSgSv0HEicGUJjNm4NI5VSrNtHhI3RVibupHgom8FnnRDo4fdyUCUEIy0OzV48eQ/640?wx_fmt=png" alt="640?wx_fmt=png" style="zoom:80%;"></p>
-<p>可以得到：<img src="https://ss.csdn.net/p?https://mmbiz.qpic.cn/mmbiz_png/QY9Ieg3xj8Bx2ibQfHWOBib71EibSgSv0HEBh0sh5lVXb2wibGlczGD04MDlSI9U7lPxH99WGdrTdcGqH7ZnQE2eGg/640?wx_fmt=png" alt="640?wx_fmt=png" style="zoom:80%;"></p>
-<p>然后我们进行下一次迭代：<img src="https://ss.csdn.net/p?https://mmbiz.qpic.cn/mmbiz_png/QY9Ieg3xj8Bx2ibQfHWOBib71EibSgSv0HEB8APMgX3lJYFg9Z49ibZnfFvj3tI37zTkctAd7ic80cCPbTkhTwwibScQ/640?wx_fmt=png" alt="640?wx_fmt=png" style="zoom:80%;"></p>
-<p>每一次移动的步长在逐渐的减小。原因: 临近整个函数底部，斜率是在逐渐降低的。导致<img src="https://ss.csdn.net/p?https://mmbiz.qpic.cn/mmbiz_png/QY9Ieg3xj8Bx2ibQfHWOBib71EibSgSv0HEkXiaAUyaS57kcMeiabBowuhSx372bO8c2bAnygMZjYGbMZGqfkaSGU0Q/640?wx_fmt=png" alt="640?wx_fmt=png" style="zoom:67%;">的绝对值在逐渐的减小。那么更新时的x的改变量也会逐渐的减小。</p>
-<p>观察我们的更新公式会发现没有之前我们的左右取点看一看的过程，而是直接做更新。原因：当我们取x=3这一点的导数值(斜率为正值)，那么<img src="https://ss.csdn.net/p?https://mmbiz.qpic.cn/mmbiz_png/QY9Ieg3xj8Bx2ibQfHWOBib71EibSgSv0HEkXiaAUyaS57kcMeiabBowuhSx372bO8c2bAnygMZjYGbMZGqfkaSGU0Q/640?wx_fmt=png" alt="640?wx_fmt=png" style="zoom:67%;">这一项就是一个负数，所以更新后的Xn+1就会变小，朝着曲线底部方向挪动；如果Xn 取-3就会在曲线的左侧，此时这一点的斜率是一个负数，那么<img src="https://ss.csdn.net/p?https://mmbiz.qpic.cn/mmbiz_png/QY9Ieg3xj8Bx2ibQfHWOBib71EibSgSv0HEkXiaAUyaS57kcMeiabBowuhSx372bO8c2bAnygMZjYGbMZGqfkaSGU0Q/640?wx_fmt=png" alt="640?wx_fmt=png" style="zoom:67%;">这一项就是一个正数，更新之后的Xn+1就会变大，依然是朝着函数底部的方向。</p>
-<p>例子2：</p>
-<p>二元凸函数 ： f(x) = x^2 + 8y^2</p>
-<p>我们在这个平面上随便找一个点(x0,y0)，然后想把它挪动到极值点上去。</p>
-<p>原来一元凸函数我们有两个方向去尝试，可以先看眼左边，再看眼右边，哪一边离极值点近就像哪一边先挪动，而二元凸函数我们就有四个方向去尝试。</p>
-<p>现在在两个维度上的更新方程：</p>
-<p><img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AF%87%EF%BC%9A%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E7%AE%97%E6%B3%95/%E5%9C%A8%E4%B8%A4%E4%B8%AA%E7%BB%B4%E5%BA%A6%E4%B8%8A%E7%9A%84%E6%9B%B4%E6%96%B0%E6%96%B9%E7%A8%8B.png" alt="在两个维度上的更新方程"></p>
-<p><img src="https://ss.csdn.net/p?https://mmbiz.qpic.cn/mmbiz_png/QY9Ieg3xj8Bx2ibQfHWOBib71EibSgSv0HEpJRj0fMenV1QQHgVQGl0MhvJ1rrngn9bjWk2V0oWaNLyzZlcSeTjhw/640?wx_fmt=png" alt="640?wx_fmt=png" style="zoom:67%;">表示的是x偏导，曲面上的点沿着平行于x轴方向的切线：</p>
-<p><img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AF%87%EF%BC%9A%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%B2%BF%E7%9D%80x%E8%BD%B4%E6%96%B9%E5%90%91%E7%9A%84%E5%88%87%E7%BA%BF%E6%96%9C%E7%8E%87.png" alt="沿着x轴方向的切线斜率"></p>
-<p><img src="https://ss.csdn.net/p?https://mmbiz.qpic.cn/mmbiz_png/QY9Ieg3xj8Bx2ibQfHWOBib71EibSgSv0HEGfiaNEnH9DGjPjeL2LI7cqHQmp20UGQSk7Wk3QoicQNmrYiaxd7icAbnTw/640?wx_fmt=png" alt="640?wx_fmt=png" style="zoom:67%;"> - y轴方向切线：</p>
-<p><img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AF%87%EF%BC%9A%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%B2%BF%E7%9D%80y%E8%BD%B4%E6%96%B9%E5%90%91%E7%9A%84%E5%88%87%E7%BA%BF%E6%96%9C%E7%8E%87.png" alt="沿着y轴方向的切线斜率"></p>
-<p><img src="https://ss.csdn.net/p?https://mmbiz.qpic.cn/mmbiz_png/QY9Ieg3xj8Bx2ibQfHWOBib71EibSgSv0HEEdoYrQCQvoWAzibibJkvHcLXrqpxMe4vCo4K98icyqadicbl2Gno5VR5Bw/640?wx_fmt=png" alt="640?wx_fmt=png"></p>
-<p>假设我们有一点(3,4),代入之后可求得:<img src="https://ss.csdn.net/p?https://mmbiz.qpic.cn/mmbiz_png/QY9Ieg3xj8Bx2ibQfHWOBib71EibSgSv0HEERvdGxS39759NNGsEgEcZnJO0Jn2sVbmA90zIt18w9XI4UDASPsvrg/640?wx_fmt=png" alt="640?wx_fmt=png" style="zoom:67%;"></p>
-<p>更新方程：<img src="https://ss.csdn.net/p?https://mmbiz.qpic.cn/mmbiz_png/QY9Ieg3xj8Bx2ibQfHWOBib71EibSgSv0HEkibmPiaiaU7TQzCtOUeSIYqaQYM2rrX3l5laj9rz9WakwiblicbV87ON1Xg/640?wx_fmt=png" alt="640?wx_fmt=png"></p>
-<p>对于梯度下降算法来说，里面有多个维度可以选择。如果在一个三维的空间中，我们想从山顶往山下走。最快的方法:沿着山坡上最陡峭的方向向下最快。</p>
-<p>*<em>梯度: *</em></p>
-<p>反着写的倒三角形，等于两个方向上的偏导，一个是x的偏导一个是y的偏导。</p>
-<p><img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AF%87%EF%BC%9A%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%A2%AF%E5%BA%A6.png" alt="梯度"></p>
-<p>如果每次进行更新的时候，你就可以使用学习率(一塔)乘以这两个方向上的偏导。各自完成自己的更新量.</p>
-<p>假如我们函数中的变量不止两个，而是有一千种。它表示的形式就是:<img src="https://ss.csdn.net/p?https://mmbiz.qpic.cn/mmbiz_png/QY9Ieg3xj8Bx2ibQfHWOBib71EibSgSv0HEcswlK172JIuJpMPtYWG69eUASo1B9uqpDibXRPT5mHc97yx3dmQ9omA/640?wx_fmt=png" alt="640?wx_fmt=png" style="zoom:67%;">，求出了这1000个参数的偏导数。然后乘以学习率，更新1000个w变量：<img src="https://ss.csdn.net/p?https://mmbiz.qpic.cn/mmbiz_png/QY9Ieg3xj8Bx2ibQfHWOBib71EibSgSv0HEDTl4yEicicOFEdcaVumdK6eic8b84J3YXr7syBsbicqGX6UKsvycsICsvg/640?wx_fmt=png" alt="640?wx_fmt=png" style="zoom:67%;">，其中w的上标i表示这是第几个w。w的下标n和n+1表示的是第几次迭代。</p>
-<p><strong>开始训练：</strong>需要一个描述残差loss的函数。接着我们可以使用若干个w来表述这个函数。然后我们可以用梯度下降算法用最快方法去更新w的各个维度。最后满足loss极值点的位置就是我们要找的w。</p>
-<h3 id="神经网络的训练"><a href="#神经网络的训练" class="headerlink" title="神经网络的训练"></a>神经网络的训练</h3><p><img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AF%87%EF%BC%9A%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E7%AE%97%E6%B3%95/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C.png" alt="神经网络"></p>
-<p>第一部分是线性单元，第二部分是非线性部分。第一行为隐藏层的输入x经过wh和bh的处理变成Zh,Zh又作为非线性单元的输入。</p>
-<p><em>训练过程：</em></p>
-<ul>
-<li>初始化w,b</li>
-<li>Loss(w,b)</li>
-<li>挪动w,b 逐步变化, 直到Loss足够小。</li>
-</ul>
-<p><strong>样本:</strong></p>
-<p><img src="https://ss.csdn.net/p?https://mmbiz.qpic.cn/mmbiz_png/QY9Ieg3xj8Bx2ibQfHWOBib71EibSgSv0HETDY2oiautTia1OAC55L17uEzmNntygBib8Hia6lgoiaD0rDI18rrml7FhMw/640?wx_fmt=png" alt="640?wx_fmt=png"></p>
-<p>根据网络中两个表达式的描述。可以带入x1:</p>
-<p><img src="https://ss.csdn.net/p?https://mmbiz.qpic.cn/mmbiz_png/QY9Ieg3xj8Bx2ibQfHWOBib71EibSgSv0HEERKkJZLPQhnYtThwZO5OVPJ6C9ZaMJc3icWvF40GdIlILbFUf4zJI6g/640?wx_fmt=png" alt="640?wx_fmt=png"></p>
-<p>由x1和y1所带来的误差值：<img src="https://ss.csdn.net/p?https://mmbiz.qpic.cn/mmbiz_png/QY9Ieg3xj8Bx2ibQfHWOBib71EibSgSv0HE6XFaf88eHX39ZPhUgJiawZCIrn58IPpOs7pictweJlJqUZWLjsI1EdPQ/640?wx_fmt=png" alt="640?wx_fmt=png" style="zoom:57%;">，这是一个样本的Loss，也就是残差平方。 然后累加求和得到：<img src="https://ss.csdn.net/p?https://mmbiz.qpic.cn/mmbiz_png/QY9Ieg3xj8Bx2ibQfHWOBib71EibSgSv0HEsKDsfXNpVibQR0sMy4lsPDoxZbrz5reiaJQ78x4Gy4sBrfh8cJDGdQaw/640?wx_fmt=png" alt="640?wx_fmt=png" style="zoom:67%;"></p>
-<p><strong>前向传播的代码实现：</strong></p>
-<p><u>计算每一层的z, 再计算每一层的a。接着保存每一层的z和a，为后面的反向传播做准备。</u></p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"> <span class="number">1</span><span class="comment"># coding=utf-8</span></span><br><span class="line"> <span class="number">2</span><span class="keyword">import</span> random</span><br><span class="line"> <span class="number">3</span><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"> <span class="number">4</span><span class="keyword">class</span> Network(object):</span><br><span class="line"> <span class="number">5</span><span class="keyword">def</span> __init__(self, sizes):</span><br><span class="line"> <span class="number">6</span><span class="comment"># 网络层数</span></span><br><span class="line"> <span class="number">7</span>self.num_layers = len(sizes)</span><br><span class="line"> <span class="number">8</span><span class="comment"># 网络每层神经元个数</span></span><br><span class="line"> <span class="number">9</span>self.sizes = sizes</span><br><span class="line"><span class="number">10</span><span class="comment"># 初始化每层的偏置</span></span><br><span class="line"><span class="number">11</span>self.biases = [np.random.randn(y, <span class="number">1</span>) <span class="keyword">for</span> y <span class="keyword">in</span> sizes[<span class="number">1</span>:]]</span><br><span class="line"><span class="number">12</span><span class="comment"># 初始化每层的权重</span></span><br><span class="line"><span class="number">13</span>self.weights = [np.random.randn(y, x)</span><br><span class="line"><span class="number">14</span>                <span class="keyword">for</span> x, y <span class="keyword">in</span> zip(sizes[:<span class="number">-1</span>], sizes[<span class="number">1</span>:])]</span><br><span class="line"><span class="number">15</span><span class="comment"># 梯度下降</span></span><br><span class="line"><span class="number">16</span><span class="comment"># GD函数有两个变量: 训练数据集, 需要训练的轮数</span></span><br><span class="line"><span class="number">17</span><span class="keyword">def</span> GD(self, training_data, epochs):</span><br><span class="line"><span class="number">18</span><span class="comment"># 开始训练 循环每一个epochs: 定义epochs数值为几,就循环几次</span></span><br><span class="line"><span class="number">19</span><span class="keyword">for</span> j <span class="keyword">in</span> range(epochs):</span><br><span class="line"><span class="number">20</span>    <span class="comment"># 洗牌 打乱训练数据 shuffle</span></span><br><span class="line"><span class="number">21</span>    random.shuffle(training_data)</span><br><span class="line"><span class="number">22</span>    <span class="comment"># 让每一次训练的时候,训练数据的顺序不同</span></span><br><span class="line"><span class="number">23</span>    <span class="comment"># 训练每一个数据, 使用x和y来取训练数据data和它对应的y</span></span><br><span class="line"><span class="number">24</span>    <span class="keyword">for</span> x, y <span class="keyword">in</span> training_data:</span><br><span class="line"><span class="number">25</span>        <span class="comment"># 使用update方法进行前向传播</span></span><br><span class="line"><span class="number">26</span>        self.update(x, y)</span><br><span class="line"><span class="number">27</span>    <span class="comment"># 每个epoch 完成,打印我们已经训练到了第几个epoch</span></span><br><span class="line"><span class="number">28</span>    print(<span class="string">"Epoch &#123;0&#125; complete"</span>.format(j))</span><br><span class="line"><span class="number">29</span>    <span class="comment"># 前向传播</span></span><br><span class="line"><span class="number">30</span>   <span class="function"><span class="keyword">def</span> <span class="title">update</span><span class="params">(self, x, y)</span>:</span></span><br><span class="line"><span class="number">31</span>  <span class="comment"># 传入输入的训练数据,</span></span><br><span class="line"><span class="number">32</span>activation = x</span><br><span class="line"><span class="number">33</span><span class="comment"># 保存每一层的激励值a=sigmoid(z) z=wx+b</span></span><br><span class="line"><span class="number">34</span><span class="comment"># 第一层时输入数据就是它的激励值</span></span><br><span class="line"><span class="number">35</span>activations = [x]</span><br><span class="line"><span class="number">36</span><span class="comment"># 保存每一层的z=wx+b</span></span><br><span class="line"><span class="number">37</span>zs = []</span><br><span class="line"><span class="number">38</span><span class="comment"># 前向传播</span></span><br><span class="line"><span class="number">39</span><span class="comment"># 使用for循环遍历每一层的偏置与权重:同时取第一层的偏置和权重</span></span><br><span class="line"><span class="number">40</span><span class="keyword">for</span> b, w <span class="keyword">in</span> zip(self.biases, self.weights):</span><br><span class="line"><span class="number">41</span>    <span class="comment"># 计算每层的z</span></span><br><span class="line"><span class="number">42</span>    <span class="comment"># dot是点乘方法: 把两个数组进行点乘,对于二维数组相当于矩阵乘法。</span></span><br><span class="line"><span class="number">43</span>    <span class="comment"># 一维数组相当于向量的内积</span></span><br><span class="line"><span class="number">44</span>    z = np.dot(w, activation) + b</span><br><span class="line"><span class="number">45</span>    <span class="comment"># 保存每层的z</span></span><br><span class="line"><span class="number">46</span>    zs.append(z)</span><br><span class="line"><span class="number">47</span>    <span class="comment"># 计算每层的a</span></span><br><span class="line"><span class="number">48</span>    activation = sigmoid(z)</span><br><span class="line"><span class="number">49</span>    <span class="comment"># 保存每一层的a</span></span><br><span class="line"><span class="number">50</span>    activations.append(activation)</span><br><span class="line"><span class="number">51</span>  <span class="function"><span class="keyword">def</span> <span class="title">sigmoid</span><span class="params">(z)</span>:</span></span><br><span class="line"><span class="number">52</span> <span class="keyword">return</span> <span class="number">1.0</span> / (<span class="number">1.0</span> + np.exp(-z))</span><br></pre></td></tr></table></figure>
-
-<p><strong>反向传播更新参数:</strong></p>
-<p>可以开始挪动Wh Bh Wo Bo四个待定系数，来逐步减小Loss值。这个在之前的线性回归的训练过程中我们已经讲过了。也就是需要四个更新公式来帮我们更新。</p>
-<p><img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AF%87%EF%BC%9A%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E7%AE%97%E6%B3%95/%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E6%9B%B4%E6%96%B0%E5%8F%82%E6%95%B0.png" alt="反向传播更新参数"></p>
-<p><em>这四个值到底怎么求？</em></p>
-<p>我们把我们的损失函数loss的方程改变一下,在前面加上二分之一:<img src="https://ss.csdn.net/p?https://mmbiz.qpic.cn/mmbiz_png/QY9Ieg3xj8Bx2ibQfHWOBib71EibSgSv0HENqLALSK2jicePRLlCx4rQj1FoLPuicbwIVjb4FGviciczlcYEE5fABnXHg/640?wx_fmt=png" alt="640?wx_fmt=png" style="zoom:67%;">这样是为了我们后面求导方便约分。</p>
-<p>根据链式法则可以得到:<img src="https://ss.csdn.net/p?https://mmbiz.qpic.cn/mmbiz_png/QY9Ieg3xj8Bx2ibQfHWOBib71EibSgSv0HEh132MlyiaQ9fjgDjWloOWTpO9AsUxIFCVhSdnz0P2srP2ShtuUvAeZA/640?wx_fmt=png" alt="640?wx_fmt=png" style="zoom:67%;">又由于Zo=WoYh+Bo  所以Zo偏Bo求导的值为1.所以得到<img src="https://ss.csdn.net/p?https://mmbiz.qpic.cn/mmbiz_png/QY9Ieg3xj8Bx2ibQfHWOBib71EibSgSv0HEDW9BXF3dbA3rafyvuWGzAgCgZjr3JVMWqZL2DJeL508RRlULj3wHeA/640?wx_fmt=png" alt="640?wx_fmt=png" style="zoom:67%;"></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/05/%E7%AE%97%E6%B3%95%E7%AF%87%EF%BC%9AAttention%E6%80%9D%E6%83%B3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/07/05/%E7%AE%97%E6%B3%95%E7%AF%87%EF%BC%9AAttention%E6%80%9D%E6%83%B3/" itemprop="url">算法篇：Attention思想</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-07-05T23:23:24+08:00">
-                2020-07-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>[toc]</p>
-<h1 id="什么是注意力机制"><a href="#什么是注意力机制" class="headerlink" title="什么是注意力机制"></a>什么是注意力机制</h1><p><u>注意力机制模仿了生物观察行为的内部过程。</u>例如人的视觉在处理一张图片时，会通过快速扫描全局图像，获得需要重点关注的目标区域，也就是注意力焦点。然后对这一区域投入更多的注意力资源，以获得更多所需要关注的目标的细节信息，并抑制其它无用信息。</p>
-<p>目前大多数的注意力模型都是依附在 Encoder-Decoder 框架下，但并不是只能运用在该模型中，注意力机制作为一种思想可以和多种模型进行结合，其本身不依赖于任何一种框架。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1829,7 +2057,7 @@ list(enumerate(seasons, start=1))       # 下标从 1 开始
               
                 <a href="/archives/%20%7C%7C%20archive">
               
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1879,7 +2107,7 @@ list(enumerate(seasons, start=1))       # 下标从 1 开始
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

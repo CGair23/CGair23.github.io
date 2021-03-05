@@ -229,7 +229,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/10/19/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%AD%A6%E4%B9%A0%EF%BC%9Alinux/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/19/Conflux-Project/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -248,7 +248,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/10/19/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%AD%A6%E4%B9%A0%EF%BC%9Alinux/" itemprop="url">大数据学习：linux</a></h1>
+                <a class="post-title-link" href="/2021/01/19/Conflux-Project/" itemprop="url">Conflux Project</a></h1>
         
 
         <div class="post-meta">
@@ -260,8 +260,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-10-19T10:03:57+08:00">
-                2020-10-19
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-01-19T15:03:58+08:00">
+                2021-01-19
               </time>
             
 
@@ -300,7 +300,727 @@
       
         
           
+            <p>[toc]</p>
+<h1 id="Windows10-安装-ubuntu18-04-双系统教程"><a href="#Windows10-安装-ubuntu18-04-双系统教程" class="headerlink" title="Windows10 安装 ubuntu18.04 双系统教程"></a>Windows10 安装 ubuntu18.04 双系统教程</h1><h2 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h2><p> <a href="https://www.cnblogs.com/masbay/p/10745170.html" target="_blank" rel="noopener"><code>Windows10</code>安装<code>ubuntu18.04</code>双系统教程</a></p>
+<p><a href="https://www.cnblogs.com/masbay/p/10745170.html" target="_blank" rel="noopener">教程 <code>2</code></a></p>
+<h2 id="知识盲区："><a href="#知识盲区：" class="headerlink" title="知识盲区："></a>知识盲区：</h2><p><a href="https://blog.csdn.net/qq_35605632/article/details/57080567" target="_blank" rel="noopener"><code>1. UEFI</code>与<code>MBR</code>区别 <code>?</code></a></p>
+<p><code>BIOS+MBR</code>已经趋于淘汰，<code>UEFI+GPT</code>是大势所趋</p>
+<p><code>MBR</code>和<code>GPT</code>是两种不同分区形式，好比你买回来一块新硬盘，要划分成不同的区域，系统、工具、音乐等等，看你怎么分，传统的<code>MBR</code>模式只能 分<code>4</code>个主分区，并且最大的支持<code>2.1T</code>硬盘。<code>GPT</code>可以分无数多分区，并且支持<code>9.4ZB</code>硬盘<code>（9.4ZB = 94亿TB）</code>。</p>
+<p><code>NTFS，FAT32</code>是文件系统，好比你给分好区的硬盘上打上格子，方便填充数据。至于打成什么样的格子由你自己决定，现在<code>WIN</code>主流是<code>NTFS</code>。</p>
+<p><a href="https://blog.csdn.net/weixin_33729196/article/details/90629777?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-3.control&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-3.control" target="_blank" rel="noopener"><code>2. EFI、UEFI、MBR、GPT</code>的区别 <code>?</code></a></p>
+<p><a href="https://www.zhihu.com/question/21672895" target="_blank" rel="noopener"><code>3. UEFI</code>引导与 <code>BIOS</code> 引导在原理上有什么区别 <code>?</code></a></p>
+<p><code>PC</code>启动的过程中，<code>BIOS</code>担负着初始化硬件，检测硬件功能，以及引导操作系统的责任。</p>
+<p><code>BIOS</code>和<code>UEFI</code>的最主要的功能：初始化硬件和提供硬件的软件抽象。</p>
+<p><a href="https://linux.cn/article-8782-1.html" target="_blank" rel="noopener"><code>4. Linux 包管理基础：apt、yum、dnf 和 pkg</code></a></p>
+<h1 id="Intel-SGX"><a href="#Intel-SGX" class="headerlink" title="Intel SGX"></a>Intel SGX</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>内存隔离：<code>encalve</code></p>
+<p>远程认证和密封：</p>
+<img src="http://www.jos.org.cn/html/2018/9/PIC/rjxb-29-9-2778-2.jpg" alt="img" style="zoom:80%;">
+
+<h2 id="可信计算基"><a href="#可信计算基" class="headerlink" title="可信计算基"></a>可信计算基</h2><p><code>TCB</code>由一个操作系统及其所有内置的安全控制、单独的系统硬件、网络硬件和软件、已检测的安全过程和协议，以及系统本身的实际物理位置组成。</p>
+<p><strong>维护系统数据的机密性和完整性是<code>TCB</code>的主要职责。</strong></p>
+<p>因此，在为安全体系结构设计<code>TCB</code>，通常会对访问控制、用户身份验证支持、授权特定应用程序、防止恶意软件的系统渗透，以及数据备份等方面进行规定。</p>
+<h1 id="Intel-DCAP"><a href="#Intel-DCAP" class="headerlink" title="Intel DCAP"></a>Intel DCAP</h1><p><a href="https://github.com/intel/SGXDataCenterAttestationPrimitives" target="_blank" rel="noopener">Github链接</a></p>
+<h1 id="CMake-amp-Make"><a href="#CMake-amp-Make" class="headerlink" title="CMake &amp; Make"></a>CMake &amp; Make</h1><h2 id="CMake"><a href="#CMake" class="headerlink" title="CMake"></a>CMake</h2><p><a href="https://blog.csdn.net/zhuiyunzhugang/article/details/88142908" target="_blank" rel="noopener">关于<code>CMake</code></a></p>
+<p>允许开发者编写一种平台无关的 <code>CMakeList.txt</code>文件来定制整个编译流程</p>
+<p>首先默念三遍并记住口诀：</p>
+<ol>
+<li><code>Declare a target</code></li>
+<li><code>Declare target&#39;s traits</code></li>
+<li><code>It&#39;s all about targets</code></li>
+</ol>
+<h2 id="如何彻底清除cmake产生的缓存"><a href="#如何彻底清除cmake产生的缓存" class="headerlink" title="如何彻底清除cmake产生的缓存"></a>如何彻底清除cmake产生的缓存</h2><p><code>Cmake</code>编译的缓存(<code>*.cmake, Makefile,CmakeCache.txt, CMakeFiles</code>目录)会遍布各个目录。</p>
+<p>在根部目录下建立一个<code>build</code>目录，然后在<code>build</code>目录中编译，这样产生的缓存都在<code>build</code>目录下了。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> mkdir build</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> build</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="variable">$&#123;path&#125;</span>/cmake</span></span><br></pre></td></tr></table></figure>
+
+
+<p>在下一次编译之前，先删除<code>build</code>下的内容即可，可以做成一个脚本，避免重复操作。</p>
+<h2 id="CMake-和-Make-的区别"><a href="#CMake-和-Make-的区别" class="headerlink" title="CMake 和 Make 的区别"></a>CMake 和 Make 的区别</h2><p><code>gcc(GNU Compiler Collection)</code>可以编译很多种编程语言。</p>
+<p>程序包含很多个源文件 - &gt; </p>
+<p><code>gcc</code>命令逐个编译 - &gt; </p>
+<p>出现<code>make</code>（本身没有编译和链接的功能）- &gt;</p>
+<p>工程非常大的时，手写makefile非常麻烦 <code>&amp;</code> 换了个平台<code>makefile</code>要重新修改 - &gt; </p>
+<p>出现<code>Cmake</code>（跨平台生成对应平台能用的<code>makefile</code>） - &gt; </p>
+<p>根据<code>CMakeLists.txt</code>文件去生成<code>makefile</code></p>
+<img src="https://img-blog.csdnimg.cn/20190521175203875.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpc2ZhZg==,size_16,color_FFFFFF,t_70" alt="img" style="zoom:67%;">
+
+<p><a href="https://blog.csdn.net/android_ruben/article/details/51698498?utm_medium=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.control&dist_request_id=&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.control" target="_blank" rel="noopener">区别</a></p>
+<h1 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h1><h2 id="docker-compose"><a href="#docker-compose" class="headerlink" title="docker-compose"></a>docker-compose</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">teaclave-access-control-service:</span><br><span class="line">    build:</span><br><span class="line">      context: ../</span><br><span class="line">      dockerfile: docker/teaclave-rt.ubuntu-1804.Dockerfile</span><br><span class="line">    expose:</span><br><span class="line">      - 17779</span><br><span class="line">      </span><br><span class="line">      # The volumes section allows the configuration of named volumes that can be reused across multiple services. </span><br><span class="line">      # 挂载一个目录或者一个已存在的数据卷容器。</span><br><span class="line">      # 可以使用 [HOST:CONTAINER] 这样的格式，或者使用 [HOST:CONTAINER:ro] 这样的格式，后者对于容器来说，数据卷是只读的，这样可以有效保护宿主机的文件系统。</span><br><span class="line">    volumes: </span><br><span class="line">      - ./runtime.config.toml:/teaclave/runtime.config.toml</span><br><span class="line">      - type: bind</span><br><span class="line">        source: /var/run/aesmd/aesm.socket</span><br><span class="line">        target: /var/run/aesmd/aesm.socket</span><br><span class="line">        </span><br><span class="line">        # 设备映射列表。</span><br><span class="line">    devices:</span><br><span class="line">      - /dev/isgx</span><br><span class="line">    working_dir: /teaclave</span><br><span class="line">    </span><br><span class="line">    # 设置镜像变量，可以保存变量到镜像里面。</span><br><span class="line">    # 启动的容器也会包含这些变量设置。</span><br><span class="line">    environment:</span><br><span class="line">      - AS_SPID</span><br><span class="line">      - AS_KEY</span><br><span class="line">      - AS_ALGO</span><br><span class="line">      - AS_URL</span><br><span class="line">      - TEACLAVE_LOG</span><br><span class="line">    container_name: teaclave-access-control-service</span><br><span class="line">    entrypoint: ./teaclave_access_control_service</span><br><span class="line">    networks:</span><br><span class="line">      internal:</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="知识"><a href="#知识" class="headerlink" title="知识 ++"></a>知识 ++</h1><h2 id="linux-Makefile中-和"><a href="#linux-Makefile中-和" class="headerlink" title="linux Makefile中 := 和 ?="></a>linux Makefile中 := 和 ?=</h2><ul>
+<li>:= 是覆盖之前的值</li>
+<li>?= 是如果没有被赋值过就赋予等号后面的值</li>
+</ul>
+<h2 id="linux通过export添加环境变量"><a href="#linux通过export添加环境变量" class="headerlink" title="linux通过export添加环境变量"></a>linux通过export添加环境变量</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 只能在当前会话临时生效</span></span><br><span class="line">PATH= ... :$PATH</span><br><span class="line">export PATH</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="Environment-Setup"><a href="#Environment-Setup" class="headerlink" title="Environment-Setup"></a>Environment-Setup</h1><h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="https://github.com/apache/incubator-teaclave-sgx-sdk/wiki/Environment-Setup" target="_blank" rel="noopener"><code>Environment-Setup</code></a></p>
+<p><a href="https://download.01.org/intel-sgx/" target="_blank" rel="noopener">官方<code>Doc</code></a></p>
+<h2 id="知识盲区：-1"><a href="#知识盲区：-1" class="headerlink" title="知识盲区："></a>知识盲区：</h2><h3 id="Intel-SGX-AESM-Service是什么？"><a href="#Intel-SGX-AESM-Service是什么？" class="headerlink" title="Intel SGX AESM Service是什么？"></a><code>Intel SGX AESM Service</code>是什么<code>？</code></h3><p><code>AESM</code>的全称是<code>Intel SGX Application Enclave Services Manager</code>，即<code>SGX</code>应用安全容器的服务管理系统。</p>
+<p><a href="https://blog.csdn.net/kouryoushine/article/details/90257973" target="_blank" rel="noopener"><code>Intel SGX AESM Service</code></a></p>
+<h3 id="Ubuntu18-04-更改apt源为阿里源"><a href="#Ubuntu18-04-更改apt源为阿里源" class="headerlink" title="Ubuntu18.04 更改apt源为阿里源"></a><code>Ubuntu18.04</code> 更改<code>apt</code>源为阿里源</h3><p><a href="https://blog.csdn.net/zhangjiahao14/article/details/80554616" target="_blank" rel="noopener"><code>Ubuntu18.04</code> 更改<code>apt</code>源为阿里源</a></p>
+<h3 id="sudo-apt-get-update与sudo-apt-get-upgrade有什么区别"><a href="#sudo-apt-get-update与sudo-apt-get-upgrade有什么区别" class="headerlink" title="sudo apt-get update与sudo apt-get upgrade有什么区别?"></a><code>sudo apt-get update</code>与<code>sudo apt-get upgrade</code>有什么区别<code>?</code></h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br></pre></td></tr></table></figure>
+
+<p>这个命令，会访问<strong>源列表</strong>里的每个网址，并<strong>读取软件列表</strong>，然后保存在本地电脑。软件包管理器里看到的软件列表，都是通过<code>update</code>命令更新的。</p>
+<p><code>update</code>后，可能需要<code>upgrade</code>一下。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get upgrade</span><br></pre></td></tr></table></figure>
+
+<p>这个命令，会把本地已安装的软件，与刚下载的软件列表里对应软件进行对比，如果发现已安装的软件版本太低，就会提示你更新。</p>
+<p>总而言之，<code>update</code>是更新软件列表，<code>upgrade</code>是更新软件。</p>
+<p><a href="https://blog.csdn.net/beckeyloveyou/article/details/51352426" target="_blank" rel="noopener"><code>sudo apt-get update</code>与<code>sudo apt-get upgrade</code>的区别</a></p>
+<h2 id="Software-Setup"><a href="#Software-Setup" class="headerlink" title="Software Setup"></a>Software Setup</h2><h3 id="Rust-toolchain"><a href="#Rust-toolchain" class="headerlink" title="Rust toolchain"></a><code>Rust toolchain</code></h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> curl https://sh.rustup.rs -sSf | sh</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">source</span> <span class="variable">$HOME</span>/.cargo/env</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> rustup update</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> rustc --version</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id><a href="#" class="headerlink" title></a></h1><h3 id="Intel-SGX-toolchain-setup"><a href="#Intel-SGX-toolchain-setup" class="headerlink" title="Intel SGX toolchain setup"></a><code>Intel SGX toolchain setup</code></h3><p>Ubuntu 18.04</p>
+<p><a href="https://download.01.org/intel-sgx" target="_blank" rel="noopener">Intel® Software Guard Extensions SDK and Platform Software Installation</a></p>
+<h3 id="Docker-setup"><a href="#Docker-setup" class="headerlink" title="Docker setup"></a><code>Docker setup</code></h3><h1 id="Nginx-amp-ssh"><a href="#Nginx-amp-ssh" class="headerlink" title="Nginx &amp; ssh"></a>Nginx &amp; ssh</h1><h2 id="正向代理和反向代理"><a href="#正向代理和反向代理" class="headerlink" title="正向代理和反向代理"></a>正向代理和反向代理</h2><p><a href="https://www.jianshu.com/p/ae76c223c6ef" target="_blank" rel="noopener">区别</a></p>
+<p><strong>正向代理</strong>其实是<strong>客户端</strong>的代理，帮助客户端访问其无法访问的服务器资源。</p>
+<img src="https://img-blog.csdnimg.cn/20190226143532327.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpeGlhbmdzczE5OTM=,size_16,color_FFFFFF,t_70" alt="img" style="zoom:50%;">
+
+<p><strong>反向代理</strong>则是<strong>服务器</strong>的代理，帮助服务器做负载均衡，安全防护等。</p>
+<img src="https://img-blog.csdnimg.cn/20190226143921811.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpeGlhbmdzczE5OTM=,size_16,color_FFFFFF,t_70" alt="img" style="zoom:50%;">
+
+
+
+<h1 id="一些坑"><a href="#一些坑" class="headerlink" title="一些坑"></a>一些坑</h1><p><code>1、error while loading shared libraries</code></p>
+<p><img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/Conflux-Project/%E5%9D%911.png" alt="坑1"></p>
+<p><code>2、SSH远程登录出现 WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!</code></p>
+<p>因为之前远程登录过，后来服务器重装系统。</p>
+<p><code>known_hosts</code>是记录远程主机的公钥的文件，第一次连接远程服务器，本机会把远程主机的<code>ECDSA</code>公钥信息添加到本机的 <code>～/.ssh/known_hosts</code>文件中。</p>
+<p><strong>Solved：</strong></p>
+<p>在客户端执行下述指令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#vim ~/.ssh/known_hosts</span></span><br></pre></td></tr></table></figure>
+
+<p>把里面与所要连接IP（远程服务器）相关的内容删掉即可。</p>
+<p>3、<code>Linux：使用useradd创建用户后，/home下没有用户主目录</code></p>
+<p><a href="https://blog.csdn.net/weixin_43410435/article/details/108434002" target="_blank" rel="noopener">Linux：使用useradd创建用户后，/home下没有用户主目录</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 推荐用adduser</span></span><br><span class="line"><span class="comment"># 新建用户</span></span><br><span class="line">adduser sc</span><br><span class="line"><span class="comment"># 更改密码</span></span><br><span class="line">passwd sc</span><br><span class="line"><span class="comment"># 查看是否有用户主目录</span></span><br><span class="line">ls /home或<span class="built_in">cd</span> /home/sc</span><br></pre></td></tr></table></figure>
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/01/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%A1%B9%E7%9B%AE%EF%BC%9A%E6%95%B0%E4%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/12/01/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%A1%B9%E7%9B%AE%EF%BC%9A%E6%95%B0%E4%BB%93/" itemprop="url">大数据项目：数仓</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
             
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-12-01T16:25:32+08:00">
+                2020-12-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>[toc]</p>
+<h1 id="数据仓库概念"><a href="#数据仓库概念" class="headerlink" title="数据仓库概念"></a>数据仓库概念</h1><img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/大数据项目：数仓/数仓概念.png" alt="数仓概念" style="zoom:67%;">
+
+
+
+<p><strong>ODS：Operation Data Store</strong><br>原始数据</p>
+<p><strong>DWD(数据清洗/DWI)</strong> <strong>data warehouse detail</strong><br>数据明细详情，去除空值，脏数据，超过极限范围的<br>明细解析<br>具体表</p>
+<p><strong>DWS(宽表-用户行为，轻度聚合)</strong> <strong>data warehouse service —–&gt;有多少个宽表？多少个字段</strong><br>服务层–留存-转化-GMV-复购率-日活<br>点赞、评论、收藏;<br>轻度聚合对DWD</p>
+<p><strong>ADS(APP/DAL/DF)-出报表结果</strong> <strong>Application Data Store</strong><br>做分析处理同步到RDS数据库里边</p>
+<h1 id="技术选型"><a href="#技术选型" class="headerlink" title="技术选型"></a>技术选型</h1><img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/大数据项目：数仓/技术选型.png" alt="技术选型" style="zoom: 67%;">
+
+<h1 id="数仓架构"><a href="#数仓架构" class="headerlink" title="数仓架构"></a>数仓架构</h1><img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/大数据项目：数仓/数仓架构.png" alt="数仓架构" style="zoom:67%;">
+
+<h1 id="测试集群服务器规划"><a href="#测试集群服务器规划" class="headerlink" title="测试集群服务器规划"></a>测试集群服务器规划</h1><img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/大数据项目：数仓/测试集群服务器规划1.png" alt="测试集群服务器规划" style="zoom:67%;">
+
+<img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/大数据项目：数仓/测试集群服务器规划2.png" alt="测试集群服务器规划2" style="zoom:67%;">
+
+<h1 id="参考电商数仓-——–-gt-比特币数仓"><a href="#参考电商数仓-——–-gt-比特币数仓" class="headerlink" title="参考电商数仓 ——–&gt; 比特币数仓"></a>参考电商数仓 ——–&gt; 比特币数仓</h1><h2 id="集群规划和配置"><a href="#集群规划和配置" class="headerlink" title="集群规划和配置"></a>集群规划和配置</h2><img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/大数据项目：数仓/集群规划.png" alt="集群规划" style="zoom: 67%;">
+
+<img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/大数据项目：数仓/集群规划和配置.png" alt="集群规划和配置" style="zoom:67%;">
+
+<h2 id="比特币数据解析"><a href="#比特币数据解析" class="headerlink" title="比特币数据解析"></a>比特币数据解析</h2><h3 id="比特币数据文件格式"><a href="#比特币数据文件格式" class="headerlink" title="比特币数据文件格式"></a>比特币数据文件格式</h3><p>比特币节点（Bitcoin Core）的<code>~/.bitcoin/blocks/</code>目录中的<code>blk.dat</code> 文件中包含了节点接收到的原始区块数据，这些数据文件构成了比特币区块链的基础，同时也是区块链数据分析获取比特币区块和交易数据的最高效的途径。</p>
+<h3 id="blk-文件结构"><a href="#blk-文件结构" class="headerlink" title="blk 文件结构"></a>blk 文件结构</h3><p>![blk 文件结构](/Users/cgair/Documents/cg/my_blog/blog/source/_posts/大数据项目：数仓/blk 文件结构.png)</p>
+<ul>
+<li>magic bytes（魔术字节）和size（数据尺寸）可以用来找出来每个区块的起止位置</li>
+<li>block header（区块头）包含了区块的头部信息</li>
+<li>tx count 表示区块中的交易数量，后面的transaction data部分就是逐条交易的数据</li>
+</ul>
+<p><strong>如果你在解析blk.dat文件，一定要记得区块不一定是按先后顺序排列的。</strong></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://blog.csdn.net/boke14122621/article/details/103162435" target="_blank" rel="noopener">比特币区块数据的解析</a></p>
+<p>(比特币数据分析ETL工具)[<a href="http://sc.hubwiz.com/codebag/blocketl-java/]" target="_blank" rel="noopener">http://sc.hubwiz.com/codebag/blocketl-java/]</a></p>
+<h2 id="项目经验"><a href="#项目经验" class="headerlink" title="项目经验"></a>项目经验</h2><h3 id="HDFS存储多目录"><a href="#HDFS存储多目录" class="headerlink" title="HDFS存储多目录"></a>HDFS存储多目录</h3><img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/大数据项目：数仓/HDFS存储多目录1.png" alt="HDFS存储多目录1" style="zoom:50%;">
+
+<img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/大数据项目：数仓/HDFS存储多目录2.png" alt="HDFS存储多目录2" style="zoom:67%;">
+
+<h3 id="节点间数据均衡"><a href="#节点间数据均衡" class="headerlink" title="节点间数据均衡"></a>节点间数据均衡</h3><p><img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%A1%B9%E7%9B%AE%EF%BC%9A%E6%95%B0%E4%BB%93/%E8%8A%82%E7%82%B9%E9%97%B4%E6%95%B0%E6%8D%AE%E5%9D%87%E8%A1%A1.png" alt="节点间数据均衡"></p>
+<h3 id="LZO压缩"><a href="#LZO压缩" class="headerlink" title="LZO压缩"></a>LZO压缩</h3><img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/大数据项目：数仓/LZO压缩.png" alt="LZO压缩" style="zoom:67%;">
+
+<h3 id="基准测试"><a href="#基准测试" class="headerlink" title="基准测试"></a>基准测试</h3><p>HDFS 读、写性能</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 向 HDFS 集群写入 10 个 128M的文件</span><br><span class="line">hadoop jar &#x2F;opt&#x2F;module&#x2F;hadoop-2.9.2&#x2F;share&#x2F;hadoop&#x2F;mapreduce&#x2F;hadoop-mapreduce-client-jobclient-2.9.2-tests.jar TestDFSIO -write -nrFiles 10 -fileSize 128MB</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 测试 HDFS 读性能</span><br><span class="line">hadoop jar &#x2F;opt&#x2F;module&#x2F;hadoop-2.9.2&#x2F;share&#x2F;hadoop&#x2F;mapreduce&#x2F;hadoop-mapreduce-client-jobclient-2.9.2-tests.jar TestDFSIO -read -nrFiles 10 -fileSize 128MB</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 删除测试生成的数据</span><br><span class="line">hadoop jar &#x2F;opt&#x2F;module&#x2F;hadoop-2.9.2&#x2F;share&#x2F;hadoop&#x2F;mapreduce&#x2F;hadoop-mapreduce-client-jobclient-2.9.2-tests.jar TestDFSIO -clean</span><br></pre></td></tr></table></figure>
+
+
+
+<p>Mapreduce 计算性能</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># 使用 Sort 程序测试 MapReduce</span><br><span class="line"></span><br><span class="line"># 使用Random Writer 产生随机数，每个节点运行 10 个 Map任务，每个Map任务产生大约1G大小的二进制随机数</span><br><span class="line">hadoop jar &#x2F;opt&#x2F;module&#x2F;hadoop-2.9.2&#x2F;share&#x2F;hadoop&#x2F;mapreduce&#x2F;hadoop-mapreduce-examples-2.9.2.jar randomwriter random-data</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 执行 Sort 程序</span><br><span class="line">hadoop jar &#x2F;opt&#x2F;module&#x2F;hadoop-2.9.2&#x2F;share&#x2F;hadoop&#x2F;mapreduce&#x2F;hadoop-mapreduce-examples-2.9.2.jar sort random-data sorted-data</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 验证数据是否真的排好序了</span><br><span class="line">hadoop jar &#x2F;opt&#x2F;module&#x2F;hadoop-2.9.2&#x2F;share&#x2F;hadoop&#x2F;mapreduce&#x2F;hadoop-mapreduce-examples-2.9.2.jar testmapredsort -sortInput random-data -sortOutput sorted-data</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="HDFS-参数调优"><a href="#HDFS-参数调优" class="headerlink" title="HDFS 参数调优"></a>HDFS 参数调优</h3><h3 id="Yarn-参数调优"><a href="#Yarn-参数调优" class="headerlink" title="Yarn 参数调优"></a>Yarn 参数调优</h3><h3 id="Linux-环境变量"><a href="#Linux-环境变量" class="headerlink" title="Linux 环境变量"></a>Linux 环境变量</h3><img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/大数据项目：数仓/Linux 环境变量.png" alt="Linux 环境变量" style="zoom:67%;">
+
+<h2 id><a href="#" class="headerlink" title></a></h2>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/26/%E5%A4%A7%E6%95%B0%E6%8D%AElinux%E5%BC%80%E5%8F%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/11/26/%E5%A4%A7%E6%95%B0%E6%8D%AElinux%E5%BC%80%E5%8F%91/" itemprop="url">大数据linux开发</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-11-26T11:52:57+08:00">
+                2020-11-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>[toc]</p>
+<p><strong>大数据的开发一般都在CentOS上运行的，Python一般都是在Ubantu上运行。</strong></p>
+<h1 id="CentOS-gt-网络配置三种方式"><a href="#CentOS-gt-网络配置三种方式" class="headerlink" title="CentOS  -&gt; 网络配置三种方式"></a>CentOS  -&gt; 网络配置三种方式</h1><h2 id="Q-桥接、NAT以及仅主机模式的区别？"><a href="#Q-桥接、NAT以及仅主机模式的区别？" class="headerlink" title="Q 桥接、NAT以及仅主机模式的区别？"></a>Q 桥接、NAT以及仅主机模式的区别？</h2><p><a href="https://blog.csdn.net/sores/article/details/89249771" target="_blank" rel="noopener">桥接、NAT以及仅主机模式的详细介绍和区别</a></p>
+<h1 id="命令概念"><a href="#命令概念" class="headerlink" title="命令概念"></a>命令概念</h1><h2 id="Q：什么是-shell？"><a href="#Q：什么是-shell？" class="headerlink" title="Q：什么是 shell？"></a>Q：什么是 shell？</h2><p>shell 就是一个程序，它接受从键盘输入的命令，然后把命令传递给操作系统去执行。</p>
+<h2 id="Q：到底什么是命令"><a href="#Q：到底什么是命令" class="headerlink" title="Q：到底什么是命令?"></a>Q：到底什么是命令?</h2><p>命令可以是下面四种形式之一:</p>
+<ol>
+<li>是一个可执行程序，就像我们所看到的位于目录/usr/bin 中的文件一样。这一类程序可以是用诸如 C 和 C++ 语言写成的程序编译的二进制文件, 也可以是由诸如 shell，perl， python，ruby 等等脚本语言写成的程序。</li>
+<li>是一个内建于 shell 自身的命令。bash 支持若干命令，内部叫做 shell 内部命令 (builtins)。 例如，cd 命令，就是一个 shell 内部命令。</li>
+<li>是一个 shell 函数。这些是小规模的 shell 脚本，它们混合到环境变量中。</li>
+<li>是一个命令别名。我们可以定义自己的命令，建立在其它命令之上。</li>
+</ol>
+<h2 id="Q：内部-amp-外部命令？"><a href="#Q：内部-amp-外部命令？" class="headerlink" title="Q：内部 &amp; 外部命令？"></a>Q：内部 &amp; 外部命令？</h2><p>linux系统为了提高系统运行效率，将经常使用的轻量的命令在系统启动时一并加载这些命令到内存中供shell随时调用，这部分命令即为内部命令。反之，系统层调用的较重的命令只有当被调用时才会被硬盘加载的这部分命令即为外部命令。</p>
+<p><strong>注：</strong></p>
+<ol>
+<li><p>type 可以查看命令是内部命令还是外部命令。</p>
+</li>
+<li><p>对内部命令：# type command  显示 command is a shell builtin 即为内部命令，可以用 # help command 看如何使用。 </p>
+</li>
+<li><p>对外部命令：利用 # man command ： manual 手册</p>
+</li>
+<li><p>whereis 命令定位命令位置。</p>
+</li>
+<li><p># echo $PATH 显示当前PATH环境变量，该变量的值由一系列以冒号分隔的目录名组成。如：/usr/local/bin:/bin:/usr/bin。</p>
+<p>输入一个命令，shell自动跟据PATH变量的值去搜索该程序。比如我们现在的工作目录是根目录/ ，有一个程序sunrise在/bin/目录下，我们可以在命令行输入/bin/sunrise 这样来执行它，还可以直接输入sunrise，这时shell会自动去寻找sunrise这个程序所在的完整路径，找到之后才会去执行该程序。shell在搜索时先搜索PATH环境变量中的第一个目录，没找到再接着搜索，如果找到则执行它，不会再继续搜索。</p>
+</li>
+</ol>
+<h1 id="Linux-的目录结构"><a href="#Linux-的目录结构" class="headerlink" title="Linux 的目录结构"></a>Linux 的目录结构</h1><p><a href="https://blog.csdn.net/weixin_44262126/article/details/108207555" target="_blank" rel="noopener">Linux的目录结构</a></p>
+<p><a href="https://www.cnblogs.com/dengyungao/p/8426878.html" target="_blank" rel="noopener">Linux各目录及每个目录的详细介绍</a></p>
+<p><strong>注：</strong></p>
+<ol>
+<li><p>符号 “.” 指的是工作目录，“..” 指的是工作目录的父目录。</p>
+</li>
+<li><p>“~” 是当前用户的主目录：如果是 root 用户就是 /root/ 目录， 如果是其他用户就是 /home/ 下用户名命名的用户。</p>
+</li>
+</ol>
+<h1 id="Linux用户、组与权限管理"><a href="#Linux用户、组与权限管理" class="headerlink" title="Linux用户、组与权限管理"></a>Linux用户、组与权限管理</h1><p><a href="https://blog.csdn.net/weixin_44262126/article/details/108213296" target="_blank" rel="noopener">Linux用户、组与权限管理</a></p>
+<h1 id="Linux-实用命令"><a href="#Linux-实用命令" class="headerlink" title="Linux 实用命令"></a>Linux 实用命令</h1><p><a href="https://blog.csdn.net/weixin_44262126/article/details/108213553" target="_blank" rel="noopener">Linux实用指令</a></p>
+<h1 id="权限管理"><a href="#权限管理" class="headerlink" title="权限管理"></a>权限管理</h1><p><a href="https://blog.csdn.net/weixin_44262126/article/details/108214883" target="_blank" rel="noopener">权限管理</a></p>
+<p><strong>chmod：</strong></p>
+<h1 id><a href="#" class="headerlink" title></a><img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/大数据linux开发/chmod.png" alt="chmod" style="zoom:50%;"></h1><h1 id="进程管理"><a href="#进程管理" class="headerlink" title="进程管理"></a>进程管理</h1><p><a href="https://blog.csdn.net/weixin_44262126/article/details/108216701" target="_blank" rel="noopener">进程管理</a></p>
+<h1 id="网络配置原理和说明"><a href="#网络配置原理和说明" class="headerlink" title="网络配置原理和说明"></a>网络配置原理和说明</h1><p><a href="https://blog.csdn.net/weixin_44262126/article/details/108216527" target="_blank" rel="noopener">网络配置原理和说明</a></p>
+<h1 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h1><p><a href="https://blog.csdn.net/weixin_44262126/article/details/108217320" target="_blank" rel="noopener">Linux极速上手，超全面总结</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/25/java%E7%9F%A5%E8%AF%86%E7%82%B9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/11/25/java%E7%9F%A5%E8%AF%86%E7%82%B9/" itemprop="url">java知识点</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-11-25T18:59:32+08:00">
+                2020-11-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>[toc]</p>
+<h1 id="Java-命名规范？"><a href="#Java-命名规范？" class="headerlink" title="Java 命名规范？"></a>Java 命名规范？</h1><h2 id="总体命名规范"><a href="#总体命名规范" class="headerlink" title="总体命名规范"></a>总体命名规范</h2><p>1、<strong>项目名</strong>全部小写.<br>2、<strong>包名</strong>全部小写.<br>3、类名首字母大写,其余组成词首字母依次大写.<br>4、变量名,方法名首字母小写,如果名称由多个单词组成,除首字母外的每个单词的首字母都要大写.<br>5、常量名全部大写.<br>6、所有命名规则必须遵循以下规则 :</p>
+<ul>
+<li>名称只能由字母、数字、下划线、$符号组成.</li>
+<li>不能以数字开头.</li>
+<li>名称不能使用Java中的关键字.</li>
+<li>坚决不允许出现中文及拼音命名.</li>
+</ul>
+<h2 id="Java-包命名规范"><a href="#Java-包命名规范" class="headerlink" title="Java 包命名规范"></a>Java 包命名规范</h2><p>Java的包名由小写单词组成,包的路径符合所开发的系统模块的定义,以便通过包名可得知其属于哪个模块,从而方便到对应包里找相应的实现类.</p>
+<h3 id="常规包名"><a href="#常规包名" class="headerlink" title="常规包名"></a>常规包名</h3><p>为了保障每个Java Package命名的唯一性,在Java编程规范中要求开发人员在自己定义的包名前加上唯一的前缀.由于互联网上的域名称是不会重复的,所以多数开发人员采用自己公司在互联网上的域名称作为自己程序包的唯一前缀.例如 : com.sun.swt…<br>1.公司项目<br>  com : 公司项目,copyright由项目发起的公司所有.<br>  包名 : com.公司名.项目名.模块名..<br>2.团队项目<br>  team : 团队项目,指由团队发起,并由该团队开发的项目,copyright属于该团队所有.<br>  包名 : team.团队名.项目名.模块名..</p>
+<h3 id="自定义包名"><a href="#自定义包名" class="headerlink" title="自定义包名"></a>自定义包名</h3><p>一般公司命名为com.公司名.项目名.模块名….那我们个人的项目又怎么命名呢?</p>
+<p>个人的英语单词有individual、personal、private、one-man,进一步对以上四个单词词意进行分析并在保证了唯一性,继而使用每个单词的前4个字母作为前缀,与com也做了区分.示例如下所示:</p>
+<p>1.indi : 个体项目,指个人发起,但非自己独自完成的项目,可公开或私有项目,copyright主要属于发起者.  </p>
+<ul>
+<li>包名 : indi.发起者名.项目名.模块名..</li>
+</ul>
+<p>2.pers : 个人项目,指个人发起,独自完成,可分享的项目,copyright主要属于个人.</p>
+<ul>
+<li>包名 : pers.个人名.项目名.模块名..</li>
+</ul>
+<p>3.priv : 私有项目,指个人发起,独自完成,非公开的私人使用的项目,copyright属于个人.</p>
+<ul>
+<li>包名 : priv.个人名.项目名.模块名..</li>
+</ul>
+<p>4.onem : 与indi相同，推荐使用indi.</p>
+<h1 id="集合的同步与非同步？"><a href="#集合的同步与非同步？" class="headerlink" title="集合的同步与非同步？"></a>集合的同步与非同步？</h1><p>在这里的非同步指的是,<strong>当使用线程和web的时候,对于这个集合对象进行操作,那么不同的线程,和不同的web客户端所获取的这个集合对象是不同的.</strong>所以是说不同步,且不在同一个线程,多线程的形式,是不安全的.</p>
+<p>比如说现在 线程A 和 线程B, 要拿到这个集合对象, 现在集合对象有[1,2,3].那么A在集合对象里添加了一下数字[1,2,3,4,5].那么这个时候B线程所取拿这个集合对象的时候,还是[1,2,3]而不是A已经修改好的集合[1,2,3,4,5].所以说这里的集合不同步,线程不安全.</p>
+<h1 id="什么是线程安全问题"><a href="#什么是线程安全问题" class="headerlink" title="什么是线程安全问题 ?"></a>什么是线程安全问题 ?</h1><p>前言：我们要确保在多条线程访问的时候，我们的程序还能按照我们预期的行为去执行。</p>
+<p><strong>线程安全,其实指的就是内存的安全.</strong> 目前主流操作系统都是多任务多线程同时进行的.为了保证安全,每个进程只能访问分配额给自己的内存空间,而不能访问别的进程,这是由操作系统保障的.</p>
+<p>在每个进程的内存空间中都会有一块特殊的公共区域,通常称为 堆区(内存).进程内所有的线程都可以访问到该区域,这就是造成线程安全问题的潜在原因.</p>
+<p>所以, 线程安全指的是,在堆区内存的数据由于可以被任何线程访问到,没有限制的情况下存在被意外修改的风险. </p>
+<p><strong>当多个线程访问某个方法时，不管你通过怎样的调用方式或者说这些线程如何交替的执行，我们在主程序中不需要去做任何的同步，这个类的结果行为都是我们设想的正确行为，那么我们就可以说这个类是线程安全的。</strong></p>
+<h1 id="错误机制-fail-fast-机制？"><a href="#错误机制-fail-fast-机制？" class="headerlink" title="错误机制 - fail-fast 机制？"></a>错误机制 - fail-fast 机制？</h1><p><strong>ConcurrentModificationException</strong> 异常</p>
+<h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>fail-fast 机制是java集合(Collection) 中的一种错误机制。当多个线程对同一个集合的内容进行操作时，就可能会产生 fail-fast 事件。</p>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p><img src="https://pics7.baidu.com/feed/63d0f703918fa0ec60ecd6b90db24ceb3d6ddb01.jpeg?token=473ebbb1a4e5a60cd647be02521a7766&s=54926C32D13EE5CC465504DA000050B0" alt="img" style="zoom:67%;"><img src="https://pics0.baidu.com/feed/ca1349540923dd54b2eded64fb2ca6db9d8248ce.jpeg?token=3a1f9b5ea4c48f60d193b278c4f7c6f4&s=ADA6BE1A199C7CC84AFC9CDC020000B5" alt="img" style="zoom:67%;"></p>
+<p>每个集合都会实现可遍历的接口，以上述代码为例，集合调用iterator();方法的时候，其实是返回了一个new Itr();</p>
+<p><strong>Itr 源码</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * An optimized version of AbstractList.Itr</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">Itr</span> <span class="keyword">implements</span> <span class="title">Iterator</span>&lt;<span class="title">E</span>&gt; </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> cursor;       <span class="comment">// index of next element to return</span></span><br><span class="line">        <span class="keyword">int</span> lastRet = -<span class="number">1</span>; <span class="comment">// index of last element returned; -1 if no such</span></span><br><span class="line">        <span class="keyword">int</span> expectedModCount = modCount;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasNext</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> cursor != size;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@SuppressWarnings</span>(<span class="string">"unchecked"</span>)</span><br><span class="line">        <span class="function"><span class="keyword">public</span> E <span class="title">next</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            checkForComodification();</span><br><span class="line">            <span class="keyword">int</span> i = cursor;</span><br><span class="line">            <span class="keyword">if</span> (i &gt;= size)</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> NoSuchElementException();</span><br><span class="line">            Object[] elementData = ArrayList.<span class="keyword">this</span>.elementData;</span><br><span class="line">            <span class="keyword">if</span> (i &gt;= elementData.length)</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> ConcurrentModificationException();</span><br><span class="line">            cursor = i + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">return</span> (E) elementData[lastRet = i];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">remove</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (lastRet &lt; <span class="number">0</span>)</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException();</span><br><span class="line">            checkForComodification();</span><br><span class="line"></span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                ArrayList.<span class="keyword">this</span>.remove(lastRet);</span><br><span class="line">                cursor = lastRet;</span><br><span class="line">                lastRet = -<span class="number">1</span>;</span><br><span class="line">                expectedModCount = modCount;</span><br><span class="line">            &#125; <span class="keyword">catch</span> (IndexOutOfBoundsException ex) &#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> ConcurrentModificationException();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="meta">@SuppressWarnings</span>(<span class="string">"unchecked"</span>)</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">forEachRemaining</span><span class="params">(Consumer&lt;? <span class="keyword">super</span> E&gt; consumer)</span> </span>&#123;</span><br><span class="line">            Objects.requireNonNull(consumer);</span><br><span class="line">            <span class="keyword">final</span> <span class="keyword">int</span> size = ArrayList.<span class="keyword">this</span>.size;</span><br><span class="line">            <span class="keyword">int</span> i = cursor;</span><br><span class="line">            <span class="keyword">if</span> (i &gt;= size) &#123;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">final</span> Object[] elementData = ArrayList.<span class="keyword">this</span>.elementData;</span><br><span class="line">            <span class="keyword">if</span> (i &gt;= elementData.length) &#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> ConcurrentModificationException();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">while</span> (i != size &amp;&amp; modCount == expectedModCount) &#123;</span><br><span class="line">                consumer.accept((E) elementData[i++]);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// update once at end of iteration to reduce heap write traffic</span></span><br><span class="line">            cursor = i;</span><br><span class="line">            lastRet = i - <span class="number">1</span>;</span><br><span class="line">            checkForComodification();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">final</span> <span class="keyword">void</span> <span class="title">checkForComodification</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (modCount != expectedModCount)</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> ConcurrentModificationException();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>expectedModCount它初始值就为ArrayList中的modCount（modCount是抽象类AbstractList中的变量，默认为0，而ArrayList 继承了AbstractList ，所以也有这个变量，modCount用于记录集合操作过程中作的修改次数）</p>
+<p>由源码可以看出，该异常就是在调用next()的时候引发的，而调用next()方法的时候会先调用checkForComodification()，该方法判断expectedModCount与modCount是否相等，如果不等则抛异常了。</p>
+<p>ArrayList继承了AbstractList，AbstractList有modCount属性，通过以下源码我们可以看到，当ArrayList调用add、remove方法，modCount++</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Inserts the specified element at the specified position in this</span></span><br><span class="line"><span class="comment">     * list. Shifts the element currently at that position (if any) and</span></span><br><span class="line"><span class="comment">     * any subsequent elements to the right (adds one to their indices).</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> index index at which the specified element is to be inserted</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> element element to be inserted</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> IndexOutOfBoundsException &#123;<span class="doctag">@inheritDoc</span>&#125;</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> index, E element)</span> </span>&#123;</span><br><span class="line">        rangeCheckForAdd(index);</span><br><span class="line"></span><br><span class="line">        ensureCapacityInternal(size + <span class="number">1</span>);  <span class="comment">// Increments modCount!!</span></span><br><span class="line">        System.arraycopy(elementData, index, elementData, index + <span class="number">1</span>, size - index);</span><br><span class="line">        elementData[index] = element;</span><br><span class="line">        size++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Removes the element at the specified position in this list.</span></span><br><span class="line"><span class="comment">     * Shifts any subsequent elements to the left (subtracts one from their</span></span><br><span class="line"><span class="comment">     * indices).</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> index the index of the element to be removed</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> the element that was removed from the list</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> IndexOutOfBoundsException &#123;<span class="doctag">@inheritDoc</span>&#125;</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> E <span class="title">remove</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">        rangeCheck(index);</span><br><span class="line"></span><br><span class="line">        modCount++;</span><br><span class="line">        E oldValue = elementData(index);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> numMoved = size - index - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span> (numMoved &gt; <span class="number">0</span>)</span><br><span class="line">            System.arraycopy(elementData, index+<span class="number">1</span>, elementData, index,</span><br><span class="line">                             numMoved);</span><br><span class="line">        elementData[--size] = <span class="keyword">null</span>; <span class="comment">// clear to let GC do its work</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> oldValue;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p><strong>参考</strong></p>
+<p><a href="https://www.cnblogs.com/pengx/p/9576613.html" target="_blank" rel="noopener">浅谈fail-fast机制</a></p>
+<h1 id><a href="#" class="headerlink" title></a></h1>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/10/27/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%AD%A6%E4%B9%A0%EF%BC%9A%E5%85%B3%E4%BA%8EHadoop/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/10/27/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%AD%A6%E4%B9%A0%EF%BC%9A%E5%85%B3%E4%BA%8EHadoop/" itemprop="url">大数据学习：关于Hadoop</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-10-27T19:58:07+08:00">
+                2020-10-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>[toc]</p>
+<h1 id="Hadoop1-x-和-Hadoop2-x-区别？"><a href="#Hadoop1-x-和-Hadoop2-x-区别？" class="headerlink" title="Hadoop1.x 和 Hadoop2.x 区别？"></a>Hadoop1.x 和 Hadoop2.x 区别？</h1><img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/大数据学习：关于Hadoop/截屏2020-10-27 下午8.02.06.png" alt="截屏2020-10-27 下午8.02.06" style="zoom:67%;">
+
+<h1 id="大数据生态体系"><a href="#大数据生态体系" class="headerlink" title="大数据生态体系"></a>大数据生态体系</h1><img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/大数据学习：关于Hadoop/大数据生态体系.png" alt="大数据生态体系" style="zoom:67%;">
           
         
       
@@ -420,23 +1140,19 @@
         
           
             <p>[toc]</p>
-<h1>基础</h1>
-<ol>
-<li>
-<p>在 Java 中，数组一旦创建，其大小是无法改变的，因此栈使用的空间只能是这个最大容量的一部分。</p>
+<h1 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h1><ol>
+<li><p>在 Java 中，数组一旦创建，其大小是无法改变的，因此栈使用的空间只能是这个最大容量的一部分。</p>
 </li>
-<li>
-<p><strong>对象游离</strong>：保存一个不需要的对象的引用称为游离</p>
+<li><p><strong>对象游离</strong>：保存一个不需要的对象的引用称为游离</p>
 <p>Java 的垃圾收集策略是回收所有无法被访问的对象的内存。</p>
 <p>e.g.</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 从栈顶删除元素</span></span><br><span class="line">Item item = a[--N];</span><br><span class="line">a[N] = <span class="keyword">null</span>; <span class="comment">// 避免对象游离</span></span><br></pre></td></tr></table></figure>
+
 <p>被弹出的元素的引用仍然存在于数组中。这个元素实际上已经是一个<strong>孤儿</strong>了 — 它永远也不会再被访问了，但 Java 的垃圾收集器没法知道这一点，除非该引用被覆盖。</p>
 <p>在这里，避免对象游离很容易，只需将被弹出的数组元素的值设为 null 即可，这将覆盖无用的引用并使系统可以在用例使用完被弹出的元素后回收它的内存。</p>
 </li>
 </ol>
-<h1>算法分析</h1>
-<h2 id="数学模型">数学模型</h2>
-<ol>
+<h1 id="算法分析"><a href="#算法分析" class="headerlink" title="算法分析"></a>算法分析</h1><h2 id="数学模型"><a href="#数学模型" class="headerlink" title="数学模型"></a>数学模型</h2><ol>
 <li>一个程序运行的总时间主要和两点有关:</li>
 </ol>
 <p><strong>执行每条语句的耗时;</strong></p>
@@ -444,38 +1160,31 @@
 <p>前者取决于计算机、Java 编译器和操作系统，后者取决于程序本身和输入。</p>
 <p>定义。我们用 ~<em>f</em>(<em>N</em>) 表示所有随着 <em>N</em> 的增大除以 <em>f</em>(<em>N</em>) 的结果趋近于 1 的函数。我们用 <em>g</em>(<em>N</em>) ~ <em>f</em>(<em>N</em>) 表示 <em>g</em>(<em>N</em>)/<em>f</em>(<em>N</em>) 随着 <em>N</em> 的增大趋近于 1。<img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/算法4-学习笔记/近似.png" alt="近似" style="zoom:80%;"></p>
 <ol start="2">
-<li>
-<p>对于大多数程序，得到其运行时间的数学模型所需的步骤如下:</p>
+<li><p>对于大多数程序，得到其运行时间的数学模型所需的步骤如下:</p>
 <ul>
-<li>
-<p>  确定输入模型，定义问题的规模;</p>
+<li><p>  确定输入模型，定义问题的规模;</p>
 </li>
-<li>
-<p>  识别内循环;</p>
+<li><p>  识别内循环;</p>
 </li>
-<li>
-<p>  根据内循环中的操作确定所研究的算法中的<strong>基本操作</strong>;</p>
+<li><p>  根据内循环中的操作确定所研究的算法中的<strong>基本操作</strong>;</p>
 </li>
-<li>
-<p>  对于给定的输入，判断这些操作的执行频率。这可能需要进行数学分析。</p>
+<li><p>  对于给定的输入，判断这些操作的执行频率。这可能需要进行数学分析。</p>
 <p>例如：BinarySearch</p>
 </li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Arrays; <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BinarySearch</span> </span>&#123;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">rank</span><span class="params">(<span class="keyword">int</span> key, <span class="keyword">int</span>[] a)</span> </span>&#123; <span class="comment">// 数组必须是有序的</span></span><br><span class="line"><span class="keyword">int</span> lo = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> hi = a.length - <span class="number">1</span>;</span><br><span class="line"><span class="keyword">while</span> (lo &lt;= hi)</span><br><span class="line">&#123; <span class="comment">// 被查找的键要么不存在，要么必然存在于a[lo..hi]之中</span></span><br><span class="line"><span class="keyword">int</span> mid = lo + (hi - lo) / <span class="number">2</span>;</span><br><span class="line"><span class="keyword">if</span> (key &lt; a[mid]) hi = mid - <span class="number">1</span>; <span class="keyword">else</span> <span class="keyword">if</span> (key &gt; a[mid]) lo = mid + <span class="number">1</span>; <span class="keyword">else</span> <span class="keyword">return</span> mid;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> -<span class="number">1</span>; &#125;</span><br><span class="line">       <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span></span><br><span class="line"><span class="function">       </span>&#123;</span><br><span class="line"><span class="keyword">int</span>[] whitelist = In.readInts(args[<span class="number">0</span>]); Arrays.sort(whitelist);</span><br><span class="line"><span class="keyword">while</span> (!StdIn.isEmpty())</span><br><span class="line">&#123; <span class="comment">// 读取键值，如果不存在于白名单中则将其打印</span></span><br><span class="line"><span class="keyword">int</span> key = StdIn.readInt(); <span class="keyword">if</span> (rank(key, whitelist) &lt; <span class="number">0</span>)</span><br><span class="line">StdOut.println(key); &#125;</span><br><span class="line">&#125; &#125;</span><br></pre></td></tr></table></figure>
+
 <p>它的：</p>
 <p><strong>输入模型</strong>是大小为 <em>N</em> 的数组 a[]</p>
 <p><strong>内循环</strong>是一个 while 循环中的所有语句</p>
 <p><strong>基本操作</strong>是比较操作(比较两个数组元素的值)</p>
 </li>
 </ol>
-<h2 id="内存">内存</h2>
-<h3 id="对象">对象</h3>
-<p>要知道一个对象所使用的内存量，需要将所有实例变量使用的内存与对象本身的开销(一般是16字节)相加。这些开销包括一个指向对象的类的引用、垃圾收集信息以及同步信息。</p>
-<p>**一般内存的使用都会被填充为 8 字节(64 位计算机中的机器字) 的倍数。**例如，一个 Integer 对象会使用 24 字节(16 字节的对象开销，4 字节用于保存它的 int 值以及 4 个填充字节)。</p>
+<h2 id="内存"><a href="#内存" class="headerlink" title="内存"></a>内存</h2><h3 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h3><p>要知道一个对象所使用的内存量，需要将所有实例变量使用的内存与对象本身的开销(一般是16字节)相加。这些开销包括一个指向对象的类的引用、垃圾收集信息以及同步信息。</p>
+<p><strong>一般内存的使用都会被填充为 8 字节(64 位计算机中的机器字) 的倍数。</strong>例如，一个 Integer 对象会使用 24 字节(16 字节的对象开销，4 字节用于保存它的 int 值以及 4 个填充字节)。</p>
 <img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/算法4-学习笔记/典型对象的内存需求.png" alt="典型对象的内存需求" style="zoom:50%;">
-<h3 id="链表">链表</h3>
-<h3 id="数组">数组</h3>
 
+<h3 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h3><h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h3><h1 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h1><h2 id="二叉查找树"><a href="#二叉查找树" class="headerlink" title="二叉查找树"></a>二叉查找树</h2><h2 id="平衡查找树"><a href="#平衡查找树" class="headerlink" title="平衡查找树"></a>平衡查找树</h2>
           
         
       
@@ -1054,500 +1763,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/21/%E5%88%B7leetcode%E7%9A%84%E5%BF%83%E5%BE%97/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/09/21/%E5%88%B7leetcode%E7%9A%84%E5%BF%83%E5%BE%97/" itemprop="url">刷leetcode的心得</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-09-21T12:30:46+08:00">
-                2020-09-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>[toc]</p>
-<h1>栈（Stack）</h1>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 用列表实现栈</span></span><br><span class="line">stack = []</span><br><span class="line">stack.append()</span><br><span class="line">stack.pop()</span><br><span class="line">stack[<span class="number">-1</span>]</span><br><span class="line">stack[<span class="number">-2</span>]</span><br><span class="line">sum(stack)</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/20/Deeplearning%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0Q&A/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/09/20/Deeplearning%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0Q&A/" itemprop="url">Deeplearning深度学习笔记Q&</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-09-20T10:32:30+08:00">
-                2020-09-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>[toc]</p>
-<h1>超参数调试、 正则化以及优化</h1>
-<h2 id="Q1：如何通过组织机器学习来-u-诊断偏差和方差-u-（基本方法），然后选择解决问题的正确操作？">Q1：如何通过组织机器学习来<u>诊断偏差和方差</u>（基本方法），然后选择解决问题的正确操作？</h2>
-<p><strong>A：</strong>《Deeplearning深度学习笔记》（P129 - P135）</p>
-<h2 id="Q2：为什么正则化有利于预防过拟合呢-（Why-regularization-reduces-overfitting-）">Q2：为什么正则化有利于预防过拟合呢? （Why regularization reduces overfitting?）</h2>
-<p><strong>A：</strong>《Deeplearning深度学习笔记》（P140）</p>
-<h3 id="Plus-数学-1：什么是范数？">Plus 数学 1：什么是范数？</h3>
-<p>**A：**范数主要是对矩阵和向量的一种描述，有了统一的规范，那么“大小就可以比较了”。</p>
-<p>例如：1比2小我们一目了然，可是（3,5,3）和（6,1,2）哪个大？</p>
-<p>2范数比：根号（43）比根号（41）大，因此2范数对比中（3,5,3）大。</p>
-<p><strong>矩阵范数</strong>：描述矩阵引起变化的大小，AX=B，矩阵X变化了A个量级，然后成为了B。<br>
-<strong>向量范数</strong>：描述向量在空间中的大小。</p>
-<p>《DeepLearning-500-questions-master》第一章：向量和矩阵的范数归纳</p>
-<h3 id="Plus-数学-2：什么是“弗罗贝尼乌斯范数”？如何使用该范数实现梯度下降">Plus 数学 2：什么是“弗罗贝尼乌斯范数”？如何使用该范数实现梯度下降?</h3>
-<p><strong>A：</strong>《Deeplearning深度学习笔记》（P138）</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/14/%E4%BB%8E0%E5%BC%80%E5%A7%8B%E5%AD%A6%E4%B9%A0nlp/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/09/14/%E4%BB%8E0%E5%BC%80%E5%A7%8B%E5%AD%A6%E4%B9%A0nlp/" itemprop="url">从0开始学习nlp</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-09-14T22:13:03+08:00">
-                2020-09-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/14/%E5%88%B7leetcode%E7%9A%84%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB%E7%9A%84%E7%9F%A5%E8%AF%86%E7%82%B9%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E9%87%8D%E7%82%B9/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/09/14/%E5%88%B7leetcode%E7%9A%84%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB%E7%9A%84%E7%9F%A5%E8%AF%86%E7%82%B9%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E9%87%8D%E7%82%B9/" itemprop="url">刷leetcode的杂七杂八的知识点：算法</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-09-14T10:20:30+08:00">
-                2020-09-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1598,7 +1813,7 @@
               
                 <a href="/archives/%20%7C%7C%20archive">
               
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1648,7 +1863,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

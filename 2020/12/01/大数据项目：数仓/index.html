@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="[toc] 数据仓库概念    ODS：Operation Data Store原始数据 DWD(数据清洗&#x2F;DWI) data warehouse detail数据明细详情，去除空值，脏数据，超过极限范围的明细解析具体表 DWS(宽表-用户行为，轻度聚合) data warehouse service —–&gt;有多少个宽表？多少个字段服务层–留存-转化-GMV-复购率-日活点赞、评论、收藏;轻">
+<meta property="og:type" content="article">
+<meta property="og:title" content="大数据项目：数仓">
+<meta property="og:url" content="http://yoursite.com/2020/12/01/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%A1%B9%E7%9B%AE%EF%BC%9A%E6%95%B0%E4%BB%93/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="[toc] 数据仓库概念    ODS：Operation Data Store原始数据 DWD(数据清洗&#x2F;DWI) data warehouse detail数据明细详情，去除空值，脏数据，超过极限范围的明细解析具体表 DWS(宽表-用户行为，轻度聚合) data warehouse service —–&gt;有多少个宽表？多少个字段服务层–留存-转化-GMV-复购率-日活点赞、评论、收藏;轻">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/.com//cgair/Documents/cg/my_blog/blog/source/_posts/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%A1%B9%E7%9B%AE%EF%BC%9A%E6%95%B0%E4%BB%93/%E6%95%B0%E4%BB%93%E6%A6%82%E5%BF%B5.png">
+<meta property="og:image" content="http://yoursite.com/.com//cgair/Documents/cg/my_blog/blog/source/_posts/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%A1%B9%E7%9B%AE%EF%BC%9A%E6%95%B0%E4%BB%93/%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B.png">
+<meta property="og:image" content="http://yoursite.com/.com//cgair/Documents/cg/my_blog/blog/source/_posts/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%A1%B9%E7%9B%AE%EF%BC%9A%E6%95%B0%E4%BB%93/%E6%95%B0%E4%BB%93%E6%9E%B6%E6%9E%84.png">
+<meta property="og:image" content="http://yoursite.com/.com//cgair/Documents/cg/my_blog/blog/source/_posts/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%A1%B9%E7%9B%AE%EF%BC%9A%E6%95%B0%E4%BB%93/%E6%B5%8B%E8%AF%95%E9%9B%86%E7%BE%A4%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%A7%84%E5%88%921.png">
+<meta property="og:image" content="http://yoursite.com/.com//cgair/Documents/cg/my_blog/blog/source/_posts/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%A1%B9%E7%9B%AE%EF%BC%9A%E6%95%B0%E4%BB%93/%E6%B5%8B%E8%AF%95%E9%9B%86%E7%BE%A4%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%A7%84%E5%88%922.png">
+<meta property="og:image" content="http://yoursite.com/.com//cgair/Documents/cg/my_blog/blog/source/_posts/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%A1%B9%E7%9B%AE%EF%BC%9A%E6%95%B0%E4%BB%93/%E9%9B%86%E7%BE%A4%E8%A7%84%E5%88%92.png">
+<meta property="og:image" content="http://yoursite.com/.com//cgair/Documents/cg/my_blog/blog/source/_posts/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%A1%B9%E7%9B%AE%EF%BC%9A%E6%95%B0%E4%BB%93/%E9%9B%86%E7%BE%A4%E8%A7%84%E5%88%92%E5%92%8C%E9%85%8D%E7%BD%AE.png">
+<meta property="og:image" content="http://yoursite.com/.com//cgair/Documents/cg/my_blog/blog/source/_posts/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%A1%B9%E7%9B%AE%EF%BC%9A%E6%95%B0%E4%BB%93/HDFS%E5%AD%98%E5%82%A8%E5%A4%9A%E7%9B%AE%E5%BD%951.png">
+<meta property="og:image" content="http://yoursite.com/.com//cgair/Documents/cg/my_blog/blog/source/_posts/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%A1%B9%E7%9B%AE%EF%BC%9A%E6%95%B0%E4%BB%93/HDFS%E5%AD%98%E5%82%A8%E5%A4%9A%E7%9B%AE%E5%BD%952.png">
+<meta property="og:image" content="http://yoursite.com/.com//cgair/Documents/cg/my_blog/blog/source/_posts/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%A1%B9%E7%9B%AE%EF%BC%9A%E6%95%B0%E4%BB%93/%E8%8A%82%E7%82%B9%E9%97%B4%E6%95%B0%E6%8D%AE%E5%9D%87%E8%A1%A1.png">
+<meta property="og:image" content="http://yoursite.com/.com//cgair/Documents/cg/my_blog/blog/source/_posts/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%A1%B9%E7%9B%AE%EF%BC%9A%E6%95%B0%E4%BB%93/LZO%E5%8E%8B%E7%BC%A9.png">
+<meta property="og:image" content="http://yoursite.com/.com//cgair/Documents/cg/my_blog/blog/source/_posts/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%A1%B9%E7%9B%AE%EF%BC%9A%E6%95%B0%E4%BB%93/Linux%20%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F.png">
+<meta property="article:published_time" content="2020-12-01T08:25:32.000Z">
+<meta property="article:modified_time" content="2020-12-01T14:31:46.559Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/.com//cgair/Documents/cg/my_blog/blog/source/_posts/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%A1%B9%E7%9B%AE%EF%BC%9A%E6%95%B0%E4%BB%93/%E6%95%B0%E4%BB%93%E6%A6%82%E5%BF%B5.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/12/01/大数据项目：数仓/"/>
+
+
+
+
+
+  <title>大数据项目：数仓 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/01/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%A1%B9%E7%9B%AE%EF%BC%9A%E6%95%B0%E4%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">大数据项目：数仓</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-12-01T16:25:32+08:00">
+                2020-12-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>[toc]</p>
+<h1 id="数据仓库概念"><a href="#数据仓库概念" class="headerlink" title="数据仓库概念"></a>数据仓库概念</h1><img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/大数据项目：数仓/数仓概念.png" alt="数仓概念" style="zoom:67%;">
+
+
+
+<p><strong>ODS：Operation Data Store</strong><br>原始数据</p>
+<p><strong>DWD(数据清洗/DWI)</strong> <strong>data warehouse detail</strong><br>数据明细详情，去除空值，脏数据，超过极限范围的<br>明细解析<br>具体表</p>
+<p><strong>DWS(宽表-用户行为，轻度聚合)</strong> <strong>data warehouse service —–&gt;有多少个宽表？多少个字段</strong><br>服务层–留存-转化-GMV-复购率-日活<br>点赞、评论、收藏;<br>轻度聚合对DWD</p>
+<p><strong>ADS(APP/DAL/DF)-出报表结果</strong> <strong>Application Data Store</strong><br>做分析处理同步到RDS数据库里边</p>
+<h1 id="技术选型"><a href="#技术选型" class="headerlink" title="技术选型"></a>技术选型</h1><img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/大数据项目：数仓/技术选型.png" alt="技术选型" style="zoom: 67%;">
+
+<h1 id="数仓架构"><a href="#数仓架构" class="headerlink" title="数仓架构"></a>数仓架构</h1><img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/大数据项目：数仓/数仓架构.png" alt="数仓架构" style="zoom:67%;">
+
+<h1 id="测试集群服务器规划"><a href="#测试集群服务器规划" class="headerlink" title="测试集群服务器规划"></a>测试集群服务器规划</h1><img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/大数据项目：数仓/测试集群服务器规划1.png" alt="测试集群服务器规划" style="zoom:67%;">
+
+<img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/大数据项目：数仓/测试集群服务器规划2.png" alt="测试集群服务器规划2" style="zoom:67%;">
+
+<h1 id="参考电商数仓-——–-gt-比特币数仓"><a href="#参考电商数仓-——–-gt-比特币数仓" class="headerlink" title="参考电商数仓 ——–&gt; 比特币数仓"></a>参考电商数仓 ——–&gt; 比特币数仓</h1><h2 id="集群规划和配置"><a href="#集群规划和配置" class="headerlink" title="集群规划和配置"></a>集群规划和配置</h2><img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/大数据项目：数仓/集群规划.png" alt="集群规划" style="zoom: 67%;">
+
+<img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/大数据项目：数仓/集群规划和配置.png" alt="集群规划和配置" style="zoom:67%;">
+
+<h2 id="比特币数据解析"><a href="#比特币数据解析" class="headerlink" title="比特币数据解析"></a>比特币数据解析</h2><h3 id="比特币数据文件格式"><a href="#比特币数据文件格式" class="headerlink" title="比特币数据文件格式"></a>比特币数据文件格式</h3><p>比特币节点（Bitcoin Core）的<code>~/.bitcoin/blocks/</code>目录中的<code>blk.dat</code> 文件中包含了节点接收到的原始区块数据，这些数据文件构成了比特币区块链的基础，同时也是区块链数据分析获取比特币区块和交易数据的最高效的途径。</p>
+<h3 id="blk-文件结构"><a href="#blk-文件结构" class="headerlink" title="blk 文件结构"></a>blk 文件结构</h3><p>![blk 文件结构](/Users/cgair/Documents/cg/my_blog/blog/source/_posts/大数据项目：数仓/blk 文件结构.png)</p>
+<ul>
+<li>magic bytes（魔术字节）和size（数据尺寸）可以用来找出来每个区块的起止位置</li>
+<li>block header（区块头）包含了区块的头部信息</li>
+<li>tx count 表示区块中的交易数量，后面的transaction data部分就是逐条交易的数据</li>
+</ul>
+<p><strong>如果你在解析blk.dat文件，一定要记得区块不一定是按先后顺序排列的。</strong></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://blog.csdn.net/boke14122621/article/details/103162435" target="_blank" rel="noopener">比特币区块数据的解析</a></p>
+<p>(比特币数据分析ETL工具)[<a href="http://sc.hubwiz.com/codebag/blocketl-java/]" target="_blank" rel="noopener">http://sc.hubwiz.com/codebag/blocketl-java/]</a></p>
+<h2 id="项目经验"><a href="#项目经验" class="headerlink" title="项目经验"></a>项目经验</h2><h3 id="HDFS存储多目录"><a href="#HDFS存储多目录" class="headerlink" title="HDFS存储多目录"></a>HDFS存储多目录</h3><img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/大数据项目：数仓/HDFS存储多目录1.png" alt="HDFS存储多目录1" style="zoom:50%;">
+
+<img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/大数据项目：数仓/HDFS存储多目录2.png" alt="HDFS存储多目录2" style="zoom:67%;">
+
+<h3 id="节点间数据均衡"><a href="#节点间数据均衡" class="headerlink" title="节点间数据均衡"></a>节点间数据均衡</h3><p><img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%A1%B9%E7%9B%AE%EF%BC%9A%E6%95%B0%E4%BB%93/%E8%8A%82%E7%82%B9%E9%97%B4%E6%95%B0%E6%8D%AE%E5%9D%87%E8%A1%A1.png" alt="节点间数据均衡"></p>
+<h3 id="LZO压缩"><a href="#LZO压缩" class="headerlink" title="LZO压缩"></a>LZO压缩</h3><img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/大数据项目：数仓/LZO压缩.png" alt="LZO压缩" style="zoom:67%;">
+
+<h3 id="基准测试"><a href="#基准测试" class="headerlink" title="基准测试"></a>基准测试</h3><p>HDFS 读、写性能</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 向 HDFS 集群写入 10 个 128M的文件</span><br><span class="line">hadoop jar &#x2F;opt&#x2F;module&#x2F;hadoop-2.9.2&#x2F;share&#x2F;hadoop&#x2F;mapreduce&#x2F;hadoop-mapreduce-client-jobclient-2.9.2-tests.jar TestDFSIO -write -nrFiles 10 -fileSize 128MB</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 测试 HDFS 读性能</span><br><span class="line">hadoop jar &#x2F;opt&#x2F;module&#x2F;hadoop-2.9.2&#x2F;share&#x2F;hadoop&#x2F;mapreduce&#x2F;hadoop-mapreduce-client-jobclient-2.9.2-tests.jar TestDFSIO -read -nrFiles 10 -fileSize 128MB</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 删除测试生成的数据</span><br><span class="line">hadoop jar &#x2F;opt&#x2F;module&#x2F;hadoop-2.9.2&#x2F;share&#x2F;hadoop&#x2F;mapreduce&#x2F;hadoop-mapreduce-client-jobclient-2.9.2-tests.jar TestDFSIO -clean</span><br></pre></td></tr></table></figure>
+
+
+
+<p>Mapreduce 计算性能</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># 使用 Sort 程序测试 MapReduce</span><br><span class="line"></span><br><span class="line"># 使用Random Writer 产生随机数，每个节点运行 10 个 Map任务，每个Map任务产生大约1G大小的二进制随机数</span><br><span class="line">hadoop jar &#x2F;opt&#x2F;module&#x2F;hadoop-2.9.2&#x2F;share&#x2F;hadoop&#x2F;mapreduce&#x2F;hadoop-mapreduce-examples-2.9.2.jar randomwriter random-data</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 执行 Sort 程序</span><br><span class="line">hadoop jar &#x2F;opt&#x2F;module&#x2F;hadoop-2.9.2&#x2F;share&#x2F;hadoop&#x2F;mapreduce&#x2F;hadoop-mapreduce-examples-2.9.2.jar sort random-data sorted-data</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 验证数据是否真的排好序了</span><br><span class="line">hadoop jar &#x2F;opt&#x2F;module&#x2F;hadoop-2.9.2&#x2F;share&#x2F;hadoop&#x2F;mapreduce&#x2F;hadoop-mapreduce-examples-2.9.2.jar testmapredsort -sortInput random-data -sortOutput sorted-data</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="HDFS-参数调优"><a href="#HDFS-参数调优" class="headerlink" title="HDFS 参数调优"></a>HDFS 参数调优</h3><h3 id="Yarn-参数调优"><a href="#Yarn-参数调优" class="headerlink" title="Yarn 参数调优"></a>Yarn 参数调优</h3><h3 id="Linux-环境变量"><a href="#Linux-环境变量" class="headerlink" title="Linux 环境变量"></a>Linux 环境变量</h3><img src="/.com//cgair/Documents/cg/my_blog/blog/source/_posts/大数据项目：数仓/Linux 环境变量.png" alt="Linux 环境变量" style="zoom:67%;">
+
+<h2 id><a href="#" class="headerlink" title></a></h2>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/11/26/%E5%A4%A7%E6%95%B0%E6%8D%AElinux%E5%BC%80%E5%8F%91/" rel="next" title="大数据linux开发">
+                <i class="fa fa-chevron-left"></i> 大数据linux开发
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/01/19/Conflux-Project/" rel="prev" title="Conflux Project">
+                Conflux Project <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%20%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#数据仓库概念"><span class="nav-number">1.</span> <span class="nav-text">数据仓库概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#技术选型"><span class="nav-number">2.</span> <span class="nav-text">技术选型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数仓架构"><span class="nav-number">3.</span> <span class="nav-text">数仓架构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#测试集群服务器规划"><span class="nav-number">4.</span> <span class="nav-text">测试集群服务器规划</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考电商数仓-——–-gt-比特币数仓"><span class="nav-number">5.</span> <span class="nav-text">参考电商数仓 ——–&gt; 比特币数仓</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#集群规划和配置"><span class="nav-number">5.1.</span> <span class="nav-text">集群规划和配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#比特币数据解析"><span class="nav-number">5.2.</span> <span class="nav-text">比特币数据解析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#比特币数据文件格式"><span class="nav-number">5.2.1.</span> <span class="nav-text">比特币数据文件格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#blk-文件结构"><span class="nav-number">5.2.2.</span> <span class="nav-text">blk 文件结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">5.2.3.</span> <span class="nav-text">参考</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#项目经验"><span class="nav-number">5.3.</span> <span class="nav-text">项目经验</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HDFS存储多目录"><span class="nav-number">5.3.1.</span> <span class="nav-text">HDFS存储多目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#节点间数据均衡"><span class="nav-number">5.3.2.</span> <span class="nav-text">节点间数据均衡</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LZO压缩"><span class="nav-number">5.3.3.</span> <span class="nav-text">LZO压缩</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基准测试"><span class="nav-number">5.3.4.</span> <span class="nav-text">基准测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HDFS-参数调优"><span class="nav-number">5.3.5.</span> <span class="nav-text">HDFS 参数调优</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Yarn-参数调优"><span class="nav-number">5.3.6.</span> <span class="nav-text">Yarn 参数调优</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux-环境变量"><span class="nav-number">5.3.7.</span> <span class="nav-text">Linux 环境变量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">5.4.</span> <span class="nav-text"></span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
